@@ -1,0 +1,15 @@
+App Name: RuralGrow AI
+
+One-Line Pitch: An AI-powered full-stack business growth assistant designed specifically for rural micro-enterprises to automate customer review sentiment analysis and marketing content generation.
+
+Target User: Small-scale rural entrepreneurs (such as agricultural farmers, traditional handloom weavers, and eco-homestay hosts) who lack technical skills or copywriting expertise to manage digital customer feedback and create promotional campaigns, requiring an intuitive digital assistant to grow. (37 words)
+
+Core Features (3–5):
+* AI Review Sentiment Classifier: Automatically analyzes guest reviews, extracts custom themes (Food, Service, Cleanliness), and drafts warm, context-aware reply suggestions.
+* AI Marketing Copy Generator: Instantly creates localized Facebook/Instagram captions with high-converting tags.
+* AI WhatsApp Broadcast Assistant: Automates promotional message templates including active discount offers.
+* Business Analytics Dashboard: Aggregates sentiments and theme frequencies in beautiful interactive charts.
+
+AI Feature: Automated sentiment classification, theme extraction, and ad-copy copy generation are powered by Google Gemini 1.5 Flash API due to its free-tier developer token accessibility, multilingual accuracy, and ultra-fast response speed.
+
+Tech Stack: Frontend (React.js), Styling (Vanilla CSS), Backend (Node.js/Express), Database (MongoDB), Auth method (JWT), Deployment (Vercel + Render).

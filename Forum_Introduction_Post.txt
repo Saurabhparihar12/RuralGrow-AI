@@ -1,0 +1,7 @@
+Hello everyone!
+
+My name is Saurabh Parihar. My project is RuralGrow AI, an AI-powered business growth assistant designed to help small-scale rural entrepreneurs (such as agricultural farmers, traditional handloom weavers, and eco-homestay hosts) automate customer review sentiment analysis and generate promotional marketing content. 
+
+My tech stack consists of React.js for the frontend, Vanilla CSS for styling, Node.js and Express for the backend, and MongoDB for database persistence. The AI feature is powered by the Google Gemini 1.5 Flash API. 
+
+One technical challenge I anticipate is designing highly optimized, robust prompts for Gemini that can accurately categorize reviews into positive, neutral, and negative sentiments, identify distinct themes, and generate high-converting marketing copy across different rural sectors and in multiple regional languages, all while maintaining consistent JSON outputs for frontend integration.
