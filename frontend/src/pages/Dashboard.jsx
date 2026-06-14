@@ -44,9 +44,9 @@ export default function Dashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-slate-200 mb-2">AI Review Assistant — (Coming in Week 4)</h2>
+            <h2 className="text-xl font-bold text-slate-200 mb-2">AI Review Assistant</h2>
             <p className="text-sm text-slate-400 max-w-sm">
-              This panel will connect to the backend to classify review sentiments, identify themes, and generate Suggested replies.
+              Analyze guest reviews, automatically detect sentiment and themes, and generate polite suggested replies. (Pending backend connect)
             </p>
           </div>
 
@@ -57,9 +57,9 @@ export default function Dashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-slate-200 mb-2">Social Campaigns — (Coming in Week 4)</h2>
+            <h2 className="text-xl font-bold text-slate-200 mb-2">Social Campaigns</h2>
             <p className="text-sm text-slate-400 max-w-sm">
-              Input local product names, descriptions, and pricing rules to generate social captions and WhatsApp copy templates.
+              Generate localized Facebook/Instagram captions with high-converting tags and WhatsApp promo templates. (Pending backend connect)
             </p>
           </div>
         </div>

@@ -42,11 +42,11 @@ export default function Footer() {
 
           {/* Contact / Info Column */}
           <div>
-            <h4 className="text-sm font-semibold text-slate-200 uppercase tracking-wider mb-4">Internship Info</h4>
+            <h4 className="text-sm font-semibold text-slate-200 uppercase tracking-wider mb-4">Enterprise Support</h4>
             <p className="text-sm text-slate-500 leading-relaxed">
-              TBI-GEU Internship<br />
-              Week 2: Frontend Foundations<br />
-              Intern ID: <span className="text-indigo-400 font-mono">TBI-26100640</span>
+              RuralGrow AI Platform<br />
+              Email: info@ruralgrow.ai<br />
+              ID: <span className="text-indigo-400 font-mono">TBI-26100640</span>
             </p>
           </div>
         </div>

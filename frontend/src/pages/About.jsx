@@ -38,9 +38,9 @@ export default function About() {
               </p>
             </div>
             <div className="bg-slate-900/30 border border-slate-800/60 rounded-2xl p-6">
-              <h3 className="text-lg font-bold text-teal-400 mb-2">Development Plan</h3>
+              <h3 className="text-lg font-bold text-teal-400 mb-2">Platform Stack</h3>
               <p className="text-slate-400 text-sm leading-relaxed">
-                A structured 8-week full-stack path: building frontend foundations, connecting backend servers, integrating Google Gemini, and persisting data in MongoDB.
+                A modern full-stack application leveraging React.js, Node.js, Express, and MongoDB, using the Gemini API for robust NLP processing.
               </p>
             </div>
           </div>
