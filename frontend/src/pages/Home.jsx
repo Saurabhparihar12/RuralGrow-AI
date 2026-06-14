@@ -1,0 +1,77 @@
+import React from 'react';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import Card from '../components/Card';
+import Footer from '../components/Footer';
+
+export default function Home() {
+  const features = [
+    {
+      title: 'Review Sentiment Classifier',
+      description: 'Analyze customer reviews automatically to understand feedback sentiment (positive, neutral, negative) and draft warm suggested replies.',
+      badge: 'AI Classifier',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+        </svg>
+      )
+    },
+    {
+      title: 'Social Media Caption Generator',
+      description: 'Generate catchy and localized social media marketing posts with hashtags based on your products and prices to grow your page reach.',
+      badge: 'AI Copilot',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+        </svg>
+      )
+    },
+    {
+      title: 'WhatsApp Broadcast Assistant',
+      description: 'Draft promotional messages and active discount templates in seconds to send to your regular customers on WhatsApp broadcasts.',
+      badge: 'Marketing',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 19v-8.93a2 2 0 01.89-1.664l8-4.719a2 2 0 012.22 0l8 4.72A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76"></path>
+        </svg>
+      )
+    }
+  ];
+
+  return (
+    <div className="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <Hero />
+
+      {/* Reusable Cards Grid Section */}
+      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex-1">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl font-extrabold text-slate-100 sm:text-4xl">
+            Core Assistant Solutions
+          </h2>
+          <p className="mt-4 text-slate-400">
+            RuralGrow AI comes equipped with built-in tools tailored for agricultural farmers, handloom weavers, and homestay package hosts to automate daily digital operations.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, idx) => (
+            <Card
+              key={idx}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+              badge={feature.badge}
+              linkText="Explore Features"
+              linkPath="/dashboard"
+            />
+          ))}
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
