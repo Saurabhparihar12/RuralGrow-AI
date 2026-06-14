@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export default function Dashboard() {
   const stats = [
-    { label: 'Total Reviews Analyzed', value: '142', change: '+12% this week', color: 'text-indigo-400' },
-    { label: 'Marketing Copy Generated', value: '56', change: '+8 new drafts', color: 'text-purple-400' },
-    { label: 'Avg Customer Rating', value: '4.8★', change: 'Based on sentiment', color: 'text-teal-400' },
+    { label: 'Reviews Analyzed', value: '142', change: '+12% this week', color: 'text-indigo-400' },
+    { label: 'Promo Posts Drafted', value: '56', change: '+8 new drafts', color: 'text-purple-400' },
+    { label: 'Average Review Rating', value: '4.8★', change: 'Based on sentiment', color: 'text-teal-400' },
   ];
 
   return (
@@ -44,9 +44,9 @@ export default function Dashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-slate-200 mb-2">AI Review Assistant</h2>
+            <h2 className="text-xl font-bold text-slate-200 mb-2">Review Sentiment Analyzer</h2>
             <p className="text-sm text-slate-400 max-w-sm">
-              Analyze guest reviews, automatically detect sentiment and themes, and generate polite suggested replies. (Pending backend connect)
+              Shows your customer reviews, highlights if they are positive or negative, and helps you write a polite response. (Pending backend connect)
             </p>
           </div>
 
@@ -57,9 +57,9 @@ export default function Dashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-slate-200 mb-2">Social Campaigns</h2>
+            <h2 className="text-xl font-bold text-slate-200 mb-2">Promo Post Creator</h2>
             <p className="text-sm text-slate-400 max-w-sm">
-              Generate localized Facebook/Instagram captions with high-converting tags and WhatsApp promo templates. (Pending backend connect)
+              Let you enter details about your products to automatically generate Instagram captions and WhatsApp promo messages. (Pending backend connect)
             </p>
           </div>
         </div>

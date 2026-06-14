@@ -17,14 +17,14 @@ export default function Hero() {
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-              Grow Your Rural Business with{' '}
+              Helping Rural Businesses{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-                AI Intelligence
+                Grow Online
               </span>
             </h1>
             
             <p className="text-lg text-slate-400 max-w-2xl mx-auto lg:mx-0">
-              RuralGrow AI is built specifically for rural micro-enterprises to simplify marketing, automatically analyze customer reviews, and boost online engagement without requiring coding skills.
+              RuralGrow AI is a simple helper tool for small businesses like local farms, traditional weavers, and homestay owners to manage customer reviews and easily write promotional posts.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">

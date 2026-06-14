@@ -17,7 +17,7 @@ export default function Footer() {
               <span className="font-bold text-slate-100 tracking-tight">RuralGrow AI</span>
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
-              Empowering rural small businesses and local micro-enterprises with simplified, context-aware AI tools to automate marketing and customer review analysis.
+              A simple web app to help rural small businesses handle customer reviews and write marketing posts easily.
             </p>
           </div>
 
