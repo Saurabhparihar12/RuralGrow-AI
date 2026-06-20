@@ -8,42 +8,42 @@ export default function About() {
       <Navbar />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl font-extrabold sm:text-4xl text-slate-900 dark:text-white mb-4">
-            About{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-              RuralGrow AI
-            </span>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 uppercase tracking-widest bg-indigo-500/10 dark:bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-500/20">
+            GEU TBI Pilot Project
+          </span>
+          <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mt-4 mb-3">
+            About RuralGrow AI
           </h1>
-          <p className="text-lg text-slate-605 dark:text-slate-400 leading-relaxed">
-            We build simple web tools to help local rural businesses manage reviews and write promotional captions.
+          <p className="text-lg text-slate-650 dark:text-slate-400 leading-relaxed">
+            We are a group of college students building this review and marketing helper under the Graphic Era University Technology Business Incubator.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-8">
           {/* Section 1 */}
-          <div className="bg-white/80 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-8 shadow-sm dark:shadow-none">
-            <h2 className="text-xl font-bold text-indigo-650 dark:text-indigo-400 mb-4">Why RuralGrow AI?</h2>
-            <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
-              Many small businesses in rural areas, like local farms, weavers, or homestays, want to grow online but struggle to write good marketing posts or reply to customer reviews in English.
+          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 shadow-sm">
+            <h2 className="text-lg font-bold text-indigo-650 dark:text-indigo-400 mb-3">How We Started</h2>
+            <p className="text-slate-700 dark:text-slate-350 leading-relaxed text-sm">
+              During our TBI field trips to organic farms, weavers, and homestay owners in villages near Dehradun and Mussoorie, we noticed a common theme: these small businesses write down contact details in registers, and get excellent feedback from visiting tourists.
             </p>
-            <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm mt-4">
-              RuralGrow AI is built to solve this. It provides a simple dashboard to automatically check review sentiments, suggest polite replies, and write social media captions.
+            <p className="text-slate-700 dark:text-slate-355 leading-relaxed text-sm mt-4">
+              However, they often do not know how to respond to reviews on Google Maps in fluent English or write attractive captions for Instagram. We built RuralGrow AI to give them a simple, zero-code toolbox that drafts these replies and captions for them automatically.
             </p>
           </div>
 
           {/* Section 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white/60 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-6 shadow-sm dark:shadow-none">
-              <h3 className="text-lg font-bold text-purple-650 dark:text-purple-400 mb-2">Project Vision</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                Make it easy for rural business owners to manage reviews and promote their products online without needing any technical skills.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-6 shadow-sm">
+              <h3 className="text-base font-bold text-purple-650 dark:text-purple-400 mb-2">Our Goal</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                Provide rural artisans, honey gatherers, and cottage owners with simple tools to handle their own online marketing and customer reviews without paying expensive agencies.
               </p>
             </div>
-            <div className="bg-white/60 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-6 shadow-sm dark:shadow-none">
-              <h3 className="text-lg font-bold text-emerald-650 dark:text-emerald-400 mb-2">Platform Stack</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                Built using React.js for the frontend, Node.js and Express for the backend, MongoDB for data storage, and the Gemini API for review sentiment analysis.
+            <div className="bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-6 shadow-sm">
+              <h3 className="text-base font-bold text-emerald-655 dark:text-emerald-400 mb-2">Project Stack</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                Built using React.js for the frontend, styled with custom Tailwind utility configurations, and powered by simple Node.js servers connected to Google Gemini APIs.
               </p>
             </div>
           </div>

@@ -59,10 +59,10 @@ export default function ComponentShowcase() {
             UI Toolkit
           </span>
           <h1 className="text-3xl font-extrabold sm:text-4xl text-slate-900 dark:text-white mt-4">
-            Component Showcase Library
+            Custom UI Library Showcase
           </h1>
           <p className="mt-2 text-slate-650 dark:text-slate-400">
-            A comprehensive playground to test and view TBI-GEU Week 3 custom UI components in various states.
+            This playground displays our custom UI components built for the Week 3 evaluation.
           </p>
         </div>
 

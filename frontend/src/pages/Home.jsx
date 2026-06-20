@@ -7,9 +7,9 @@ import Footer from '../components/Footer';
 export default function Home() {
   const features = [
     {
-      title: 'Review Sentiment Checker',
-      description: 'Scans your customer feedback, tells you if the reviews are positive or negative, and drafts a polite reply template.',
-      badge: 'Review Helper',
+      title: 'Review Reply Helper',
+      description: 'Reads reviews left by tourists or buyers, tags if they are happy or unsatisfied, and creates a polite English/Hindi reply template to copy-paste.',
+      badge: 'Google Maps & Maps',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
@@ -17,8 +17,8 @@ export default function Home() {
       )
     },
     {
-      title: 'Social Media Post Creator',
-      description: 'Easily writes promotional captions with hashtags for your Facebook or Instagram pages based on your product details.',
+      title: 'Instagram Post Writer',
+      description: 'Enter basic details about your new crop harvest, handloom designs, or cottage room availability, and get an Instagram caption with hashtags.',
       badge: 'Social Media',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -27,9 +27,9 @@ export default function Home() {
       )
     },
     {
-      title: 'WhatsApp Promo Copywriter',
-      description: 'Helps you draft discount templates and promotional messages to send directly to your customers on WhatsApp.',
-      badge: 'WhatsApp',
+      title: 'WhatsApp Promo Composer',
+      description: 'Quickly draft simple message templates for discount alerts, new arrivals, or festival greetings to send directly to your regular customer groups.',
+      badge: 'WhatsApp Broadcasts',
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 19v-8.93a2 2 0 01.89-1.664l8-4.719a2 2 0 012.22 0l8 4.72A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76"></path>
@@ -46,13 +46,13 @@ export default function Home() {
       <Hero />
 
       {/* Reusable Cards Grid Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex-1">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-extrabold text-slate-905 dark:text-slate-100 sm:text-4xl">
-            Core Features
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex-1">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 sm:text-4xl">
+            What Can Our App Do?
           </h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-400">
-            Here are the main tools we are building to help rural businesses manage their online presence.
+          <p className="mt-3 text-slate-600 dark:text-slate-400">
+            We are building these simple utilities to help local business owners manage their online marketing without paying expensive agencies.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function Home() {
               description={feature.description}
               icon={feature.icon}
               badge={feature.badge}
-              linkText="Explore Features"
+              linkText="Try this tool"
               linkPath="/dashboard"
             />
           ))}

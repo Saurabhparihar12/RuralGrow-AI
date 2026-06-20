@@ -1,12 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Button, Input } from '../components/ui';
 
 export default function Dashboard() {
+  // Review Assistant States
+  const [selectedReviewIdx, setSelectedReviewIdx] = useState(null);
+  const [generatedReply, setGeneratedReply] = useState('');
+  
+  // Promo Post States
+  const [shopType, setShopType] = useState('Farm');
+  const [productName, setProductName] = useState('');
+  const [promoOutput, setPromoOutput] = useState('');
+
+  const mockReviews = [
+    {
+      author: 'Vikram Mehta (Chandigarh)',
+      shopName: 'Shyam\'s Organic Honey',
+      rating: '★★★★★',
+      reviewText: 'The wild forest honey is pure and tastes natural. Will order again next season.',
+      replySuggestion: 'Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! 🙏'
+    },
+    {
+      author: 'Priya Sharma (Delhi)',
+      shopName: 'Garhwal Handlooms',
+      rating: '★★★☆☆',
+      reviewText: 'The woollen shawl is warm and colors are bright. But the courier delivery to Delhi took almost 9 days.',
+      replySuggestion: 'Hello Priya, thank you for ordering our hand-woven shawl. We are sorry for the delay in shipping. Since our weaving center is in a remote village, transport takes a bit extra time. We are working on a faster courier service for next orders! 🙏'
+    },
+    {
+      author: 'Karan Johar (Mumbai)',
+      shopName: 'Raj Mountain Homestay',
+      rating: '★★★★★',
+      reviewText: 'Amazing views of the Himalayas and homely food cooked by Raj\'s family. Very clean room.',
+      replySuggestion: 'Hi Karan, thank you for staying with us at Raj Homestay! It was our pleasure hosting you in Mussoorie. Hope to see you and your friends again in the winters! 🙏'
+    }
+  ];
+
+  const handleSuggestReply = (idx) => {
+    setSelectedReviewIdx(idx);
+    setGeneratedReply(mockReviews[idx].replySuggestion);
+  };
+
+  const handleGeneratePromo = (e) => {
+    e.preventDefault();
+    if (!productName.trim()) {
+      setPromoOutput('Please type a product name first! (e.g. Organic Walnuts)');
+      return;
+    }
+
+    // Handcrafted mock generators
+    if (shopType === 'Farm') {
+      setPromoOutput(`🌾 Fresh harvest alert from Uttarakhand hills! Our special, organic [${productName}] is ready. Grown traditionally with crystal clear mountain water. Support local farmers! \n\n📍 Delivery across Dehradun. Send us a WhatsApp message to order. \n\n#OrganicFarming #GrowLocal #UttarakhandFarms #DehradunBasmati #${productName.replace(/\s+/g, '')}`);
+    } else if (shopType === 'Handloom') {
+      setPromoOutput(`🧣 Handcrafted with love by our local weavers! Presenting the all-new [${productName}]. Every thread is woven by hand using traditional designs passed down through generations. \n\n📦 Shipments across India. Help keep our craft heritage alive! \n\n#VocalForLocal #MakeInIndia #HandloomWeavers #TraditionalCrafts #${productName.replace(/\s+/g, '')}`);
+    } else {
+      setPromoOutput(`🏔️ Escape the summer heat! Book your mountain view room at our homestay. Enjoy home-cooked meals and local experiences. Fresh [${productName}] tea served in the balcony. \n\n📞 Click the contact link to book your stay. \n\n#Himalayas #MountainHomestay #UttarakhandTourism #TravelIndia #${productName.replace(/\s+/g, '')}`);
+    }
+  };
+
   const stats = [
-    { label: 'Reviews Analyzed', value: '142', change: '+12% this week', color: 'text-indigo-600 dark:text-indigo-400' },
-    { label: 'Promo Posts Drafted', value: '56', change: '+8 new drafts', color: 'text-purple-650 dark:text-purple-400' },
-    { label: 'Average Review Rating', value: '4.8★', change: 'Based on sentiment', color: 'text-emerald-600 dark:text-emerald-400' },
+    { label: 'Reviews Staged', value: '27', change: 'From Google Maps API', color: 'text-indigo-600 dark:text-indigo-400' },
+    { label: 'Captions Created', value: '14 drafts', change: 'Stored locally', color: 'text-purple-650 dark:text-purple-400' },
+    { label: 'Shops Assisted', value: '3 active', change: 'GEU TBI Pilot Test', color: 'text-emerald-600 dark:text-emerald-400' },
   ];
 
   return (
@@ -15,56 +71,171 @@ export default function Dashboard() {
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="border-b border-slate-200 dark:border-slate-900 pb-8 mb-10">
+        <div className="border-b border-slate-200 dark:border-slate-900 pb-6 mb-8">
           <h1 className="text-3xl font-extrabold sm:text-4xl text-slate-900 dark:text-white">
-            Business Growth{' '}
+            Merchant Growth{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
               Dashboard
             </span>
           </h1>
           <p className="mt-2 text-slate-600 dark:text-slate-400">
-            Real-time sentiment statistics, review replies, and automatic social media marketing campaigns.
+            Write review replies and social captions for local Uttarakhand shopkeepers and homestays.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
           {stats.map((stat, idx) => (
-            <div key={idx} className="bg-white/80 dark:bg-slate-900/40 backdrop-blur-sm border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 shadow-sm dark:shadow-md">
-              <span className="text-sm text-slate-500 dark:text-slate-400 font-semibold">{stat.label}</span>
-              <div className={`text-3xl font-bold mt-2 ${stat.color}`}>{stat.value}</div>
-              <div className="text-xs text-slate-400 dark:text-slate-500 mt-2 font-medium">{stat.change}</div>
+            <div key={idx} className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 shadow-sm">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">{stat.label}</span>
+              <div className={`text-2xl font-black mt-2.5 ${stat.color}`}>{stat.value}</div>
+              <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-1.5 font-medium">{stat.change}</div>
             </div>
           ))}
         </div>
 
-        {/* Main Placeholder Workspace */}
+        {/* Main Workspace split */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Card 1 */}
-          <div className="bg-white/60 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-8 flex flex-col justify-center items-center text-center py-16 shadow-xs dark:shadow-none">
-            <div className="w-14 h-14 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-indigo-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-750 mb-6 shadow-inner">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-              </svg>
+          
+          {/* TOOL 1: REVIEW REPLY WRITER */}
+          <div className="bg-white dark:bg-slate-900/35 border border-slate-200 dark:border-slate-800/60 rounded-3xl p-6 shadow-xs flex flex-col justify-between">
+            <div>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-605 dark:text-indigo-400 flex items-center justify-center font-bold">
+                  💬
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Review Reply Assistant</h3>
+                  <p className="text-xs text-slate-500">Pick a feedback to auto-draft a reply</p>
+                </div>
+              </div>
+
+              {/* Review Picker List */}
+              <div className="space-y-3.5 my-4">
+                {mockReviews.map((rev, idx) => (
+                  <div 
+                    key={idx} 
+                    onClick={() => handleSuggestReply(idx)}
+                    className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all duration-200 hover:border-slate-350 dark:hover:border-slate-700
+                      ${selectedReviewIdx === idx 
+                        ? 'border-indigo-550 bg-indigo-50/20 dark:bg-indigo-950/10' 
+                        : 'border-slate-150 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/20'}`}
+                  >
+                    <div className="flex justify-between items-center text-xs mb-1">
+                      <span className="font-bold text-slate-800 dark:text-slate-200">{rev.author}</span>
+                      <span className="text-slate-400 dark:text-slate-550 font-semibold">{rev.shopName}</span>
+                    </div>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 italic">"{rev.reviewText}"</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Output replies suggestion box */}
+              {generatedReply && (
+                <div className="mt-4 p-4 bg-indigo-50/20 dark:bg-indigo-950/5 border border-indigo-100 dark:border-indigo-900/50 rounded-xl space-y-2">
+                  <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 uppercase tracking-wider block">Generated Reply Template:</span>
+                  <textarea 
+                    className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-xs text-slate-700 dark:text-slate-300 focus:outline-none"
+                    rows={4}
+                    value={generatedReply}
+                    onChange={(e) => setGeneratedReply(e.target.value)}
+                  />
+                  <div className="flex justify-end">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => {
+                        navigator.clipboard.writeText(generatedReply);
+                        alert('Copied review response draft!');
+                      }}
+                    >
+                      Copy Response
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
-            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Review Sentiment Analyzer</h2>
-            <p className="text-sm text-slate-650 dark:text-slate-400 max-w-sm">
-              Shows your customer reviews, highlights if they are positive or negative, and helps you write a polite response. (Pending backend connect)
-            </p>
+            {!generatedReply && (
+              <p className="text-center text-xs text-slate-400 mt-6 italic">Click any customer review above to suggest a reply template.</p>
+            )}
           </div>
 
-          {/* Card 2 */}
-          <div className="bg-white/60 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-8 flex flex-col justify-center items-center text-center py-16 shadow-xs dark:shadow-none">
-            <div className="w-14 h-14 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-purple-600 dark:text-purple-400 border border-slate-200 dark:border-slate-750 mb-6 shadow-inner">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-              </svg>
-            </div>
-            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Promo Post Creator</h2>
-            <p className="text-sm text-slate-650 dark:text-slate-400 max-w-sm">
-              Let you enter details about your products to automatically generate Instagram captions and WhatsApp promo messages. (Pending backend connect)
-            </p>
+          {/* TOOL 2: SOCIAL PROMO DRAFTER */}
+          <div className="bg-white dark:bg-slate-900/35 border border-slate-200 dark:border-slate-800/60 rounded-3xl p-6 shadow-xs flex flex-col justify-between">
+            <form onSubmit={handleGeneratePromo} className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-605 dark:text-purple-400 flex items-center justify-center font-bold">
+                  📣
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Local Promo Poster Captioner</h3>
+                  <p className="text-xs text-slate-500">Generate Instagram posts for local products</p>
+                </div>
+              </div>
+
+              {/* Shop selection */}
+              <div>
+                <label className="block text-xs font-bold text-slate-500 uppercase mb-2 tracking-wider">Merchant Business Type</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { type: 'Farm', label: 'Farm Harvest' },
+                    { type: 'Handloom', label: 'Handicraft' },
+                    { type: 'Homestay', label: 'Homestay' }
+                  ].map((item) => (
+                    <button
+                      key={item.type}
+                      type="button"
+                      onClick={() => setShopType(item.type)}
+                      className={`px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-200 cursor-pointer
+                        ${shopType === item.type
+                          ? 'bg-purple-600 text-white border-purple-650'
+                          : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:bg-slate-50'}`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Product input */}
+              <Input
+                label="Product Name / Feature"
+                placeholder="e.g. Organic Rajma, Wool Shawl, Balcony Room"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+
+              <Button variant="primary" className="w-full" type="submit">
+                Write Instagram Draft
+              </Button>
+            </form>
+
+            {/* Promo output */}
+            {promoOutput && (
+              <div className="mt-4 p-4 bg-purple-50/20 dark:bg-purple-950/5 border border-purple-100 dark:border-purple-900/50 rounded-xl space-y-2">
+                <span className="text-xs font-bold text-purple-650 dark:text-purple-400 uppercase tracking-wider block">Instagram Caption Draft:</span>
+                <textarea 
+                  className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-xs text-slate-750 dark:text-slate-300 focus:outline-none"
+                  rows={6}
+                  value={promoOutput}
+                  onChange={(e) => setPromoOutput(e.target.value)}
+                />
+                <div className="flex justify-end">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(promoOutput);
+                      alert('Copied Instagram caption draft!');
+                    }}
+                  >
+                    Copy Caption
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
+
         </div>
       </main>
 
