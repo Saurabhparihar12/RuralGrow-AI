@@ -39,7 +39,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+    <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
       <Navbar />
       
       {/* Hero Section */}
@@ -48,10 +48,10 @@ export default function Home() {
       {/* Reusable Cards Grid Section */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex-1">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-extrabold text-slate-100 sm:text-4xl">
+          <h2 className="text-3xl font-extrabold text-slate-905 dark:text-slate-100 sm:text-4xl">
             Core Features
           </h2>
-          <p className="mt-4 text-slate-400">
+          <p className="mt-4 text-slate-600 dark:text-slate-400">
             Here are the main tools we are building to help rural businesses manage their online presence.
           </p>
         </div>
