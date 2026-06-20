@@ -13,7 +13,7 @@ export default function Hero() {
           {/* Hero Content */}
           <div className="text-center lg:text-left space-y-6">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-200/20 text-indigo-700 dark:text-indigo-400 text-xs font-semibold tracking-wide uppercase">
-              <span>🌱 GEU TBI Student Internship Project</span>
+              <span>🚀 Review & Marketing Helper Pilot</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">

@@ -62,7 +62,7 @@ export default function Dashboard() {
   const stats = [
     { label: 'Reviews Staged', value: '27', change: 'From Google Maps API', color: 'text-indigo-600 dark:text-indigo-400' },
     { label: 'Captions Created', value: '14 drafts', change: 'Stored locally', color: 'text-purple-650 dark:text-purple-400' },
-    { label: 'Shops Assisted', value: '3 active', change: 'GEU TBI Pilot Test', color: 'text-emerald-600 dark:text-emerald-400' },
+    { label: 'Shops Assisted', value: '3 active', change: 'Local Pilot Phase', color: 'text-emerald-600 dark:text-emerald-400' },
   ];
 
   return (

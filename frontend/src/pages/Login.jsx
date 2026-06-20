@@ -68,7 +68,7 @@ export default function Login() {
 
           <div className="mt-8 border-t border-slate-200 dark:border-slate-850 pt-6 text-center text-xs text-slate-500">
             <span>New merchant? </span>
-            <a href="#" className="text-indigo-650 dark:text-indigo-400 hover:underline transition-colors duration-300 cursor-not-allowed">Ask TBI GEU Admin</a>
+            <a href="#" className="text-indigo-650 dark:text-indigo-400 hover:underline transition-colors duration-300 cursor-not-allowed">Ask Support Admin</a>
           </div>
         </div>
       </main>
