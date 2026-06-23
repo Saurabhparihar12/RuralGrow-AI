@@ -1,0 +1,32 @@
+[
+  {
+    "id": "rev-1",
+    "author": "Vikram Mehta (Chandigarh)",
+    "shopName": "Shyam's Organic Honey",
+    "rating": 5,
+    "reviewText": "The wild forest honey is pure and tastes natural. Will order again next season.",
+    "replySuggestion": "Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! 🙏",
+    "sentiment": "positive",
+    "createdAt": "2026-06-20T10:00:00.000Z"
+  },
+  {
+    "id": "rev-2",
+    "author": "Priya Sharma (Delhi)",
+    "shopName": "Garhwal Handlooms",
+    "rating": 3,
+    "reviewText": "The woollen shawl is warm and colors are bright. But the courier delivery to Delhi took almost 9 days.",
+    "replySuggestion": "Hello Priya, thank you for ordering our hand-woven shawl. We are sorry for the delay in shipping. Since our weaving center is in a remote village, transport takes a bit extra time. We are working on a faster courier service for next orders! 🙏",
+    "sentiment": "neutral",
+    "createdAt": "2026-06-21T11:30:00.000Z"
+  },
+  {
+    "id": "rev-3",
+    "author": "Karan Johar (Mumbai)",
+    "shopName": "Raj Mountain Homestay",
+    "rating": 5,
+    "reviewText": "Amazing views of the Himalayas and homely food cooked by Raj's family. Very clean room.",
+    "replySuggestion": "Hi Karan, thank you for staying with us at Raj Homestay! It was our pleasure hosting you in Mussoorie. Hope to see you and your friends again in the winters! 🙏",
+    "sentiment": "positive",
+    "createdAt": "2026-06-22T08:15:00.000Z"
+  }
+]
