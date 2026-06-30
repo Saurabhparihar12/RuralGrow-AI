@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button, Input, Toast } from '../components/ui';
-import { Mail, Lock, Store, Phone, HelpCircle } from 'lucide-react';
+import { Mail, Lock, Store, Phone } from 'lucide-react';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -41,6 +41,14 @@ export default function Login() {
     setTimeout(() => {
       setIsLoading(false);
       if (isLogin) {
+        // Save simulated user session
+        const mockUser = {
+          email,
+          role: 'merchant',
+          shopName: shopName || 'Garhwal Organic Farms'
+        };
+        localStorage.setItem('user', JSON.stringify(mockUser));
+
         showToast('Login successful! Redirecting...', 'success');
         setTimeout(() => {
           navigate('/dashboard');
@@ -135,7 +143,7 @@ export default function Login() {
                 />
                 <div className="flex items-center justify-between text-[11px] pt-1">
                   <label className="flex items-center space-x-2 text-slate-500 dark:text-slate-400 cursor-pointer select-none">
-                    <input type="checkbox" className="rounded border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-sage-600" />
+                    <input type="checkbox" className="rounded border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950 text-sage-605" />
                     <span>Remember me</span>
                   </label>
                   <a href="#" onClick={(e) => { e.preventDefault(); showToast('Password reset link requested.', 'info'); }} className="text-sage-600 dark:text-sage-400 hover:underline font-bold">Forgot Password?</a>
@@ -168,7 +176,7 @@ export default function Login() {
                   placeholder="+91 99999-99999"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  icon={<Phone className="w-4 h-4 text-slate-400" />}
+                  icon={<Store className="w-4 h-4 text-slate-400" />}
                   inputClassName="py-2.5 text-xs rounded-xl"
                 />
               </div>

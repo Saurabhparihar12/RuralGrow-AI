@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Sun, Moon, Menu, X, ArrowUpRight, LogOut } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [user, setUser] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Dark/Light Theme state initialization
   const [theme, setTheme] = useState(() => {
@@ -27,6 +29,20 @@ export default function Navbar() {
     }
   }, [theme]);
 
+  // Check active user session on path change
+  useEffect(() => {
+    const saved = localStorage.getItem('user');
+    if (saved) {
+      try {
+        setUser(JSON.parse(saved));
+      } catch (e) {
+        setUser(null);
+      }
+    } else {
+      setUser(null);
+    }
+  }, [location.pathname]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -43,12 +59,18 @@ export default function Navbar() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    setIsOpen(false);
+    navigate('/');
+  };
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Showcase', path: '/showcase' },
-    { name: 'About', path: '/about' },
-    { name: 'Login', path: '/login' }
+    { name: 'About Us', path: '/about' }
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -87,12 +109,36 @@ export default function Navbar() {
                 }`}
               >
                 <span>{link.name}</span>
-                {/* Underline expanding from center */}
                 <span className={`absolute bottom-0.5 left-4 right-4 h-[1.5px] bg-sage-500 transition-all duration-300 origin-center scale-x-0 group-hover:scale-x-100 ${
                   isActive(link.path) ? 'scale-x-100 bg-forest-900 dark:bg-clay-50' : ''
                 }`} />
               </Link>
             ))}
+            
+            {/* Show Login or Sign Out in navigation based on active state */}
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="relative px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-rose-500 transition-all duration-305 cursor-pointer flex items-center space-x-1.5"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Sign Out</span>
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className={`relative px-4 py-2 text-xs font-semibold uppercase tracking-widest transition-all duration-300 group ${
+                  isActive('/login')
+                    ? 'text-forest-900 dark:text-clay-50'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-forest-900 dark:hover:text-clay-50'
+                }`}
+              >
+                <span>Login</span>
+                <span className={`absolute bottom-0.5 left-4 right-4 h-[1.5px] bg-sage-500 transition-all duration-300 origin-center scale-x-0 group-hover:scale-x-100 ${
+                  isActive('/login') ? 'scale-x-100 bg-forest-900 dark:bg-clay-50' : ''
+                }`} />
+              </Link>
+            )}
           </div>
 
           {/* Right Section Controls */}
@@ -114,7 +160,7 @@ export default function Navbar() {
             {/* Launch App / CTA */}
             <Link
               to="/dashboard"
-              className="hidden sm:inline-flex items-center space-x-1 px-5 py-2.5 rounded-full bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-900 text-[10px] font-bold uppercase tracking-widest hover:bg-sage-600 dark:hover:bg-clay-200 transition-all duration-300 cursor-pointer"
+              className="hidden sm:inline-flex items-center space-x-1 px-5 py-2.5 rounded-full bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950 text-[10px] font-bold uppercase tracking-widest hover:bg-sage-600 dark:hover:bg-clay-200 transition-all duration-300 cursor-pointer"
             >
               <span>Dashboard</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -153,10 +199,32 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
+          
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="w-full text-left block px-4 py-2.5 rounded-xl text-sm font-semibold uppercase tracking-wider text-rose-500 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className={`block px-4 py-2.5 rounded-xl text-sm font-semibold uppercase tracking-wider transition-all duration-300 ${
+                isActive('/login')
+                  ? 'bg-slate-100 dark:bg-slate-900 text-forest-900 dark:text-clay-50 border-l-2 border-sage-505'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-forest-900 dark:hover:text-clay-50 hover:bg-slate-50 dark:hover:bg-slate-900/60'
+              }`}
+            >
+              Login
+            </Link>
+          )}
+
           <Link
             to="/dashboard"
             onClick={() => setIsOpen(false)}
-            className="block text-center w-full py-3 bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-900 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300"
+            className="block text-center w-full py-3 bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300"
           >
             Dashboard
           </Link>
