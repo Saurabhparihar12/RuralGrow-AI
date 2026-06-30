@@ -30,6 +30,10 @@ export default function Dashboard() {
   const [productName, setProductName] = useState('');
   const [promoOutput, setPromoOutput] = useState('');
 
+  // Captions API States
+  const [captions, setCaptions] = useState([]);
+  const [captionsLoading, setCaptionsLoading] = useState(false);
+
   // Fetch reviews from REST API
   const fetchReviews = async () => {
     try {
@@ -61,9 +65,26 @@ export default function Dashboard() {
     }
   };
 
-  // Load reviews on mount and when filters change
+  // Fetch captions from REST API
+  const fetchCaptions = async () => {
+    try {
+      setCaptionsLoading(true);
+      const res = await fetch('http://localhost:5000/api/captions');
+      const json = await res.json();
+      if (json.success) {
+        setCaptions(json.data);
+      }
+    } catch (err) {
+      console.error('Failed to fetch captions:', err.message);
+    } finally {
+      setCaptionsLoading(false);
+    }
+  };
+
+  // Load reviews and captions on mount and when filters change
   useEffect(() => {
     fetchReviews();
+    fetchCaptions();
   }, [sentimentFilter]);
 
   // Handle search submit button
@@ -145,19 +166,62 @@ export default function Dashboard() {
     }
   };
 
-  // Local Promo Caption generation
-  const handleGeneratePromo = (e) => {
+  // Local Promo Caption generation and database saving
+  const handleGeneratePromo = async (e) => {
     e.preventDefault();
     if (!productName.trim()) {
-      setPromoOutput('Please type a product name first! (e.g. Organic Walnuts)');
+      alert('Please type a product name first! (e.g. Organic Walnuts)');
       return;
     }
+    
+    let text = '';
     if (shopType === 'Farm') {
-      setPromoOutput(`🌾 Fresh harvest alert from Uttarakhand hills! Our special, organic [${productName}] is ready. Grown traditionally with crystal clear mountain water. Support local farmers! \n\n📍 Delivery across Dehradun. Send us a WhatsApp message to order. \n\n#OrganicFarming #GrowLocal #UttarakhandFarms #DehradunBasmati #${productName.replace(/\s+/g, '')}`);
+      text = `🌾 Fresh harvest alert from Uttarakhand hills! Our special, organic [${productName}] is ready. Grown traditionally with crystal clear mountain water. Support local farmers! \n\n📍 Delivery across Dehradun. Send us a WhatsApp message to order. \n\n#OrganicFarming #GrowLocal #UttarakhandFarms #DehradunBasmati #${productName.replace(/\s+/g, '')}`;
     } else if (shopType === 'Handloom') {
-      setPromoOutput(`🧣 Handcrafted with love by our local weavers! Presenting the all-new [${productName}]. Every thread is woven by hand using traditional designs passed down through generations. \n\n📦 Shipments across India. Help keep our craft heritage alive! \n\n#VocalForLocal #MakeInIndia #HandloomWeavers #TraditionalCrafts #${productName.replace(/\s+/g, '')}`);
+      text = `🧣 Handcrafted with love by our local weavers! Presenting the all-new [${productName}]. Every thread is woven by hand using traditional designs passed down through generations. \n\n📦 Shipments across India. Help keep our craft heritage alive! \n\n#VocalForLocal #MakeInIndia #HandloomWeavers #TraditionalCrafts #${productName.replace(/\s+/g, '')}`;
     } else {
-      setPromoOutput(`🏔️ Escape the summer heat! Book your mountain view room at our homestay. Enjoy home-cooked meals and local experiences. Fresh [${productName}] tea served in the balcony. \n\n📞 Click the contact link to book your stay. \n\n#Himalayas #MountainHomestay #UttarakhandTourism #TravelIndia #${productName.replace(/\s+/g, '')}`);
+      text = `🏔️ Escape the summer heat! Book your mountain view room at our homestay. Enjoy home-cooked meals and local experiences. Fresh [${productName}] tea served in the balcony. \n\n📞 Click the contact link to book your stay. \n\n#Himalayas #MountainHomestay #UttarakhandTourism #TravelIndia #${productName.replace(/\s+/g, '')}`;
+    }
+    
+    setPromoOutput(text);
+
+    // Save caption to database
+    try {
+      const res = await fetch('http://localhost:5000/api/captions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productName,
+          shopType,
+          captionText: text
+        })
+      });
+      const json = await res.json();
+      if (json.success) {
+        fetchCaptions(); // reload saved list
+      }
+    } catch (err) {
+      console.error('Failed to save caption draft:', err.message);
+    }
+  };
+
+  // Delete saved caption
+  const handleDeleteCaption = async (id, e) => {
+    e.stopPropagation();
+    if (!window.confirm('Are you sure you want to delete this caption?')) return;
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/captions/${id}`, {
+        method: 'DELETE'
+      });
+      const json = await res.json();
+      if (json.success) {
+        fetchCaptions();
+      } else {
+        alert(`Error: ${json.message}`);
+      }
+    } catch (err) {
+      alert('Failed to delete caption.');
     }
   };
 
@@ -509,6 +573,61 @@ export default function Dashboard() {
                   </div>
                 </div>
               )}
+
+              {/* Saved Captions History List */}
+              <div className="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800/60 space-y-3.5">
+                <span className="text-[10px] font-bold text-slate-450 dark:text-slate-500 uppercase tracking-widest block">Saved Promo Drafts History ({captions.length}):</span>
+                
+                {captionsLoading ? (
+                  <div className="py-4 flex justify-center"><Loader size="sm" /></div>
+                ) : captions.length === 0 ? (
+                  <div className="text-[11px] text-slate-455 dark:text-slate-500 italic text-center py-3 border border-dashed border-slate-200 dark:border-slate-805 rounded-2xl">
+                    No saved promo posts yet. Generate one above!
+                  </div>
+                ) : (
+                  <div className="space-y-2.5 max-h-[220px] overflow-y-auto pr-1">
+                    {captions.map((cap) => {
+                      const capId = cap.id || cap._id;
+                      return (
+                        <div key={capId} className="p-3 bg-slate-55/40 dark:bg-slate-900/10 border border-slate-200 dark:border-slate-800 rounded-xl flex justify-between items-start gap-3">
+                          <div className="flex-1 space-y-1">
+                            <div className="flex justify-between items-center text-[9px] font-extrabold uppercase tracking-wider">
+                              <span className="text-purple-650 dark:text-purple-400">{cap.shopType}</span>
+                              <span className="text-slate-400 dark:text-slate-500">{cap.productName}</span>
+                            </div>
+                            <p className="text-[11px] text-slate-650 dark:text-slate-350 line-clamp-2 leading-relaxed font-medium">
+                              {cap.captionText}
+                            </p>
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(cap.captionText);
+                                alert('Copied saved caption!');
+                              }}
+                              className="p-1 rounded-lg text-slate-400 hover:text-indigo-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                              title="Copy Caption"
+                            >
+                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                              </svg>
+                            </button>
+                            <button
+                              onClick={(e) => handleDeleteCaption(capId, e)}
+                              className="p-1 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                              title="Delete Caption"
+                            >
+                              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

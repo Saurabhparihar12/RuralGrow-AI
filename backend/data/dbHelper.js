@@ -2,6 +2,9 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
+import ReviewModel from '../models/Review.js';
+import ShopModel from '../models/Shop.js';
+import CaptionModel from '../models/Caption.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,27 +17,23 @@ export function setMongoConnected(status) {
   isMongoConnected = status;
 }
 
-// Mongoose Review schema
-const reviewSchema = new mongoose.Schema({
-  author: { type: String, required: true },
-  shopName: { type: String, required: true },
-  rating: { type: Number, required: true },
-  reviewText: { type: String, required: true },
-  replySuggestion: { type: String, default: '' },
-  sentiment: { type: String, default: 'neutral' },
-  createdAt: { type: Date, default: Date.now }
-});
-
-const ReviewModel = mongoose.models.Review || mongoose.model('Review', reviewSchema);
-
 // JSON File Database utilities
 async function readJsonDb() {
   try {
     const data = await fs.readFile(jsonDbPath, 'utf8');
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    // Support legacy arrays or structured objects
+    if (Array.isArray(parsed)) {
+      return { reviews: parsed, shops: [], captions: [] };
+    }
+    return {
+      reviews: parsed.reviews || [],
+      shops: parsed.shops || [],
+      captions: parsed.captions || []
+    };
   } catch (error) {
-    console.error('[dbHelper] Error reading JSON database, using empty list:', error.message);
-    return [];
+    console.error('[dbHelper] Error reading JSON database, using empty structure:', error.message);
+    return { reviews: [], shops: [], captions: [] };
   }
 }
 
@@ -46,12 +45,13 @@ async function writeJsonDb(data) {
   }
 }
 
-// Unified Review service adapter
+// Unified Review and Caption service adapter
 export const reviewService = {
+  // Review Methods
   async listReviews(search, sentiment) {
     if (isMongoConnected) {
       const query = {};
-      if (sentiment) query.sentiment = sentiment;
+      if (sentiment && sentiment !== 'all') query.sentiment = sentiment;
       if (search) {
         query.$or = [
           { author: { $regex: search, $options: 'i' } },
@@ -61,8 +61,9 @@ export const reviewService = {
       }
       return await ReviewModel.find(query).sort({ createdAt: -1 });
     } else {
-      let list = await readJsonDb();
-      if (sentiment) {
+      const db = await readJsonDb();
+      let list = db.reviews;
+      if (sentiment && sentiment !== 'all') {
         list = list.filter(r => r.sentiment.toLowerCase() === sentiment.toLowerCase());
       }
       if (search) {
@@ -81,8 +82,8 @@ export const reviewService = {
     if (isMongoConnected) {
       return await ReviewModel.findById(id);
     } else {
-      const list = await readJsonDb();
-      return list.find(r => r.id === id) || null;
+      const db = await readJsonDb();
+      return db.reviews.find(r => r.id === id || r._id === id) || null;
     }
   },
 
@@ -91,9 +92,11 @@ export const reviewService = {
       const newReview = new ReviewModel(data);
       return await newReview.save();
     } else {
-      const list = await readJsonDb();
+      const db = await readJsonDb();
+      const newId = `rev-${Date.now()}`;
       const newReview = {
-        id: `rev-${Date.now()}`,
+        id: newId,
+        _id: newId,
         author: data.author,
         shopName: data.shopName,
         rating: data.rating,
@@ -102,8 +105,8 @@ export const reviewService = {
         sentiment: data.sentiment || 'neutral',
         createdAt: new Date().toISOString()
       };
-      list.push(newReview);
-      await writeJsonDb(list);
+      db.reviews.push(newReview);
+      await writeJsonDb(db);
       return newReview;
     }
   },
@@ -112,17 +115,18 @@ export const reviewService = {
     if (isMongoConnected) {
       return await ReviewModel.findByIdAndUpdate(id, data, { new: true });
     } else {
-      const list = await readJsonDb();
-      const idx = list.findIndex(r => r.id === id);
+      const db = await readJsonDb();
+      const idx = db.reviews.findIndex(r => r.id === id || r._id === id);
       if (idx === -1) return null;
 
       const updatedReview = {
-        ...list[idx],
+        ...db.reviews[idx],
         ...data,
-        id // Lock ID matching
+        id, // Lock ID matching
+        _id: id
       };
-      list[idx] = updatedReview;
-      await writeJsonDb(list);
+      db.reviews[idx] = updatedReview;
+      await writeJsonDb(db);
       return updatedReview;
     }
   },
@@ -131,12 +135,57 @@ export const reviewService = {
     if (isMongoConnected) {
       return await ReviewModel.findByIdAndDelete(id);
     } else {
-      const list = await readJsonDb();
-      const idx = list.findIndex(r => r.id === id);
+      const db = await readJsonDb();
+      const idx = db.reviews.findIndex(r => r.id === id || r._id === id);
       if (idx === -1) return null;
 
-      const removed = list.splice(idx, 1)[0];
-      await writeJsonDb(list);
+      const removed = db.reviews.splice(idx, 1)[0];
+      await writeJsonDb(db);
+      return removed;
+    }
+  },
+
+  // Caption Methods
+  async listCaptions() {
+    if (isMongoConnected) {
+      return await CaptionModel.find({}).sort({ createdAt: -1 });
+    } else {
+      const db = await readJsonDb();
+      return db.captions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+  },
+
+  async createCaption(data) {
+    if (isMongoConnected) {
+      const newCaption = new CaptionModel(data);
+      return await newCaption.save();
+    } else {
+      const db = await readJsonDb();
+      const newId = `cap-${Date.now()}`;
+      const newCaption = {
+        id: newId,
+        _id: newId,
+        productName: data.productName,
+        shopType: data.shopType,
+        captionText: data.captionText,
+        createdAt: new Date().toISOString()
+      };
+      db.captions.push(newCaption);
+      await writeJsonDb(db);
+      return newCaption;
+    }
+  },
+
+  async deleteCaption(id) {
+    if (isMongoConnected) {
+      return await CaptionModel.findByIdAndDelete(id);
+    } else {
+      const db = await readJsonDb();
+      const idx = db.captions.findIndex(c => c.id === id || c._id === id);
+      if (idx === -1) return null;
+
+      const removed = db.captions.splice(idx, 1)[0];
+      await writeJsonDb(db);
       return removed;
     }
   }

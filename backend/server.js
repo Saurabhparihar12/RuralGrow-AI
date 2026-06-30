@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import reviewRoutes from './routes/reviewRoutes.js';
+import captionRoutes from './routes/captionRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { setMongoConnected } from './data/dbHelper.js';
 
@@ -41,6 +42,7 @@ if (mongoURI) {
 
 // REST routes
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/captions', captionRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
