@@ -289,11 +289,11 @@ export default function Dashboard() {
               {/* Profile Block */}
               <div className="flex items-center space-x-3.5 border-b border-slate-100 dark:border-slate-800/50 pb-4">
                 <div className="w-10 h-10 rounded-full bg-sage-500/15 text-sage-600 dark:text-sage-400 flex items-center justify-center font-bold text-sm">
-                  SP
+                  RG
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-forest-900 dark:text-clay-50 font-display">Saurabh Parihar</h4>
-                  <span className="text-[9px] text-slate-450 dark:text-slate-500 font-semibold block">TBI-26100640</span>
+                  <h4 className="text-xs font-bold text-forest-900 dark:text-clay-50 font-display">RuralGrow Operator</h4>
+                  <span className="text-[9px] text-slate-450 dark:text-slate-500 font-semibold block">Merchant Hub Profile</span>
                 </div>
               </div>
 
@@ -302,7 +302,7 @@ export default function Dashboard() {
                 {[
                   { id: 'reviews', label: 'Reviews Hub', icon: <MessageSquare className="w-3.5 h-3.5" /> },
                   { id: 'promotions', label: 'Promo Builder', icon: <Compass className="w-3.5 h-3.5" /> },
-                  { id: 'settings', label: 'Platform Info', icon: <Settings className="w-3.5 h-3.5" /> }
+                  { id: 'settings', label: 'Platform Guide', icon: <Settings className="w-3.5 h-3.5" /> }
                 ].map((item) => {
                   const isActive = activeTab === item.id;
                   return (
@@ -342,12 +342,12 @@ export default function Dashboard() {
                 <h2 className="text-2xl font-display font-bold text-forest-900 dark:text-clay-50 uppercase tracking-tight">
                   {activeTab === 'reviews' && 'Reviews Hub'}
                   {activeTab === 'promotions' && 'Promo Builder'}
-                  {activeTab === 'settings' && 'Platform Settings'}
+                  {activeTab === 'settings' && 'Platform Guide'}
                 </h2>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                   {activeTab === 'reviews' && 'Analyze customer sentiment logs and fetch Suggested Replies.'}
                   {activeTab === 'promotions' && 'Draft marketing copy templates optimized for Instagram.'}
-                  {activeTab === 'settings' && 'Review configuration parameters and student developer details.'}
+                  {activeTab === 'settings' && 'Review operational guidelines for copy-pasting reviews and captions.'}
                 </p>
               </div>
             </div>
@@ -503,7 +503,7 @@ export default function Dashboard() {
                         AI Suggested Response Draft ({reviewSentiment}):
                       </span>
                       <textarea 
-                        className="w-full bg-slate-50 dark:bg-forest-900/60 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 text-xs sm:text-sm text-slate-750 dark:text-slate-350 focus:outline-none focus:ring-1 focus:ring-sage-500 leading-relaxed font-medium"
+                        className="w-full bg-slate-50 dark:bg-forest-900/60 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 text-xs sm:text-sm text-slate-755 dark:text-slate-350 focus:outline-none focus:ring-1 focus:ring-sage-500 leading-relaxed font-medium"
                         rows={4}
                         value={generatedReply}
                         onChange={(e) => setGeneratedReply(e.target.value)}
@@ -624,7 +624,7 @@ export default function Dashboard() {
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-550 uppercase mb-2.5 tracking-wider">Merchant Business Type</label>
+                      <label className="block text-[10px] font-bold text-slate-400 dark:text-slate-555 uppercase mb-2.5 tracking-wider">Merchant Business Type</label>
                       <div className="grid grid-cols-3 gap-2">
                         {[
                           { type: 'Farm', label: 'Farm Harvest' },
@@ -663,7 +663,7 @@ export default function Dashboard() {
 
                   {promoOutput && (
                     <div className="p-4 bg-purple-50/15 dark:bg-purple-950/10 border border-purple-100/50 dark:border-purple-900/30 rounded-2xl space-y-3.5 animate-fade-in-blur">
-                      <span className="text-[10px] font-bold text-purple-650 dark:text-purple-400 uppercase tracking-widest block">Instagram Caption Draft:</span>
+                      <span className="text-[10px] font-bold text-purple-655 dark:text-purple-400 uppercase tracking-widest block">Instagram Caption Draft:</span>
                       <textarea 
                         className="w-full bg-white dark:bg-forest-900 border border-slate-200 dark:border-slate-800 rounded-xl p-3.5 text-xs sm:text-sm text-slate-750 dark:text-slate-350 focus:outline-none focus:ring-1 focus:ring-purple-500/25 leading-relaxed font-medium"
                         rows={5}
@@ -705,13 +705,13 @@ export default function Dashboard() {
                       {captions.map((cap) => {
                         const capId = cap.id || cap._id;
                         return (
-                          <div key={capId} className="p-4 bg-slate-50/50 dark:bg-forest-900/30 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl flex justify-between items-start gap-4 hover:border-slate-350 dark:hover:border-slate-700 transition-colors duration-300">
+                          <div key={capId} className="p-4 bg-slate-55/35 dark:bg-forest-900/30 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl flex justify-between items-start gap-4 hover:border-slate-350 dark:hover:border-slate-700 transition-colors duration-300">
                             <div className="flex-1 space-y-2">
                               <div className="flex justify-between items-center text-[9px] font-bold uppercase tracking-wider">
                                 <span className="text-purple-650 dark:text-purple-400">{cap.shopType}</span>
-                                <span className="text-slate-400 dark:text-slate-550">{cap.productName}</span>
+                                <span className="text-slate-400 dark:text-slate-555">{cap.productName}</span>
                               </div>
-                              <p className="text-[11px] sm:text-xs text-slate-650 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-wrap">
+                              <p className="text-[11px] sm:text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-wrap">
                                 {cap.captionText}
                               </p>
                             </div>
@@ -744,35 +744,37 @@ export default function Dashboard() {
               </div>
             )}
 
-            {/* TAB 3: PLATFORM SETTINGS */}
+            {/* TAB 3: PLATFORM GUIDE */}
             {activeTab === 'settings' && (
               <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 shadow-xs space-y-6 animate-fade-in-blur">
-                <h3 className="text-lg font-display font-bold border-b border-slate-100 dark:border-slate-800/50 pb-3">Project Metadata</h3>
+                <h3 className="text-lg font-display font-bold border-b border-slate-100 dark:border-slate-800/50 pb-3">Platform Operations Guide</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
                   <div className="space-y-4">
                     <div>
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Student Intern Developer</span>
-                      <p className="font-bold text-forest-900 dark:text-clay-50 font-display">Saurabh Parihar</p>
+                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Review Assistant Guidelines</span>
+                      <p className="text-slate-655 dark:text-slate-350 leading-relaxed">
+                        Copy customer reviews from Google Maps and click on card items to review sentiment tags and suggested reply templates. Click Copy to save response suggestions to your outbox.
+                      </p>
                     </div>
                     <div>
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Intern Identifier Code</span>
-                      <p className="font-bold text-forest-900 dark:text-clay-50 font-mono">TBI-26100640</p>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Affiliated Organization</span>
-                      <p className="font-bold text-forest-900 dark:text-clay-50 font-display">Graphic Era Hill University TBI - Dehradun</p>
+                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Promo Builder Guidelines</span>
+                      <p className="text-slate-655 dark:text-slate-350 leading-relaxed">
+                        Specify product properties and select business categories (Farm, Handloom, or Homestay). Generating templates stores promotion copy persistently in the database log.
+                      </p>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
                     <div>
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Evaluated Deliverables</span>
-                      <p className="font-semibold text-slate-650 dark:text-slate-350">Week 5 Database persistent integration with Mongoose ODM models (Shop, Review, Caption) and Awwwards-style UI makeovers.</p>
+                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Database Mode</span>
+                      <p className="text-slate-655 dark:text-slate-350 leading-relaxed font-semibold">
+                        Connected to persistent storage. If whitelisted clusters are unavailable, connection fallback is handled locally using local backup JSON tables transparently.
+                      </p>
                     </div>
                     <div>
-                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Remote Codebase Repository</span>
+                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Community Repository</span>
                       <a href="https://github.com/Saurabhparihar12/RuralGrow-AI" target="_blank" rel="noreferrer" className="text-sage-600 dark:text-sage-400 hover:underline font-bold font-mono">
-                        Saurabhparihar12/RuralGrow-AI
+                        github.com/Saurabhparihar12/RuralGrow-AI
                       </a>
                     </div>
                   </div>

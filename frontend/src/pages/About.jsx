@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Calendar, Globe, MapPin, User } from 'lucide-react';
+import { Globe, MapPin, User, Cpu } from 'lucide-react';
 
 export default function About() {
   const stats = [
     { label: 'Pilot Region', value: 'Dehradun & Mussoorie hills', icon: <MapPin className="w-4 h-4 text-sage-500" /> },
     { label: 'Focus Audience', value: 'Artisans, Weavers & Orchardists', icon: <User className="w-4 h-4 text-sage-500" /> },
-    { label: 'Platform Deployment', value: 'Week 5 Database Connected', icon: <Globe className="w-4 h-4 text-sage-500" /> },
+    { label: 'Platform Deployment', value: 'Persistent Database Connected', icon: <Globe className="w-4 h-4 text-sage-500" /> },
   ];
 
   return (
@@ -23,7 +23,7 @@ export default function About() {
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto space-y-4">
           <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 dark:text-sage-400 text-[9px] uppercase font-black tracking-widest">
-            <span>Student Pilot Initiative</span>
+            <span>Community Outreach Initiative</span>
           </span>
           <h1 className="text-4xl sm:text-5xl font-display font-bold leading-tight tracking-tight">
             About RuralGrow<span className="text-sage-500 font-light">.ai</span>
@@ -54,7 +54,7 @@ export default function About() {
           <div className="md:col-span-7 space-y-6">
             <h2 className="text-2xl font-display font-bold">Why we started this pilot</h2>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-medium">
-              During our field trips to organic farms, weavers, and homestay hosts in villages near Dehradun and Mussoorie, we noticed a common theme: these small businesses write down contact details in registers, and get excellent feedback from visiting tourists.
+              During field trips to organic farms, weavers, and homestay hosts in villages near Dehradun and Mussoorie, we noticed a common theme: these small businesses write down contact details in registers, and get excellent feedback from visiting tourists.
             </p>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-medium">
               However, they often do not know how to respond to reviews on Google Maps in fluent English or write attractive captions for Instagram. We built RuralGrow AI to give them a simple, zero-code toolbox that drafts these replies and captions for them automatically.
@@ -81,12 +81,10 @@ export default function About() {
             </p>
           </div>
           <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl space-y-4 shadow-xs">
-            <h3 className="text-lg font-display font-bold text-sage-600 dark:text-sage-400">Student Developer Info</h3>
-            <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-mono font-medium space-y-1">
-              <p>Name: <span className="font-bold text-forest-900 dark:text-clay-50">Saurabh Parihar</span></p>
-              <p>Intern ID: <span className="font-bold text-forest-900 dark:text-clay-50">TBI-26100640</span></p>
-              <p>Evaluation: Week 5 persistent DB setup</p>
-            </div>
+            <h3 className="text-lg font-display font-bold text-sage-600 dark:text-sage-400">Our Platform Strategy</h3>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+              We leverage modern language processing model templates to analyze review sentiments and build instant copy-paste communication kits for micro-businesses.
+            </p>
           </div>
         </div>
 

@@ -1,22 +1,22 @@
 # RuralGrow AI
 
-A simple review reply helper and social media caption generator built to assist local Uttarakhand farmers, weavers, and homestay owners in managing their online presence.
+A review reply helper and social media caption generator built to assist local growers, weavers, and homestay hosts in managing their online presence.
 
 ## Project Structure
 * `frontend/`: React + Vite client application
 * `backend/`: Node.js + Express.js REST API server
 * `backend/models/`: Database schemas for Mongoose (Shop, Review, Caption)
-* `W5_SchemaDiagram_TBI-26100640.png` & `W5_SchemaDiagram_TBI-26100640.pdf`: Database Schema ERD Diagram
-* `W5_CRUDVerification_TBI-26100640.pdf`: PDF compilation of CRUD testing screenshots
-* `W4_APICollection_TBI-26100640.json`: Saved Postman API request test suite
+* `SchemaDiagram.png` & `SchemaDiagram.pdf`: Database Schema ERD Diagram
+* `CRUDVerification.pdf`: PDF compilation of CRUD testing screenshots
+* `APICollection.json`: Saved Postman API request test suite
 
 ---
 
 ## Database Choice & Architecture
 
-For Week 5, we selected **MongoDB** as our persistent database solution:
+The application utilizes **MongoDB** as its persistent database solution:
 - **Flexible Document Model**: Reviews and Instagram caption outputs are unstructured document types. MongoDB's BSON structure maps directly to Javascript objects without complex joins.
-- **Scalability**: Perfect for logging hundreds of fast-growing customer reviews across different merchant category profiles.
+- **Scalability**: Perfect for logging fast-growing customer reviews across different merchant category profiles.
 - **ODM Integration**: Managed using Mongoose ODM, utilizing distinct schema models for validation.
 
 ### Database Schema Design
@@ -94,5 +94,5 @@ The backend implements 8 main endpoints:
 ## Postman API Testing
 To test endpoints, import the provided collection file into Postman or Thunder Client:
 1. Load Postman and click **Import**.
-2. Drag and drop the file `W4_APICollection_TBI-26100640.json` from the project root.
+2. Drag and drop the file `APICollection.json` or `W4_APICollection_TBI-26100640.json` from the project root.
 3. Execute and verify the mock queries against your running local server!
