@@ -5,10 +5,12 @@ import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Login from './pages/Login';
 import ComponentShowcase from './pages/ComponentShowcase';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   return (
     <Router>
+      <CustomCursor />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -21,3 +23,4 @@ function App() {
 }
 
 export default App;
+

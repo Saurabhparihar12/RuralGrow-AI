@@ -3,7 +3,17 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Card from '../components/Card';
 import Footer from '../components/Footer';
-import { Sparkles, MessageSquare, ShieldCheck, HelpCircle, ArrowRight, Star } from 'lucide-react';
+import { 
+  Sparkles, 
+  MessageSquare, 
+  HelpCircle, 
+  ArrowRight, 
+  Star, 
+  Clipboard, 
+  Cpu, 
+  Share2,
+  CheckCircle2
+} from 'lucide-react';
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -148,61 +158,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Storytelling Timeline Workflow */}
-      <section className="py-24 max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <h2 className="text-2xl sm:text-3xl font-display font-bold">
-            How It Works
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-405 dark:text-slate-500 font-semibold uppercase tracking-wider">
-            Copy-paste reviews or write details of your product.
-          </p>
-        </div>
+      {/* 3. Redesigned Storytelling Workflow: Split Grid Layout */}
+      <section className="py-24 max-w-7xl mx-auto px-6 sm:px-8 relative z-10 border-t border-slate-200/40 dark:border-slate-800/30">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          
+          {/* Left Sticky Content */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 self-start space-y-5">
+            <span className="text-[10px] font-bold text-sage-600 dark:text-sage-400 uppercase tracking-widest block">System Workflow</span>
+            <h2 className="text-3xl sm:text-5xl font-display font-bold leading-tight tracking-tight">
+              Translating local work into global reach.
+            </h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+              We mapped the complete correspondence pipeline into three simple phases. No marketing training required. Just copy, paste, and let the AI draft templates.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { step: '01', title: 'Pick Feedback', desc: 'Copy a customer review or select a newly harvested product.' },
-            { step: '02', title: 'Generate Template', desc: 'Auto-analyze review sentiment or write promotional Instagram post drafts.' },
-            { step: '03', title: 'Share & Promote', desc: 'Copy the result to WhatsApp or Instagram to impress visiting guests.' }
-          ].map((item, idx) => (
-            <div key={idx} className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl relative group hover:scale-[1.01] transition-transform duration-300">
-              <span className="absolute right-6 top-4 text-4xl font-black text-slate-200/60 dark:text-slate-800/20 font-mono tracking-tighter select-none">
-                {item.step}
-              </span>
-              <h4 className="text-base font-black text-forest-900 dark:text-clay-50 mb-2">{item.title}</h4>
-              <p className="text-xs sm:text-sm text-slate-550 dark:text-slate-400 leading-relaxed font-medium font-sans">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+          {/* Right Workflow Steps connected by custom visual line */}
+          <div className="lg:col-span-7 space-y-8 relative pl-6 border-l border-slate-200 dark:border-slate-800/80">
+            {[
+              { 
+                step: '01', 
+                title: 'Collect Local Feedback', 
+                desc: 'Copy an online review from Google Maps, or enter details for a newly made woollen caps batch, honey jars, or cottage booking.',
+                icon: <Clipboard className="w-4 h-4 text-sage-500" />
+              },
+              { 
+                step: '02', 
+                title: 'Compose Contextual Drafts', 
+                desc: 'The backend parses content keywords to determine sentiments, and suggests friendly responses or outputs hashtag-optimized Instagram promotions.',
+                icon: <Cpu className="w-4 h-4 text-sage-500" />
+              },
+              { 
+                step: '03', 
+                title: 'Publish to Community Channels', 
+                desc: 'Copy the formatted templates to your outbox with one click. Share on WhatsApp or Google Maps instantly to keep tourists engaged.',
+                icon: <Share2 className="w-4 h-4 text-sage-500" />
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="relative bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl shadow-xs transition-transform duration-300 hover:scale-[1.005]">
+                {/* Node dot */}
+                <div className="absolute -left-[31px] top-9 w-2.5 h-2.5 rounded-full bg-sage-500 border-2 border-clay-50 dark:border-forest-950" />
+                
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-forest-900 flex items-center justify-center border border-slate-100 dark:border-slate-800/60">
+                    {item.icon}
+                  </div>
+                  <span className="text-xs font-bold text-sage-600 dark:text-sage-400 font-mono">{item.step}</span>
+                </div>
+                <h4 className="text-base font-bold text-forest-900 dark:text-clay-50 mb-2">{item.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
-      {/* 4. Testimonials & Masonry Gallery */}
+      {/* 4. Redesigned Testimonials & Gallery: Grid Layout */}
       <section className="py-20 border-t border-slate-200/40 dark:border-slate-800/30 bg-clay-100/40 dark:bg-forest-900/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Testimonials (5 cols width) */}
+            
+            {/* Redesigned Testimonials: Large Storytelling Card (5 cols) */}
             <div className="lg:col-span-5 space-y-8">
-              <div className="space-y-3">
-                <h3 className="text-2xl font-display font-bold">Feedback from Weavers & Hosts</h3>
-                <p className="text-xs text-slate-500 font-medium">Real merchant support validation.</p>
+              <div className="space-y-2">
+                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block">Merchant Endorsements</span>
+                <h3 className="text-2xl sm:text-3xl font-display font-bold">What local growers are saying</h3>
               </div>
 
               <div className="space-y-6">
                 {testimonials.map((t, idx) => (
-                  <div key={idx} className="bg-white dark:bg-[#19221F] border border-slate-250/50 dark:border-slate-800/40 p-6 rounded-2xl space-y-4 shadow-xs">
-                    <p className="text-xs sm:text-sm italic text-slate-650 dark:text-slate-350 leading-relaxed font-medium">
+                  <div key={idx} className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl relative shadow-xs">
+                    {/* Visual Quote Accent Mark */}
+                    <span className="absolute right-6 top-4 text-6xl font-serif text-sage-500/10 select-none">“</span>
+                    <p className="text-xs sm:text-sm italic text-slate-600 dark:text-slate-350 leading-relaxed font-medium relative z-10 mb-5">
                       "{t.quote}"
                     </p>
-                    <div className="flex items-center space-x-3 border-t border-slate-100 dark:border-slate-800/60 pt-4">
-                      <div className="w-8 h-8 rounded-full bg-sage-500/20 flex items-center justify-center text-sage-500 font-black text-xs font-mono">
+                    <div className="flex items-center space-x-3.5 pt-4 border-t border-slate-100 dark:border-slate-800/50">
+                      <div className="w-9 h-9 rounded-full bg-sage-500/15 text-sage-600 dark:text-sage-400 flex items-center justify-center text-xs font-black font-mono">
                         {t.name[0]}
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-forest-900 dark:text-clay-50">{t.name}</h4>
-                        <span className="text-[10px] text-slate-450 dark:text-slate-500 block">{t.role}</span>
+                        <span className="text-[9px] text-slate-450 dark:text-slate-500 font-semibold block">{t.role}</span>
                       </div>
                     </div>
                   </div>
@@ -212,17 +253,17 @@ export default function Home() {
 
             {/* Masonry Gallery Grid (7 cols width) */}
             <div className="lg:col-span-7 space-y-6">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-455 dark:text-slate-500">Regional Visual Gallery</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-450 dark:text-slate-500">Regional Visual Gallery</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40">
+                  <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
                       src="https://images.unsplash.com/photo-1595275312720-3b4aa582e052?auto=format&fit=crop&q=80&w=600" 
                       alt="Organic agriculture tea pickers" 
                       className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
                     />
                   </div>
-                  <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40">
+                  <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
                       src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&q=80&w=600" 
                       alt="Weaver making handicraft shawls" 
@@ -231,14 +272,14 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="space-y-4 pt-8">
-                  <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40">
+                  <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
                       src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=600" 
                       alt="Himalayan homestay balcony room view" 
                       className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
                     />
                   </div>
-                  <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40">
+                  <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
                       src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=600" 
                       alt="Himalayan mountain peaks landscape" 
