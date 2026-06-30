@@ -80,12 +80,7 @@ body.dark {
   color: var(--color-clay-50);
 }
 
-/* Hide default cursor on desktop screens supporting hover to present custom cursors naturally */
-@media (hover: hover) and (pointer: fine) {
-  body, a, button, select, textarea, input, [role="button"], .cursor-pointer {
-    cursor: none !important;
-  }
-}
+
 
 /* Premium Card container */
 .handcrafted-card {

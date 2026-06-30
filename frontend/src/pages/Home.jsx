@@ -117,8 +117,8 @@ export default function Home() {
           <div className="relative flex justify-center">
             <div className="relative w-full max-w-md h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-200/45 dark:border-slate-800/40">
               <img 
-                src="https://images.unsplash.com/photo-1626621427793-39c3b058a5bc?auto=format&fit=crop&q=80&w=800" 
-                alt="Uttarakhand mountain terraced fields"
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" 
+                alt="Himalayan mountain valley"
                 className="w-full h-full object-cover grayscale-15 dark:grayscale-30 transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute bottom-6 left-6 right-6 p-5 rounded-xl bg-white/70 dark:bg-forest-900/80 backdrop-blur-md border border-white/50 dark:border-white/5 shadow-xs">
@@ -253,20 +253,20 @@ export default function Home() {
 
             {/* Masonry Gallery Grid (7 cols width) */}
             <div className="lg:col-span-7 space-y-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-450 dark:text-slate-500">Regional Visual Gallery</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-455 dark:text-slate-500">Regional Visual Gallery</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
-                      src="https://images.unsplash.com/photo-1595275312720-3b4aa582e052?auto=format&fit=crop&q=80&w=600" 
-                      alt="Organic agriculture tea pickers" 
+                      src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&q=80&w=600" 
+                      alt="Organic tea fields" 
                       className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
                     />
                   </div>
                   <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
-                      src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&q=80&w=600" 
-                      alt="Weaver making handicraft shawls" 
+                      src="https://images.unsplash.com/photo-1617854818583-09e7f077a156?auto=format&fit=crop&q=80&w=600" 
+                      alt="Handloom weaving thread" 
                       className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
                     />
                   </div>
@@ -274,15 +274,15 @@ export default function Home() {
                 <div className="space-y-4 pt-8">
                   <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
-                      src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&q=80&w=600" 
-                      alt="Himalayan homestay balcony room view" 
+                      src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600" 
+                      alt="Cozy homestay villa" 
                       className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
                     />
                   </div>
                   <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
                     <img 
-                      src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=600" 
-                      alt="Himalayan mountain peaks landscape" 
+                      src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&q=80&w=600" 
+                      alt="Snow peak Himalayas" 
                       className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
                     />
                   </div>
