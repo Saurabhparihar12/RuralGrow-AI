@@ -1,53 +1,95 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Calendar, Globe, MapPin, User } from 'lucide-react';
 
 export default function About() {
+  const stats = [
+    { label: 'Pilot Region', value: 'Dehradun & Mussoorie hills', icon: <MapPin className="w-4 h-4 text-sage-500" /> },
+    { label: 'Focus Audience', value: 'Artisans, Weavers & Orchardists', icon: <User className="w-4 h-4 text-sage-500" /> },
+    { label: 'Platform Deployment', value: 'Week 5 Database Connected', icon: <Globe className="w-4 h-4 text-sage-500" /> },
+  ];
+
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col justify-between transition-colors duration-300">
+    <div className="bg-clay-50 dark:bg-forest-950 text-forest-900 dark:text-clay-50 min-h-screen flex flex-col justify-between transition-colors duration-300 relative overflow-hidden">
+      
+      {/* Decorative gradient blob */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-sage-500/5 rounded-full blur-3xl pointer-events-none" />
+
       <Navbar />
 
-      <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 uppercase tracking-widest bg-indigo-500/10 dark:bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-500/20">
-            RuralGrow Pilot Project
+      <main className="flex-1 max-w-4xl w-full mx-auto px-6 sm:px-8 py-16 relative z-10 space-y-16 animate-fade-in-blur">
+        
+        {/* Header Section */}
+        <div className="text-center max-w-2xl mx-auto space-y-4">
+          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 dark:text-sage-400 text-[9px] uppercase font-black tracking-widest">
+            <span>Student Pilot Initiative</span>
           </span>
-          <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mt-4 mb-3">
-            About RuralGrow AI
+          <h1 className="text-4xl sm:text-5xl font-display font-bold leading-tight tracking-tight">
+            About RuralGrow<span className="text-sage-500 font-light">.ai</span>
           </h1>
-          <p className="text-lg text-slate-650 dark:text-slate-400 leading-relaxed">
-            We are building this review and marketing helper as a student-led community support initiative.
+          <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-medium">
+            We are designing this review helper and caption outbox composer as a community research pilot to help local shops build their digital identity.
           </p>
         </div>
 
-        <div className="space-y-8">
-          {/* Section 1 */}
-          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 shadow-sm">
-            <h2 className="text-lg font-bold text-indigo-650 dark:text-indigo-400 mb-3">How We Started</h2>
-            <p className="text-slate-700 dark:text-slate-350 leading-relaxed text-sm">
-              During our field trips to organic farms, weavers, and homestay owners in villages near Dehradun and Mussoorie, we noticed a common theme: these small businesses write down contact details in registers, and get excellent feedback from visiting tourists.
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-6 rounded-2xl flex items-center space-x-4 shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-slate-50 dark:bg-forest-900 flex items-center justify-center flex-shrink-0 border border-slate-100 dark:border-slate-800/80">
+                {stat.icon}
+              </div>
+              <div className="space-y-0.5">
+                <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block">{stat.label}</span>
+                <span className="text-xs sm:text-sm font-bold text-forest-900 dark:text-clay-50 font-display">{stat.value}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Storytelling grid with Unsplash photo */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+          {/* Text block (7 cols) */}
+          <div className="md:col-span-7 space-y-6">
+            <h2 className="text-2xl font-display font-bold">Why we started this pilot</h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-medium">
+              During our field trips to organic farms, weavers, and homestay hosts in villages near Dehradun and Mussoorie, we noticed a common theme: these small businesses write down contact details in registers, and get excellent feedback from visiting tourists.
             </p>
-            <p className="text-slate-700 dark:text-slate-355 leading-relaxed text-sm mt-4">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-medium">
               However, they often do not know how to respond to reviews on Google Maps in fluent English or write attractive captions for Instagram. We built RuralGrow AI to give them a simple, zero-code toolbox that drafts these replies and captions for them automatically.
             </p>
           </div>
-
-          {/* Section 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-6 shadow-sm">
-              <h3 className="text-base font-bold text-purple-650 dark:text-purple-400 mb-2">Our Goal</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Provide rural artisans, honey gatherers, and cottage owners with simple tools to handle their own online marketing and customer reviews without paying expensive agencies.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-6 shadow-sm">
-              <h3 className="text-base font-bold text-emerald-655 dark:text-emerald-400 mb-2">Project Stack</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Built using React.js for the frontend, styled with custom Tailwind utility configurations, and powered by simple Node.js servers connected to Google Gemini APIs.
-              </p>
+          {/* Photo block (5 cols) */}
+          <div className="md:col-span-5 flex justify-center">
+            <div className="w-full max-w-sm h-[260px] rounded-2xl overflow-hidden border border-slate-200/45 dark:border-slate-800/40">
+              <img 
+                src="https://images.unsplash.com/photo-1592997572594-34be01bc36c7?auto=format&fit=crop&q=80&w=600" 
+                alt="Organic farming tea leaves close up" 
+                className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
+              />
             </div>
           </div>
         </div>
+
+        {/* Sub-Blocks: Goals & Credentials */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl space-y-4 shadow-xs">
+            <h3 className="text-lg font-display font-bold text-sage-600 dark:text-sage-400">Our Primary Goal</h3>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+              Provide rural artisans, honey gatherers, and cottage owners with simple tools to handle their own online marketing and customer reviews without paying expensive agencies.
+            </p>
+          </div>
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl space-y-4 shadow-xs">
+            <h3 className="text-lg font-display font-bold text-sage-600 dark:text-sage-400">Student Developer Info</h3>
+            <div className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-mono font-medium space-y-1">
+              <p>Name: <span className="font-bold text-forest-900 dark:text-clay-50">Saurabh Parihar</span></p>
+              <p>Intern ID: <span className="font-bold text-forest-900 dark:text-clay-50">TBI-26100640</span></p>
+              <p>Evaluation: Week 5 persistent DB setup</p>
+            </div>
+          </div>
+        </div>
+
       </main>
 
       <Footer />

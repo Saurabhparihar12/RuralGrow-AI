@@ -2,6 +2,18 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button, Input, Modal, Toast, Loader } from '../components/ui';
+import { 
+  Sparkles, 
+  Search, 
+  Mail, 
+  HelpCircle, 
+  CheckCircle2, 
+  AlertTriangle, 
+  XCircle, 
+  Info,
+  Layers,
+  ArrowRight
+} from 'lucide-react';
 
 export default function ComponentShowcase() {
   // Modal states
@@ -49,20 +61,25 @@ export default function ComponentShowcase() {
   };
 
   return (
-    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col justify-between transition-colors duration-300">
+    <div className="bg-clay-50 dark:bg-forest-950 text-forest-900 dark:text-clay-50 min-h-screen flex flex-col justify-between transition-colors duration-300 relative overflow-hidden">
+      {/* Background blobs */}
+      <div className="absolute top-20 left-10 w-96 h-96 bg-sage-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-sage-500/5 rounded-full blur-3xl pointer-events-none" />
+
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-6 sm:px-8 py-12 relative z-10 animate-fade-in-blur">
+        
         {/* Page Header */}
-        <div className="border-b border-slate-200 dark:border-slate-900 pb-8 mb-12">
-          <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 uppercase tracking-widest bg-indigo-500/10 dark:bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-500/20">
-            UI Toolkit
+        <div className="border-b border-slate-200/50 dark:border-slate-800/40 pb-6 mb-10">
+          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 dark:text-sage-400 text-[9px] uppercase font-black tracking-widest">
+            <span>UI Playground</span>
           </span>
-          <h1 className="text-3xl font-extrabold sm:text-4xl text-slate-900 dark:text-white mt-4">
-            Custom UI Library Showcase
+          <h1 className="text-3xl font-display font-bold tracking-tight mt-4">
+            Component Design Library
           </h1>
-          <p className="mt-2 text-slate-650 dark:text-slate-400">
-            This playground displays our custom UI components built for the Week 3 evaluation.
+          <p className="mt-2 text-slate-550 dark:text-slate-400 text-xs sm:text-sm font-medium">
+            This playground displays our custom UI components built for the RuralGrow assistant workspace.
           </p>
         </div>
 
@@ -70,14 +87,14 @@ export default function ComponentShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* 1. BUTTON VARIANT SHOWCASE */}
-          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 shadow-sm dark:shadow-md">
-            <h2 className="text-lg font-bold border-b border-slate-100 dark:border-slate-800/80 pb-3 mb-6 text-slate-905 dark:text-white">
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6.5 hover:scale-[1.002] transition-all duration-300">
+            <h2 className="text-base font-black border-b border-slate-100 dark:border-slate-800/40 pb-3 mb-6">
               1. Button Component (`Button.jsx`)
             </h2>
             
             <div className="space-y-6">
               <div>
-                <h3 className="text-xs font-semibold text-slate-500 uppercase mb-3 tracking-wide">Variants</h3>
+                <h3 className="text-[9px] font-bold text-slate-400 uppercase mb-3 tracking-widest">Variants</h3>
                 <div className="flex flex-wrap gap-3">
                   <Button variant="primary">Primary</Button>
                   <Button variant="secondary">Secondary</Button>
@@ -88,7 +105,7 @@ export default function ComponentShowcase() {
               </div>
 
               <div>
-                <h3 className="text-xs font-semibold text-slate-500 uppercase mb-3 tracking-wide">Sizes</h3>
+                <h3 className="text-[9px] font-bold text-slate-400 uppercase mb-3 tracking-widest">Sizes</h3>
                 <div className="flex flex-wrap items-center gap-3">
                   <Button variant="primary" size="sm">Small</Button>
                   <Button variant="primary" size="md">Medium</Button>
@@ -97,7 +114,7 @@ export default function ComponentShowcase() {
               </div>
 
               <div>
-                <h3 className="text-xs font-semibold text-slate-500 uppercase mb-3 tracking-wide">States</h3>
+                <h3 className="text-[9px] font-bold text-slate-400 uppercase mb-3 tracking-widest">States</h3>
                 <div className="flex flex-wrap gap-3">
                   <Button variant="primary" isLoading>Loading State</Button>
                   <Button variant="outline" disabled>Disabled State</Button>
@@ -107,8 +124,8 @@ export default function ComponentShowcase() {
           </div>
 
           {/* 2. INPUT FIELD SHOWCASE */}
-          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 shadow-sm dark:shadow-md">
-            <h2 className="text-lg font-bold border-b border-slate-100 dark:border-slate-800/80 pb-3 mb-6 text-slate-905 dark:text-white">
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6.5 hover:scale-[1.002] transition-all duration-300">
+            <h2 className="text-base font-black border-b border-slate-100 dark:border-slate-800/40 pb-3 mb-6">
               2. Input Field Component (`Input.jsx`)
             </h2>
             
@@ -118,16 +135,14 @@ export default function ComponentShowcase() {
                 placeholder="Enter your full name"
                 value={nameInput}
                 onChange={(e) => setNameInput(e.target.value)}
+                inputClassName="py-2.5 text-xs rounded-xl"
               />
 
               <Input
                 label="Input with Icon (Left)"
-                placeholder="search-reviews..."
-                icon={
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                }
+                placeholder="Search reviews..."
+                icon={<Search className="w-4 h-4 text-slate-400" />}
+                inputClassName="py-2.5 text-xs rounded-xl"
               />
 
               <Input
@@ -136,11 +151,13 @@ export default function ComponentShowcase() {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 error={emailError}
+                icon={<Mail className="w-4 h-4 text-slate-400" />}
+                inputClassName="py-2.5 text-xs rounded-xl"
               />
 
-              <div className="flex justify-between items-center pt-2">
-                <span className="text-xs text-slate-500">Submit form to trigger validation errors or progress loader.</span>
-                <Button variant="primary" type="submit" isLoading={isSubmitLoading}>
+              <div className="flex flex-col sm:flex-row gap-3 justify-between items-center pt-2">
+                <span className="text-[10px] text-slate-450 font-semibold">Submit form to trigger validation errors or progress loader.</span>
+                <Button variant="primary" type="submit" isLoading={isSubmitLoading} className="w-full sm:w-auto text-xs py-2 px-4 cursor-pointer font-bold uppercase tracking-wider bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950">
                   Test Submit
                 </Button>
               </div>
@@ -148,63 +165,63 @@ export default function ComponentShowcase() {
           </div>
 
           {/* 3. MODAL OVERLAY TRIGGER */}
-          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 shadow-sm dark:shadow-md">
-            <h2 className="text-lg font-bold border-b border-slate-100 dark:border-slate-800/80 pb-3 mb-6 text-slate-905 dark:text-white">
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6.5 hover:scale-[1.002] transition-all duration-300">
+            <h2 className="text-base font-black border-b border-slate-100 dark:border-slate-800/40 pb-3 mb-6">
               3. Modal Component (`Modal.jsx`)
             </h2>
 
-            <p className="text-sm text-slate-650 dark:text-slate-400 mb-6 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-550 dark:text-slate-400 mb-6 leading-relaxed font-medium">
               Modals display focused dialogues to users. Click the button below to view a fully accessible, animated, dark-mode-ready custom modal overlay.
             </p>
 
-            <Button variant="primary" onClick={() => setIsDemoModalOpen(true)}>
+            <Button variant="primary" onClick={() => setIsDemoModalOpen(true)} className="text-xs py-2.5 px-5 cursor-pointer font-bold uppercase tracking-wider bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950">
               Open Demo Modal
             </Button>
           </div>
 
           {/* 4. TOAST NOTIFICATION POPUPS */}
-          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 shadow-sm dark:shadow-md">
-            <h2 className="text-lg font-bold border-b border-slate-100 dark:border-slate-800/80 pb-3 mb-6 text-slate-905 dark:text-white">
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6.5 hover:scale-[1.002] transition-all duration-300">
+            <h2 className="text-base font-black border-b border-slate-100 dark:border-slate-800/40 pb-3 mb-6">
               4. Toast Notifications (`Toast.jsx`)
             </h2>
 
-            <p className="text-sm text-slate-650 dark:text-slate-400 mb-6 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-550 dark:text-slate-400 mb-6 leading-relaxed font-medium">
               Toasts provide contextual status updates in real-time. Click to trigger notification banners at the bottom-right.
             </p>
 
             <div className="flex flex-wrap gap-2.5">
-              <Button variant="secondary" onClick={() => triggerToast('Successfully saved reviews!', 'success')}>
+              <Button variant="secondary" className="text-[10px] font-bold uppercase tracking-wider py-2 px-3.5 cursor-pointer" onClick={() => triggerToast('Successfully saved reviews!', 'success')}>
                 Success Toast
               </Button>
-              <Button variant="danger" onClick={() => triggerToast('Could not fetch server data!', 'error')}>
+              <Button variant="danger" className="text-[10px] font-bold uppercase tracking-wider py-2 px-3.5 cursor-pointer" onClick={() => triggerToast('Could not fetch server data!', 'error')}>
                 Error Toast
               </Button>
-              <Button variant="secondary" onClick={() => triggerToast('Warning: High review usage detected.', 'warning')}>
+              <Button variant="secondary" className="text-[10px] font-bold uppercase tracking-wider py-2 px-3.5 cursor-pointer" onClick={() => triggerToast('Warning: High review usage detected.', 'warning')}>
                 Warning Toast
               </Button>
-              <Button variant="outline" onClick={() => triggerToast('Info: Analyzing sentiment score...', 'info')}>
+              <Button variant="outline" className="text-[10px] font-bold uppercase tracking-wider py-2 px-3.5 cursor-pointer" onClick={() => triggerToast('Info: Analyzing sentiment score...', 'info')}>
                 Info Toast
               </Button>
             </div>
           </div>
 
           {/* 5. SPINNING LOADERS */}
-          <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 shadow-sm dark:shadow-md lg:col-span-2">
-            <h2 className="text-lg font-bold border-b border-slate-100 dark:border-slate-800/80 pb-3 mb-6 text-slate-905 dark:text-white">
+          <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6.5 hover:scale-[1.002] transition-all duration-300 lg:col-span-2">
+            <h2 className="text-base font-black border-b border-slate-100 dark:border-slate-800/40 pb-3 mb-6">
               5. Loader Indicators (`Loader.jsx`)
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-900">
-                <h4 className="text-xs font-semibold text-slate-500 uppercase mb-3">Small Loader</h4>
+              <div className="bg-slate-50 dark:bg-forest-900/60 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80 flex flex-col items-center justify-center min-h-[110px]">
+                <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-3">Small Loader</h4>
                 <Loader size="sm" />
               </div>
-              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-900">
-                <h4 className="text-xs font-semibold text-slate-500 uppercase mb-3">Medium Loader (Default)</h4>
+              <div className="bg-slate-50 dark:bg-forest-900/60 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80 flex flex-col items-center justify-center min-h-[110px]">
+                <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-3">Medium Loader</h4>
                 <Loader size="md" />
               </div>
-              <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-200 dark:border-slate-900">
-                <h4 className="text-xs font-semibold text-slate-500 uppercase mb-3">Large Loader</h4>
+              <div className="bg-slate-50 dark:bg-forest-900/60 p-5 rounded-2xl border border-slate-100 dark:border-slate-800/80 flex flex-col items-center justify-center min-h-[110px]">
+                <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-3">Large Loader</h4>
                 <Loader size="lg" />
               </div>
             </div>
@@ -217,25 +234,25 @@ export default function ComponentShowcase() {
       <Modal
         isOpen={isDemoModalOpen}
         onClose={() => setIsDemoModalOpen(false)}
-        title="RuralGrow AI Platform Message"
+        title="RuralGrow Platform Message"
         footerContent={
           <>
-            <Button variant="outline" onClick={() => setIsDemoModalOpen(false)}>
+            <Button variant="outline" onClick={() => setIsDemoModalOpen(false)} className="text-xs py-2 px-4 cursor-pointer font-bold uppercase tracking-wider">
               Cancel
             </Button>
             <Button variant="primary" onClick={() => {
               setIsDemoModalOpen(false);
               triggerToast('Confirmed action inside modal!', 'success');
-            }}>
+            }} className="text-xs py-2 px-4 cursor-pointer font-bold uppercase tracking-wider bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950">
               Confirm
             </Button>
           </>
         }
       >
-        <p className="mb-4">
+        <p className="mb-4 text-slate-700 dark:text-slate-350 text-sm font-medium leading-relaxed">
           This is an instance of our custom modal dialogue. It matches the system's light/dark mode preference perfectly.
         </p>
-        <p className="text-slate-550 dark:text-slate-400">
+        <p className="text-slate-500 dark:text-slate-450 text-xs font-semibold">
           We can place form inputs, loader animations, or button panels inside. Click <strong>Confirm</strong> to trigger a toast indicator or press <strong>Cancel</strong> / backdrop click to dismiss.
         </p>
       </Modal>

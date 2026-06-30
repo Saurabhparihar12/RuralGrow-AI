@@ -1,3 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
+  --font-display: "Manrope", sans-serif;
+  
+  /* Sophisticated color palette: warm whites, deep forest charcoals, sage green accents */
+  --color-clay-50: #FBFBFA;
+  --color-clay-100: #F5F4F0;
+  --color-clay-200: #EAE8DF;
+  --color-forest-900: #131A17;
+  --color-forest-950: #0C110F;
+  --color-sage-500: #768875;
+  --color-sage-600: #5E6F5D;
+  --color-sage-700: #4B5A4B;
+  
+  --animate-text-reveal: text-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in-blur: fade-in-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-float-y: float-y 8s ease-in-out infinite;
+  --animate-shimmer-slow: shimmer 3s infinite linear;
+  
+  @keyframes text-reveal {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in-blur {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-y {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
 @variant dark (&:where(.dark, .dark *));
+
+/* Custom base rules for handcrafted feel */
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-clay-50);
+  color: var(--color-forest-900);
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark {
+  background-color: var(--color-forest-950);
+  color: var(--color-clay-50);
+}
+
+/* Hide default cursor on desktop screens supporting hover to present custom cursors naturally */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, select, textarea, input, [role="button"], .cursor-pointer {
+    cursor: none !important;
+  }
+}
+
+/* Premium Card container */
+.handcrafted-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(19, 26, 23, 0.05);
+  box-shadow: 0 4px 20px -2px rgba(19, 26, 23, 0.02), 0 2px 6px -1px rgba(19, 26, 23, 0.01);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .handcrafted-card {
+  background: #19221F;
+  border: 1px solid rgba(245, 244, 240, 0.05);
+  box-shadow: none;
+}
+
+.handcrafted-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -4px rgba(19, 26, 23, 0.05), 0 4px 12px -2px rgba(19, 26, 23, 0.02);
+  border-color: rgba(94, 111, 93, 0.2);
+}
+
+.dark .handcrafted-card:hover {
+  border-color: rgba(245, 244, 240, 0.15);
+}
+
+/* Beautiful custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #C4C2BA;
+  border-radius: 99px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2E3A36;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A6A49B;
+}
+
+/* Text reveal helper */
+.overflow-clip-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.overflow-clip-reveal > * {
+  display: block;
+  animation: text-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
