@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import ReviewModel from '../models/Review.js';
 import ShopModel from '../models/Shop.js';
 import CaptionModel from '../models/Caption.js';
+import UserModel from '../models/User.js';
+import bcryptjs from 'bcryptjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,16 +26,17 @@ async function readJsonDb() {
     const parsed = JSON.parse(data);
     // Support legacy arrays or structured objects
     if (Array.isArray(parsed)) {
-      return { reviews: parsed, shops: [], captions: [] };
+      return { reviews: parsed, shops: [], captions: [], users: [] };
     }
     return {
       reviews: parsed.reviews || [],
       shops: parsed.shops || [],
-      captions: parsed.captions || []
+      captions: parsed.captions || [],
+      users: parsed.users || []
     };
   } catch (error) {
     console.error('[dbHelper] Error reading JSON database, using empty structure:', error.message);
-    return { reviews: [], shops: [], captions: [] };
+    return { reviews: [], shops: [], captions: [], users: [] };
   }
 }
 
@@ -188,5 +191,59 @@ export const reviewService = {
       await writeJsonDb(db);
       return removed;
     }
+  }
+};
+
+// Unified User service adapter
+export const userService = {
+  async findUserByEmail(email) {
+    if (isMongoConnected) {
+      return await UserModel.findOne({ email: email.toLowerCase() });
+    } else {
+      const db = await readJsonDb();
+      return db.users.find(u => u.email.toLowerCase() === email.toLowerCase()) || null;
+    }
+  },
+
+  async findUserById(id) {
+    if (isMongoConnected) {
+      return await UserModel.findById(id);
+    } else {
+      const db = await readJsonDb();
+      return db.users.find(u => u.id === id || u._id === id) || null;
+    }
+  },
+
+  async createUser(data) {
+    if (isMongoConnected) {
+      const newUser = new UserModel(data);
+      return await newUser.save();
+    } else {
+      const db = await readJsonDb();
+      if (!db.users) db.users = [];
+      
+      const salt = await bcryptjs.genSalt(10);
+      const hashedPassword = await bcryptjs.hash(data.password, salt);
+      
+      const newId = `usr-${Date.now()}`;
+      const newUser = {
+        id: newId,
+        _id: newId,
+        name: data.name,
+        email: data.email.toLowerCase(),
+        password: hashedPassword,
+        role: data.role || 'merchant',
+        shopName: data.shopName || 'Garhwal Organic Farms',
+        createdAt: new Date().toISOString()
+      };
+      
+      db.users.push(newUser);
+      await writeJsonDb(db);
+      return newUser;
+    }
+  },
+
+  async comparePassword(enteredPassword, hashedPassword) {
+    return await bcryptjs.compare(enteredPassword, hashedPassword);
   }
 };

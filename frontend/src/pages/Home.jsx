@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Card from '../components/Card';
 import Footer from '../components/Footer';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
   MessageSquare, 
@@ -65,7 +66,7 @@ export default function Home() {
     },
     {
       q: 'Is my merchant data saved permanently?',
-      a: 'Yes. With the Week 5 upgrade, all customer reviews and Instagram promo caption history are stored persistently in the database, meaning they survive restarts.'
+      a: 'Yes. With the database upgrade, all customer reviews and Instagram promo caption history are stored persistently in the database, meaning they survive restarts.'
     },
     {
       q: 'Can I use this without a MongoDB instance?',
@@ -88,7 +89,13 @@ export default function Home() {
       <section className="py-24 max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Block */}
-          <div className="space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="space-y-6"
+          >
             <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 dark:text-sage-400 text-[9px] uppercase font-black tracking-widest">
               <span>Our Origin Story</span>
             </div>
@@ -105,28 +112,34 @@ export default function Home() {
             <div className="pt-2">
               <a 
                 href="/about" 
-                className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-sage-600 hover:text-sage-700 transition-colors"
+                className="inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-sage-600 hover:text-sage-700 transition-colors cursor-pointer"
               >
-                <span>Read student credentials</span>
+                <span>Read operational values</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Block: Alternating photo grid */}
-          <div className="relative flex justify-center">
-            <div className="relative w-full max-w-md h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-200/45 dark:border-slate-800/40">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            className="relative flex justify-center"
+          >
+            <div className="relative w-full max-w-md h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-200/45 dark:border-slate-800/40 group">
               <img 
                 src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" 
                 alt="Himalayan mountain valley"
-                className="w-full h-full object-cover grayscale-15 dark:grayscale-30 transition-transform duration-700 hover:scale-105"
+                className="w-full h-full object-cover grayscale-15 dark:grayscale-30 transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute bottom-6 left-6 right-6 p-5 rounded-xl bg-white/70 dark:bg-forest-900/80 backdrop-blur-md border border-white/50 dark:border-white/5 shadow-xs">
                 <span className="text-[9px] uppercase tracking-widest font-bold text-sage-600 dark:text-sage-400 block mb-1">Location Spotlight</span>
                 <p className="text-xs font-bold text-forest-900 dark:text-clay-50 font-display">Dehradun & Mussoorie Organic Valleys</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -144,15 +157,22 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feat, idx) => (
-              <Card
+              <motion.div
                 key={idx}
-                title={feat.title}
-                description={feat.description}
-                icon={feat.icon}
-                badge={feat.badge}
-                linkText="Launch Tool"
-                linkPath="/dashboard"
-              />
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+              >
+                <Card
+                  title={feat.title}
+                  description={feat.description}
+                  icon={feat.icon}
+                  badge={feat.badge}
+                  linkText="Launch Tool"
+                  linkPath="/dashboard"
+                />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -163,7 +183,13 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Left Sticky Content */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 self-start space-y-5">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 lg:sticky lg:top-28 self-start space-y-5"
+          >
             <span className="text-[10px] font-bold text-sage-600 dark:text-sage-400 uppercase tracking-widest block">System Workflow</span>
             <h2 className="text-3xl sm:text-5xl font-display font-bold leading-tight tracking-tight">
               Translating local work into global reach.
@@ -171,9 +197,9 @@ export default function Home() {
             <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
               We mapped the complete correspondence pipeline into three simple phases. No marketing training required. Just copy, paste, and let the AI draft templates.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Right Workflow Steps connected by custom visual line */}
+          {/* Right Workflow Steps */}
           <div className="lg:col-span-7 space-y-8 relative pl-6 border-l border-slate-200 dark:border-slate-800/80">
             {[
               { 
@@ -195,12 +221,19 @@ export default function Home() {
                 icon: <Share2 className="w-4 h-4 text-sage-500" />
               }
             ].map((item, idx) => (
-              <div key={idx} className="relative bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl shadow-xs transition-transform duration-300 hover:scale-[1.005]">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                className="relative bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl shadow-xs transition-all duration-300 hover:scale-[1.005]"
+              >
                 {/* Node dot */}
                 <div className="absolute -left-[31px] top-9 w-2.5 h-2.5 rounded-full bg-sage-500 border-2 border-clay-50 dark:border-forest-950" />
                 
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-forest-900 flex items-center justify-center border border-slate-100 dark:border-slate-800/60">
+                  <div className="w-9 h-9 rounded-xl bg-slate-55 dark:bg-forest-900 flex items-center justify-center border border-slate-100 dark:border-slate-800/60 animate-pulse">
                     {item.icon}
                   </div>
                   <span className="text-xs font-bold text-sage-600 dark:text-sage-400 font-mono">{item.step}</span>
@@ -209,20 +242,20 @@ export default function Home() {
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
         </div>
       </section>
 
-      {/* 4. Redesigned Testimonials & Gallery: Grid Layout */}
+      {/* 4. Testimonials & Gallery */}
       <section className="py-20 border-t border-slate-200/40 dark:border-slate-800/30 bg-clay-100/40 dark:bg-forest-900/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             
-            {/* Redesigned Testimonials: Large Storytelling Card (5 cols) */}
+            {/* Testimonials (5 cols) */}
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-2">
                 <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest block">Merchant Endorsements</span>
@@ -231,10 +264,16 @@ export default function Home() {
 
               <div className="space-y-6">
                 {testimonials.map((t, idx) => (
-                  <div key={idx} className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl relative shadow-xs">
-                    {/* Visual Quote Accent Mark */}
+                  <motion.div 
+                    key={idx} 
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.2 }}
+                    className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 p-8 rounded-2xl relative shadow-xs"
+                  >
                     <span className="absolute right-6 top-4 text-6xl font-serif text-sage-500/10 select-none">“</span>
-                    <p className="text-xs sm:text-sm italic text-slate-600 dark:text-slate-350 leading-relaxed font-medium relative z-10 mb-5">
+                    <p className="text-xs sm:text-sm italic text-slate-600 dark:text-slate-355 leading-relaxed font-medium relative z-10 mb-5">
                       "{t.quote}"
                     </p>
                     <div className="flex items-center space-x-3.5 pt-4 border-t border-slate-100 dark:border-slate-800/50">
@@ -246,46 +285,70 @@ export default function Home() {
                         <span className="text-[9px] text-slate-450 dark:text-slate-500 font-semibold block">{t.role}</span>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Masonry Gallery Grid (7 cols width) */}
+            {/* Gallery Grid (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
               <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-455 dark:text-slate-500">Regional Visual Gallery</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs group"
+                  >
                     <img 
                       src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&q=80&w=600" 
                       alt="Organic tea fields" 
-                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
+                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-700 group-hover:scale-103" 
                     />
-                  </div>
-                  <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.15 }}
+                    className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs group"
+                  >
                     <img 
                       src="https://images.unsplash.com/photo-1617854818583-09e7f077a156?auto=format&fit=crop&q=80&w=600" 
                       alt="Handloom weaving thread" 
-                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
+                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-700 group-hover:scale-103" 
                     />
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="space-y-4 pt-8">
-                  <div className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="rounded-2xl overflow-hidden h-[240px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs group"
+                  >
                     <img 
                       src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600" 
                       alt="Cozy homestay villa" 
-                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
+                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-700 group-hover:scale-103" 
                     />
-                  </div>
-                  <div className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.25 }}
+                    className="rounded-2xl overflow-hidden h-[180px] border border-slate-200/50 dark:border-slate-800/40 shadow-xs group"
+                  >
                     <img 
                       src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&q=80&w=600" 
                       alt="Snow peak Himalayas" 
-                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-500 hover:scale-103" 
+                      className="w-full h-full object-cover grayscale-10 dark:grayscale-30 transition-transform duration-700 group-hover:scale-103" 
                     />
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -314,11 +377,21 @@ export default function Home() {
                   <h4 className="text-xs sm:text-sm font-bold text-forest-900 dark:text-clay-50">{faq.q}</h4>
                   <HelpCircle className={`w-4 h-4 text-sage-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                 </div>
-                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-40 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/60' : 'max-h-0'}`}>
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium font-sans">
-                    {faq.a}
-                  </p>
-                </div>
+                
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium font-sans mt-3 pt-3 border-t border-slate-100 dark:border-slate-800/60">
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}

@@ -10,4 +10,9 @@ const reviewSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+// Indexes for query performance optimization
+reviewSchema.index({ createdAt: -1 });
+reviewSchema.index({ sentiment: 1 });
+reviewSchema.index({ shopName: 1 });
+
 export default mongoose.models.Review || mongoose.model('Review', reviewSchema);

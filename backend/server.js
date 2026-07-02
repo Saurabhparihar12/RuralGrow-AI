@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import reviewRoutes from './routes/reviewRoutes.js';
 import captionRoutes from './routes/captionRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { setMongoConnected } from './data/dbHelper.js';
 
@@ -43,6 +44,7 @@ if (mongoURI) {
 // REST routes
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/captions', captionRoutes);
+app.use('/api/auth', authRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

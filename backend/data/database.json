@@ -32,6 +32,17 @@
       "replySuggestion": "Hi Karan, thank you for staying with us at Raj Homestay! It was our pleasure hosting you in Mussoorie. Hope to see you and your friends again in the winters! 🙏",
       "sentiment": "positive",
       "createdAt": "2026-06-22T08:15:00.000Z"
+    },
+    {
+      "id": "rev-1782842635635",
+      "_id": "rev-1782842635635",
+      "author": "saurabh",
+      "shopName": "Sawai pent house",
+      "rating": 4,
+      "reviewText": "nice experience\n",
+      "replySuggestion": "Hi saurabh! Thank you so much for the 5-star review. We are so happy you liked your experience at Sawai pent house. Do let us know when you need your next order. Have a wonderful day! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-30T18:03:55.635Z"
     }
   ],
   "shops": [],
