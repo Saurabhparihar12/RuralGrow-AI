@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import Footer from '../components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Sparkles, 
+  Send, 
   MessageSquare, 
   HelpCircle, 
   ArrowRight, 
@@ -42,7 +42,7 @@ export default function Home() {
       title: 'WhatsApp Promo Drafts',
       description: 'Quickly compose simple, friendly promo text alerts for new harvest arrivals, loom patterns, or cozy homestay rooms.',
       badge: 'WhatsApp Broadcaster',
-      icon: <Sparkles className="w-5 h-5 text-sage-500" />
+      icon: <Send className="w-5 h-5 text-sage-500" />
     }
   ];
 

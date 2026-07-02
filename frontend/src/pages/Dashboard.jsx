@@ -22,7 +22,7 @@ import {
   User, 
   Store, 
   Star, 
-  Sparkles, 
+  Tag, 
   Plus,
   Compass,
   Settings,
@@ -884,7 +884,7 @@ export default function Dashboard() {
                         onChange={(e) => setProductName(e.target.value)}
                         className="!space-y-1.5"
                         inputClassName="py-2.5 text-xs rounded-xl focus:ring-1 focus:ring-sage-500"
-                        icon={<Sparkles className="w-3.5 h-3.5 text-slate-400" />}
+                        icon={<Tag className="w-3.5 h-3.5 text-slate-400" />}
                         disabled={user && user.role === 'visitor'}
                       />
 

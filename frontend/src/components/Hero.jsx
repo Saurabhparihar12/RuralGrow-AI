@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Globe } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -29,7 +29,7 @@ export default function Hero() {
         
         {/* Accent Tag */}
         <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-clay-50/10 border border-clay-50/15 text-[10px] uppercase font-bold tracking-widest text-clay-100 animate-fade-in-blur">
-          <Sparkles className="w-3.5 h-3.5 text-sage-500" />
+          <Globe className="w-3.5 h-3.5 text-sage-500" />
           <span>Community Outreach Initiative // Rural Growth</span>
         </div>
 
