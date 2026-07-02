@@ -63,5 +63,17 @@
       "captionText": "🧣 Handcrafted with love by our local weavers! Presenting the all-new [Pashmina Shawl]. Every thread is woven by hand using traditional designs passed down through generations. \n\n📦 Shipments across India. Help keep our craft heritage alive! \n\n#VocalForLocal #MakeInIndia #HandloomWeavers #TraditionalCrafts #PashminaShawl",
       "createdAt": "2026-06-30T17:17:34.835Z"
     }
+  ],
+  "users": [
+    {
+      "id": "usr-1782966498935",
+      "_id": "usr-1782966498935",
+      "name": "Saurabh parihar",
+      "email": "saurabh@gmail.com",
+      "password": "$2b$10$awTi/Jn2nyh7RjIcymzJe.Qol1CNiIGIzPsqUybHvquhw3/LJgNye",
+      "role": "merchant",
+      "shopName": "Garhwal Organic Farms",
+      "createdAt": "2026-07-02T04:28:18.935Z"
+    }
   ]
 }

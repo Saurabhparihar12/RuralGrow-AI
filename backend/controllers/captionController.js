@@ -18,7 +18,7 @@ export const captionController = {
   // 2. POST /api/captions
   async createCaption(req, res, next) {
     try {
-      const { productName, shopType, captionText } = req.body;
+            const { productName, shopType, captionText, reviewId } = req.body;
       if (!productName || !shopType || !captionText) {
         return res.status(400).json({
           success: false,
@@ -29,7 +29,8 @@ export const captionController = {
       const caption = await reviewService.createCaption({
         productName,
         shopType,
-        captionText
+        captionText,
+        reviewId: reviewId || null
       });
 
       res.status(201).json({

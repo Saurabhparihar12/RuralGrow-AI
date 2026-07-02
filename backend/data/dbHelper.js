@@ -171,6 +171,7 @@ export const reviewService = {
         productName: data.productName,
         shopType: data.shopType,
         captionText: data.captionText,
+        reviewId: data.reviewId || null,
         createdAt: new Date().toISOString()
       };
       db.captions.push(newCaption);
