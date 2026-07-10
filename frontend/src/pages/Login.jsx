@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button, Input, Toast } from '../components/ui';
-import { Mail, Lock, Store, User, ArrowRight, CornerDownLeft } from 'lucide-react';
+import { Mail, Lock, Store, User, ArrowRight, CornerDownLeft, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login, signup, forgotPassword } = useAuth();
+  const [searchParams] = useSearchParams();
+  const { login, signup, googleLoginSimulated, loginWithParams, forgotPassword } = useAuth();
   
   const [isLogin, setIsLogin] = useState(true);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [showSimulatedGoogle, setShowSimulatedGoogle] = useState(false);
   
   // Form input states
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [shopName, setShopName] = useState('Garhwal Organic Farms');
-  const [role, setRole] = useState('merchant');
+  const [role, setRole] = useState('guest');
+  
+  // Simulated Google inputs
+  const [googleName, setGoogleName] = useState('Saurabh Parihar');
+  const [googleEmail, setGoogleEmail] = useState('sparihar2005@gmail.com');
   
   const [isLoading, setIsLoading] = useState(false);
   const [toast, setToast] = useState(null);
@@ -27,6 +33,32 @@ export default function Login() {
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
   };
+
+  // Check for Google OAuth tokens returned in URL parameters
+  useEffect(() => {
+    const token = searchParams.get('token');
+    const userStr = searchParams.get('user');
+    const error = searchParams.get('error');
+
+    if (error) {
+      showToast('Google OAuth Authentication failed. Please try again.', 'error');
+    } else if (token && userStr) {
+      try {
+        const decodedUser = JSON.parse(decodeURIComponent(userStr));
+        loginWithParams(token, decodedUser);
+        showToast(`Google Login Successful! Welcome ${decodedUser.name}`, 'success');
+        setTimeout(() => {
+          if (decodedUser.role === 'admin' || decodedUser.role === 'business_owner') {
+            navigate('/admin');
+          } else {
+            navigate('/dashboard');
+          }
+        }, 1000);
+      } catch (e) {
+        showToast('Error parsing Google user metadata.', 'error');
+      }
+    }
+  }, [searchParams]);
 
   const handleAuthSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +92,13 @@ export default function Login() {
       if (res.success) {
         showToast('Welcome to RuralGrow AI! Redirecting...', 'success');
         setTimeout(() => {
-          navigate('/dashboard');
+          // Check role to route correctly
+          const userMeta = res.user || {};
+          if (userMeta.role === 'admin' || userMeta.role === 'business_owner') {
+            navigate('/admin');
+          } else {
+            navigate('/dashboard');
+          }
         }, 1000);
       } else {
         showToast(res.message, 'error');
@@ -81,6 +119,35 @@ export default function Login() {
       } else {
         showToast(res.message, 'error');
       }
+    }
+  };
+
+  const handleRealGoogleOAuth = () => {
+    // Redirect browser directly to passport-google-oauth20 route on backend
+    window.location.href = 'http://localhost:5000/api/auth/google';
+  };
+
+  const handleSimulatedGoogleSubmit = async (e) => {
+    e.preventDefault();
+    if (!googleEmail.trim()) {
+      showToast('Please enter a mock Google email.', 'warning');
+      return;
+    }
+    setIsLoading(true);
+    const res = await googleLoginSimulated(googleName, googleEmail, 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150');
+    setIsLoading(false);
+    if (res.success) {
+      showToast('Google OAuth Sandbox Login Successful!', 'success');
+      setTimeout(() => {
+        // Redirect to admin for mock admin/owner profiles
+        if (googleEmail.includes('admin') || googleEmail.includes('saurabh')) {
+          navigate('/admin');
+        } else {
+          navigate('/dashboard');
+        }
+      }, 1000);
+    } else {
+      showToast(res.message, 'error');
     }
   };
 
@@ -105,9 +172,6 @@ export default function Login() {
         )}
       </AnimatePresence>
 
-      {/* Background Blobs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-sage-500/5 rounded-full blur-3xl pointer-events-none" />
-
       <Navbar />
 
       <main className="flex-1 flex items-center justify-center py-16 px-6 relative z-10">
@@ -115,11 +179,68 @@ export default function Login() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-md w-full bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 md:p-10 shadow-xl dark:shadow-none relative overflow-hidden transition-all duration-500"
+          className="max-w-md w-full bg-white/80 dark:bg-[#19221F]/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 md:p-10 shadow-xl dark:shadow-none relative overflow-hidden transition-all duration-500"
         >
           
           <AnimatePresence mode="wait">
-            {!isForgotPassword ? (
+            {showSimulatedGoogle ? (
+              // Simulated Google Login Form
+              <motion.div
+                key="google-simulated"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="space-y-6"
+              >
+                <div className="text-center">
+                  <h2 className="text-xl font-display font-bold text-forest-900 dark:text-clay-50 flex items-center justify-center space-x-2">
+                    <Globe className="w-5 h-5 text-blue-550" />
+                    <span>Google Login Sandbox</span>
+                  </h2>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 font-medium">
+                    Simulate a Google OAuth authentication callback flow locally.
+                  </p>
+                </div>
+
+                <form className="space-y-4" onSubmit={handleSimulatedGoogleSubmit}>
+                  <Input
+                    label="Google Display Name"
+                    type="text"
+                    value={googleName}
+                    onChange={(e) => setGoogleName(e.target.value)}
+                    icon={<User className="w-4 h-4 text-slate-400" />}
+                    inputClassName="py-2.5 text-xs rounded-xl"
+                  />
+                  <Input
+                    label="Google Email Address"
+                    type="email"
+                    value={googleEmail}
+                    onChange={(e) => setGoogleEmail(e.target.value)}
+                    icon={<Mail className="w-4 h-4 text-slate-400" />}
+                    inputClassName="py-2.5 text-xs rounded-xl"
+                  />
+
+                  <Button
+                    variant="primary"
+                    className="w-full cursor-pointer font-bold uppercase tracking-widest text-[10px] py-3.5 bg-blue-600 hover:bg-blue-700 text-white"
+                    type="submit"
+                    isLoading={isLoading}
+                  >
+                    Confirm OAuth Simulation
+                  </Button>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowSimulatedGoogle(false)}
+                    className="w-full text-center flex items-center justify-center space-x-1.5 text-xs font-bold text-slate-500 hover:text-forest-900 dark:hover:text-clay-50 transition-colors pt-2 cursor-pointer bg-transparent border-none"
+                  >
+                    <CornerDownLeft className="w-3.5 h-3.5" />
+                    <span>Back to standard login</span>
+                  </button>
+                </form>
+              </motion.div>
+            ) : !isForgotPassword ? (
+              // Standard native login/register
               <motion.div
                 key="form-fields"
                 initial={{ opacity: 0 }}
@@ -135,7 +256,7 @@ export default function Login() {
                       isLogin ? 'text-forest-900 dark:text-clay-50 bg-white dark:bg-forest-800 shadow-xs' : 'text-slate-500 hover:text-slate-700'
                     }`}
                   >
-                    Merchant Login
+                    Login
                   </button>
                   <button
                     onClick={() => { setIsLogin(false); setToast(null); }}
@@ -143,7 +264,7 @@ export default function Login() {
                       !isLogin ? 'text-forest-900 dark:text-clay-50 bg-white dark:bg-forest-800 shadow-xs' : 'text-slate-500 hover:text-slate-700'
                     }`}
                   >
-                    Create Account
+                    Register
                   </button>
                 </div>
 
@@ -154,7 +275,7 @@ export default function Login() {
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-450 mt-1.5 font-medium">
                     {isLogin 
-                      ? 'Sign in to access your saved reviews and promotional tools' 
+                      ? 'Sign in to access your business growth tools' 
                       : 'Register your cottage industry, farm, or workshop'
                     }
                   </p>
@@ -165,7 +286,6 @@ export default function Login() {
                   
                   <AnimatePresence mode="wait">
                     {isLogin ? (
-                      // Login form fields
                       <motion.div
                         key="login-inputs"
                         initial={{ opacity: 0, y: 10 }}
@@ -206,7 +326,6 @@ export default function Login() {
                         </div>
                       </motion.div>
                     ) : (
-                      // Signup form fields
                       <motion.div
                         key="signup-inputs"
                         initial={{ opacity: 0, y: 10 }}
@@ -257,8 +376,10 @@ export default function Login() {
                             onChange={(e) => setRole(e.target.value)}
                             className="w-full bg-white dark:bg-forest-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-350 outline-none cursor-pointer"
                           >
-                            <option value="merchant">Merchant (Write permissions)</option>
-                            <option value="visitor">Viewer (Read-Only access)</option>
+                            <option value="guest">Guest (Default read-only)</option>
+                            <option value="farmer">Farmer (Agricultural tools)</option>
+                            <option value="business_owner">Business Owner (Write permissions)</option>
+                            <option value="admin">System Admin</option>
                           </select>
                         </div>
                       </motion.div>
@@ -271,9 +392,37 @@ export default function Login() {
                     type="submit"
                     isLoading={isLoading}
                   >
-                    {isLogin ? 'Sign In to Hub' : 'Register Account'}
+                    {isLogin ? 'Sign In' : 'Register Account'}
                   </Button>
                 </form>
+
+                {/* Google Sign-in Dividers */}
+                <div className="relative my-6 text-center">
+                  <span className="absolute left-0 right-0 top-1/2 border-t border-slate-200 dark:border-slate-800 -z-10" />
+                  <span className="bg-white dark:bg-[#19221F] px-3.5 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                    Or Authentication
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Real Google OAuth Redirect */}
+                  <button
+                    onClick={handleRealGoogleOAuth}
+                    className="w-full flex items-center justify-center space-x-2.5 py-3 border border-slate-200 dark:border-slate-800 hover:bg-slate-55/40 dark:hover:bg-forest-900/60 rounded-xl transition-all duration-300 font-semibold text-xs text-slate-700 dark:text-slate-350 cursor-pointer bg-white dark:bg-forest-900"
+                  >
+                    <Globe className="w-4 h-4 text-red-550" />
+                    <span>Login with Google (OAuth Redirection)</span>
+                  </button>
+
+                  {/* Sandbox Simulated Google Login */}
+                  <button
+                    onClick={() => setShowSimulatedGoogle(true)}
+                    className="w-full flex items-center justify-center space-x-2.5 py-3 border border-dashed border-blue-500/40 hover:bg-blue-500/5 rounded-xl transition-all duration-300 font-semibold text-xs text-blue-600 dark:text-blue-450 cursor-pointer bg-transparent"
+                  >
+                    <Globe className="w-4 h-4 text-blue-500 animate-pulse" />
+                    <span>OAuth Sandbox (Simulated Google Auth)</span>
+                  </button>
+                </div>
               </motion.div>
             ) : (
               // Forgot Password view
@@ -288,7 +437,7 @@ export default function Login() {
                 <div className="text-center">
                   <h2 className="text-2xl font-display font-bold text-forest-900 dark:text-clay-50">Reset Password</h2>
                   <p className="text-xs text-slate-500 dark:text-slate-450 mt-1.5 font-medium">
-                    Enter your registered email address below, and we will simulate a verification reset link.
+                    Enter your registered email address below to request a verification reset link.
                   </p>
                 </div>
 
@@ -326,9 +475,9 @@ export default function Login() {
           </AnimatePresence>
 
           <div className="mt-8 border-t border-slate-200 dark:border-slate-800/80 pt-6 text-center text-[10px] text-slate-500 font-medium">
-            <span>Note: Local accounts are pre-assigned. </span>
+            <span>Admin pre-configured demo logins:</span>
             <br />
-            <span className="font-bold text-sage-600 dark:text-sage-400">Ask Support Admin for credentials support.</span>
+            <span className="font-bold text-sage-600 dark:text-sage-400">admin@ruralgrow.in</span> / <span className="font-bold text-sage-600 dark:text-sage-400">admin123</span>
           </div>
 
         </motion.div>

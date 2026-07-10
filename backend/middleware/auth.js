@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { userService } from '../data/dbHelper.js';
 
+// Verify JWT token middleware
 export const protect = async (req, res, next) => {
   let token;
 
@@ -47,4 +48,29 @@ export const protect = async (req, res, next) => {
       message: 'Not authorized: Token missing.'
     });
   }
+};
+
+// Aliases for verifyToken and requireAuth as requested
+export const verifyToken = protect;
+export const requireAuth = protect;
+
+// Role-based authorization middleware
+export const authorizeRoles = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Not authorized: User profile not loaded.'
+      });
+    }
+
+    if (!allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: `Forbidden: User role '${req.user.role}' is not authorized to access this resource.`
+      });
+    }
+
+    next();
+  };
 };

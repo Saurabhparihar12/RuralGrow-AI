@@ -58,11 +58,11 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // Signup handler
+  // Signup/Register handler
   const signup = async (name, email, password, role, shopName) => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/signup', {
+      const res = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, role, shopName })
@@ -80,6 +80,36 @@ export function AuthProvider({ children }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Simulated Google Sign-In handler (for development and test sandboxes)
+  const googleLoginSimulated = async (name, email, avatar) => {
+    setLoading(true);
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/google-simulated', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, avatar })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setToken(data.token);
+        setUser(data.user);
+        return { success: true, message: data.message };
+      } else {
+        return { success: false, message: data.message || 'Google Login failed.' };
+      }
+    } catch (err) {
+      return { success: false, message: 'Could not connect to authentication server.' };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Direct login using parameters (for Google OAuth callback redirects)
+  const loginWithParams = (authToken, userMetadata) => {
+    setToken(authToken);
+    setUser(userMetadata);
   };
 
   // Logout handler
@@ -110,7 +140,18 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, setUser, login, signup, logout, forgotPassword, loading }}>
+    <AuthContext.Provider value={{ 
+      token, 
+      user, 
+      setUser, 
+      login, 
+      signup, 
+      googleLoginSimulated,
+      loginWithParams,
+      logout, 
+      forgotPassword, 
+      loading 
+    }}>
       {children}
     </AuthContext.Provider>
   );

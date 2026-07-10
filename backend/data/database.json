@@ -43,6 +43,28 @@
       "replySuggestion": "Hi saurabh! Thank you so much for the 5-star review. We are so happy you liked your experience at Sawai pent house. Do let us know when you need your next order. Have a wonderful day! 🙏",
       "sentiment": "positive",
       "createdAt": "2026-06-30T18:03:55.635Z"
+    },
+    {
+      "id": "rev-1783188712609",
+      "_id": "rev-1783188712609",
+      "author": "saurabh",
+      "shopName": "garwhal shop",
+      "rating": 2,
+      "reviewText": "nice\n",
+      "replySuggestion": "Hi saurabh! Thank you so much for the 5-star review. We are so happy you liked your experience at garwhal shop. Do let us know when you need your next order. Have a wonderful day! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-04T18:11:52.609Z"
+    },
+    {
+      "id": "rev-1783191506523",
+      "_id": "rev-1783191506523",
+      "author": "muskan ",
+      "shopName": "muskan berries",
+      "rating": 5,
+      "reviewText": "tasty berries",
+      "replySuggestion": "Hi muskan! Thank you for the review. We are glad you checked out muskan berries and appreciate your honest feedback. We will keep working to make our products better. Hope to serve you again! 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-07-04T18:58:26.523Z"
     }
   ],
   "shops": [],
@@ -70,10 +92,44 @@
       "_id": "usr-1782966498935",
       "name": "Saurabh parihar",
       "email": "saurabh@gmail.com",
-      "password": "$2b$10$awTi/Jn2nyh7RjIcymzJe.Qol1CNiIGIzPsqUybHvquhw3/LJgNye",
-      "role": "merchant",
+      "password": "$2b$10$C6IJC7yH2eAVdV8rFX/kJeY6o7QQXfpJ3KFiRVWeioGSsEm.k5k92",
+      "role": "business_owner",
       "shopName": "Garhwal Organic Farms",
       "createdAt": "2026-07-02T04:28:18.935Z"
+    },
+    {
+      "id": "usr-admin",
+      "_id": "usr-admin",
+      "name": "Saurabh Parihar (Admin)",
+      "email": "admin@ruralgrow.in",
+      "password": "$2b$10$C6IJC7yH2eAVdV8rFX/kJeY6o7QQXfpJ3KFiRVWeioGSsEm.k5k92",
+      "role": "admin",
+      "shopName": "Garhwal Farms (Admin)",
+      "createdAt": "2026-07-10T09:00:00.000Z"
+    },
+    {
+      "id": "usr-1783675008677",
+      "_id": "usr-1783675008677",
+      "name": "sohamm",
+      "email": "sohamm@gmail.com",
+      "password": "$2b$10$Jrdl7NU0cYJq5Ox8sE.onOspGAJDCj6ByvO23Y6dlIqIrSvO9ySDC",
+      "role": "business_owner",
+      "shopName": "Garhwal Organic Farms",
+      "googleId": null,
+      "avatar": null,
+      "createdAt": "2026-07-10T09:16:48.677Z"
+    },
+    {
+      "id": "usr-1783675131543",
+      "_id": "usr-1783675131543",
+      "name": "Saurabh Parihar",
+      "email": "sparihar2005@gmail.com",
+      "password": null,
+      "role": "guest",
+      "shopName": "Garhwal Farms (Google)",
+      "googleId": "google-simulated-1783675131543",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+      "createdAt": "2026-07-10T09:18:51.543Z"
     }
   ]
 }

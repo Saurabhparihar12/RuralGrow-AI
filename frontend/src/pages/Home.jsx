@@ -130,7 +130,7 @@ export default function Home() {
           >
             <div className="relative w-full max-w-md h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-200/45 dark:border-slate-800/40 group">
               <img 
-                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" 
+                src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&q=80&w=800" 
                 alt="Himalayan mountain valley"
                 className="w-full h-full object-cover grayscale-15 dark:grayscale-30 transition-transform duration-1000 group-hover:scale-105"
               />
@@ -395,6 +395,46 @@ export default function Home() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Uttarakhand Landscapes Gallery */}
+      <section className="py-20 border-t border-slate-200/40 dark:border-slate-800/30">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 dark:text-sage-400 text-[9px] uppercase font-black tracking-widest">
+              <span>Himalayan Landscapes</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-display font-bold tracking-tight">Uttarakhand Heritage Spots</h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
+              Take a visual journey through the home regions of our weavers, apiarists, and cottage owners.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: 'Laxman Jhula Suspension Bridge', region: 'Rishikesh Valley', img: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&q=80&w=600' },
+              { title: 'Naini Lake Boats', region: 'Nainital District', img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=600' },
+              { title: 'Valley of Flowers Trail', region: 'Chamoli Glaciers', img: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=600' },
+              { title: 'Snow Mountain Range', region: 'Nanda Devi Peaks', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600' }
+            ].map((place, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ y: -6 }}
+                className="relative h-64 rounded-3xl overflow-hidden group shadow-sm border border-slate-100 dark:border-slate-800"
+              >
+                <img 
+                  src={place.img} 
+                  alt={place.title} 
+                  className="w-full h-full object-cover filter brightness-85 group-hover:scale-105 transition-transform duration-700" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/30 to-transparent p-6 flex flex-col justify-end text-left">
+                  <span className="text-[9px] uppercase tracking-widest text-sage-400 font-extrabold">{place.region}</span>
+                  <h4 className="text-sm font-bold text-white font-display mt-1">{place.title}</h4>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

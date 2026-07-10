@@ -44,6 +44,8 @@ export default function Dashboard() {
   // Search & Filters
   const [searchTerm, setSearchTerm] = useState('');
   const [sentimentFilter, setSentimentFilter] = useState('all');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   // New Review Form States
   const [newAuthor, setNewAuthor] = useState('');
@@ -80,15 +82,17 @@ export default function Dashboard() {
     }
   }, [token, user, navigate]);
 
-  // Fetch reviews from API
-  const fetchReviews = async () => {
+  // Fetch reviews from API (supports search override for autocomplete clicks)
+  const fetchReviews = async (overrideSearch = null) => {
     if (!token) return;
     try {
       setLoading(true);
       let url = 'http://localhost:5000/api/reviews';
       const params = [];
-      if (searchTerm.trim()) {
-        params.push(`search=${encodeURIComponent(searchTerm.trim())}`);
+      const activeSearch = overrideSearch !== null ? overrideSearch : searchTerm;
+      
+      if (activeSearch.trim()) {
+        params.push(`search=${encodeURIComponent(activeSearch.trim())}`);
       }
       if (sentimentFilter && sentimentFilter !== 'all') {
         params.push(`sentiment=${sentimentFilter}`);
@@ -600,23 +604,54 @@ export default function Dashboard() {
                       </ResponsiveContainer>
                     </div>
                   </div>
-
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                     
                     {/* List Container (7 columns) */}
                     <div className="lg:col-span-7 bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6 shadow-xs space-y-6">
                       
                       {/* Filter and Search Panel */}
-                      <form onSubmit={handleSearchSubmit} className="flex gap-2.5">
-                        <div className="flex-1">
+                      <form onSubmit={handleSearchSubmit} className="flex gap-2.5 relative">
+                        <div className="flex-1 relative">
                           <Input
                             placeholder="Search reviews..."
                             value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setSearchTerm(val);
+                              if (val.trim().length > 0) {
+                                const matches = ['Organic Honey', 'Handloom Saree', 'Apple Orchard', 'Cottage Homestay', 'Woolen Shawl', 'Milk Products'].filter(k => k.toLowerCase().includes(val.toLowerCase()));
+                                setSuggestions(matches);
+                                setShowSuggestions(true);
+                              } else {
+                                setSuggestions([]);
+                                setShowSuggestions(false);
+                              }
+                            }}
                             className="!space-y-0"
                             inputClassName="py-2.5 text-xs rounded-xl focus:ring-1 focus:ring-sage-500"
                             icon={<Search className="w-3.5 h-3.5 text-slate-400" />}
                           />
+                          
+                          {/* Autocomplete Suggestions Dropdown */}
+                          {showSuggestions && suggestions.length > 0 && (
+                            <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#19221F] border border-slate-200 dark:border-slate-800 rounded-xl shadow-lg z-30 overflow-hidden text-xs divide-y divide-slate-100 dark:divide-slate-800/40">
+                              {suggestions.map((s, idx) => (
+                                <div
+                                  key={idx}
+                                  onClick={() => {
+                                    setSearchTerm(s);
+                                    setShowSuggestions(false);
+                                    setTimeout(() => {
+                                      fetchReviews(s);
+                                    }, 50);
+                                  }}
+                                  className="px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-forest-900/60 cursor-pointer font-bold text-slate-700 dark:text-slate-350"
+                                >
+                                  {s}
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                         <button 
                           type="submit"

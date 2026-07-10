@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "848fa562-b91c-4b71-a4be-a6984e1b8b80",
+		"name": "Week 6 - Authentication & Security (TBI-26100640)",
+		"description": "Postman collection covering MERN backend authentication, rate-limiting, validations, and role-based permissions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register New Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Saurabh Parihar\",\n    \"email\": \"sparihar2005@gmail.com\",\n    \"password\": \"admin123\",\n    \"role\": \"admin\",\n    \"shopName\": \"Garhwal Farms (Admin)\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Creates a new native user account with Zod input validation checks. Default role can be mapped during registration."
+					},
+					"response": []
+				},
+				{
+					"name": "User Login (Standard)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"if (responseJson.success && responseJson.token) {",
+									"    pm.environment.set(\"jwt_token\", responseJson.token);",
+									"    console.log(\"Saved JWT token to environment variables.\");",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sparihar2005@gmail.com\",\n    \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Authenticates credentials, signs a JWT session (expires in 7 days), and saves it inside Postman environment variables."
+					},
+					"response": []
+				},
+				{
+					"name": "Simulated Google Sign-In Callback",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Saurabh Parihar (Google)\",\n    \"email\": \"sparihar2005@gmail.com\",\n    \"avatar\": \"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/google-simulated",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"google-simulated"
+							]
+						},
+						"description": "Simulates Google OAuth signup/login for testing authorization routes without real OAuth keys."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Protected Operations",
+			"item": [
+				{
+					"name": "Fetch User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profile"
+							]
+						},
+						"description": "Protected endpoint displaying profile metadata for currently logged in JWT session owner."
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Admin Panel Statistics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/admin/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"admin",
+								"stats"
+							]
+						},
+						"description": "Protected route requiring 'admin' role. Returns detailed system size, active database connections, and server telemetry."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}

@@ -4,7 +4,14 @@ import { ArrowRight, Globe } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <div className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-forest-950 text-clay-50 select-none">
+    <div 
+      className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-forest-950 text-clay-50 select-none"
+      style={{ 
+        backgroundImage: "url('https://images.unsplash.com/photo-1626697591416-56ceb5ecca61?auto=format&fit=crop&q=80&w=1920')", 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center' 
+      }}
+    >
       
       {/* Cinematic Background Video */}
       <video
@@ -12,7 +19,7 @@ export default function Hero() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-35 scale-102 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-25 scale-102 pointer-events-none"
       >
         <source 
           src="https://assets.mixkit.co/videos/preview/mixkit-drone-shot-of-a-himalayan-valley-with-pine-trees-43093-large.mp4" 

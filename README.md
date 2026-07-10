@@ -1,98 +1,112 @@
-# RuralGrow AI
+# RuralGrow AI - Week 6: Authentication & Security Upgrade
 
-A review reply helper and social media caption generator built to assist local growers, weavers, and homestay hosts in managing their online presence.
+An AI-assisted review helper and social media marketing generator designed to support rural micro-merchants, organic farmers, and cottage industries (like weavers and homestay hosts) in Uttarakhand. 
 
-## Project Structure
-* `frontend/`: React + Vite client application
-* `backend/`: Node.js + Express.js REST API server
-* `backend/models/`: Database schemas for Mongoose (Shop, Review, Caption)
-* `SchemaDiagram.png` & `SchemaDiagram.pdf`: Database Schema ERD Diagram
-* `CRUDVerification.pdf`: PDF compilation of CRUD testing screenshots
-* `APICollection.json`: Saved Postman API request test suite
+This release introduces comprehensive MERN stack authentication, passport-based Google OAuth, Zod request body validation, express-rate-limiting, Helmet secure headers, MongoDB query sanitization, and role-based route guards.
 
 ---
 
-## Database Choice & Architecture
-
-The application utilizes **MongoDB** as its persistent database solution:
-- **Flexible Document Model**: Reviews and Instagram caption outputs are unstructured document types. MongoDB's BSON structure maps directly to Javascript objects without complex joins.
-- **Scalability**: Perfect for logging fast-growing customer reviews across different merchant category profiles.
-- **ODM Integration**: Managed using Mongoose ODM, utilizing distinct schema models for validation.
-
-### Database Schema Design
-Our database model contains three primary entities:
-1. **Shop**: Stores merchant profiles (Farms, Weaving Centers, Homestays).
-2. **Review**: Stores client review feedback and AI suggested reply templates (Linked in a 1:N relationship with Shop).
-3. **Caption**: Stores generated Instagram promotion drafts.
-
-![Database Schema Diagram](W5_SchemaDiagram_TBI-26100640.png)
-
----
-
-## Local Setup & Installation
-
-### 1. Database Setup (MongoDB Atlas)
-1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a free tier cluster (M0).
-2. Whitelist your local network IP and create a database user with read/write permissions.
-3. Retrieve your MongoDB connection string (e.g., `mongodb+srv://<username>:<password>@cluster.mongodb.net/ruralgrow`).
-4. Paste this connection string inside your backend `.env` file as `MONGODB_URI`.
-
-### 2. Backend Server Setup
-1. Navigate into the backend directory:
-   ```bash
-   cd backend
-   ```
-2. Install the required Node packages:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` configuration file in the backend root based on `.env.example`:
-   ```bash
-   PORT=5000
-   MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/ruralgrow
-   ```
-   *Note: If no MONGODB_URI is provided, the API automatically falls back to reading/writing JSON records from the local `backend/data/database.json` file, allowing you to test without a running MongoDB database.*
-4. Start the backend in development hot-reload mode:
-   ```bash
-   npm run dev
-   ```
-   *The REST API will listen on port `5000`.*
-
-### 3. Frontend Client Setup
-1. Navigate into the frontend directory:
-   ```bash
-   cd ../frontend
-   ```
-2. Install client dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite React development server:
-   ```bash
-   npm run dev
-   ```
-   *The client interface will load at `http://localhost:5173`.*
+## 📁 Updated Project Directory Architecture
+The application has been restructured to follow standard production MERN patterns:
+```
+├── backend/
+│   ├── config/             # Passport.js strategy loaders (passport.js)
+│   ├── controllers/        # Express route request controllers (authController, reviewController)
+│   ├── data/               # Persistent adapters and fallback json tables (dbHelper.js, database.json)
+│   ├── middleware/         # Security, validation, and auth guards (auth.js, security.js, validator.js)
+│   ├── models/             # Mongoose DB schema definitions (User.js, Review.js, Caption.js, Shop.js)
+│   ├── routes/             # REST routing groups (authRoutes.js, reviewRoutes.js, captionRoutes.js)
+│   ├── server.js           # Server initializer mounting helmet, cors, and sanitizers
+│   └── package.json        # Node configuration with zod, helmet, express-rate-limit, and passport
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # UI elements & custom cursors
+│   │   │   └── layout/     # Session ProtectedRoute component wrappers
+│   │   ├── context/        # Global AuthContext provider and theme toggles
+│   │   ├── pages/          # Pages (Home, Login, Dashboard, Profile, AdminDashboard)
+│   │   ├── App.jsx         # Client routing declaring route guards
+│   │   └── main.jsx        # App mounting and wrapper contexts
+│   └── package.json        # Client configuration with framer-motion and lucide icons
+```
 
 ---
 
-## REST API Endpoint Details
-The backend implements 8 main endpoints:
-* **Reviews CRUD**:
-  - `GET /api/reviews` — Fetch review list (supports filtering by `?sentiment=positive|negative|neutral` and searching by `?search=basmati`)
-  - `GET /api/reviews/:id` — Fetch details of a single review log
-  - `POST /api/reviews` — Log a new customer review (auto-assigns sentiment and reply suggestion templates)
-  - `PUT /api/reviews/:id` — Update review text or rating values
-  - `DELETE /api/reviews/:id` — Remove a review entry
-  - `POST /api/reviews/:id/reply` — Manually trigger AI-drafted reply suggestion updates
-* **Instagram Captions CRUD**:
-  - `GET /api/captions` — Fetch saved social marketing posts history
-  - `POST /api/captions` — Save a newly generated Instagram caption in the database
-  - `DELETE /api/captions/:id` — Delete a saved caption draft from history
+## 🔒 Security Implementations
+We have integrated professional security frameworks to protect user transactions:
+1. **Helmet HTTP Headers:** Secure headers configured using `helmet` middleware.
+2. **NoSQL Query Sanitization:** Cleans req bodies of SQL/NoSQL operator inputs via `express-mongo-sanitize`.
+3. **CORS Whitelisting:** Enforces cross-origin checks allowing only the client port (`http://localhost:5173`) in production.
+4. **Input Verification:** Validates incoming registration/login bodies via **Zod** schema checkers.
+5. **Rate Limiting:** Enforces maximum of 5 native registration/login attempts per 15 minutes to block brute-force attempts (returns standard HTTP status code `429 Too Many Requests`).
 
 ---
 
-## Postman API Testing
-To test endpoints, import the provided collection file into Postman or Thunder Client:
-1. Load Postman and click **Import**.
-2. Drag and drop the file `APICollection.json` or `W4_APICollection_TBI-26100640.json` from the project root.
-3. Execute and verify the mock queries against your running local server!
+## 👥 Role-Based Permission Architecture
+The platform defines four distinct user roles, locking down both UI screens and backend APIs:
+* **Admin:** Unrestricted read/write. Authorized to view system logs, delete users, and access server telemetry.
+* **Farmer:** Allowed to view agricultural review boards and write reviews.
+* **Business Owner:** Full write access for review replies and marketing captions.
+* **Guest (Default):** Read-only viewing permissions on dashboards.
+
+---
+
+## 🔌 API Documentation
+
+### Native & Google Authentication Routes
+* `POST /api/auth/register` (or `/signup`) — Registers a new user. Enforces Zod validation schemas. Hashes password with bcrypt (10-12 salt rounds). Returns a JWT token.
+* `POST /api/auth/login` — Authenticates user credentials. Returns signed JWT token (valid for 7 days).
+* `POST /api/auth/google-simulated` — Sandbox Google OAuth sign-in flow for local testing without Client IDs.
+* `GET /api/auth/google` — Redirects browser to Google account consent screen.
+* `GET /api/auth/google/callback` — Handles callback from Google, registers/finds user profile, signs JWT, and redirects back to the frontend dashboard.
+* `GET /api/auth/profile` — (Protected) Fetches details of the active authenticated session owner.
+* `GET /api/auth/admin/stats` — (Protected - Admin Only) Returns server memory, user list size, and review volume trends.
+
+---
+
+## ⚙️ Environment Configuration
+
+Create a `.env` file in the `backend/` directory with the following variables:
+```env
+PORT=5000
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/ruralgrow
+JWT_SECRET=your_super_secure_jwt_secret_key
+
+# Google OAuth Credentials (Required for production OAuth)
+GOOGLE_CLIENT_ID=your_google_oauth_client_id
+GOOGLE_CLIENT_SECRET=your_google_oauth_client_secret
+```
+
+---
+
+## 🚀 Local Installation & Setup
+
+### 1. Start the Backend Server
+```bash
+cd backend
+npm install
+npm run dev
+```
+*Server will output: `[Server] REST API successfully listening on port: 5000`*
+
+### 2. Optional: Seed the MongoDB Atlas Database
+If you connect your real cloud MongoDB database for the first time, seed it with our default dataset (Admin accounts, mock reviews, and captions) by running:
+```bash
+npm run seed
+```
+
+### 2. Start the Frontend Client
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+*Client interface will load at `http://localhost:5173`.*
+
+---
+
+## 📁 Week 6 Submission Packets
+All required deliverables are compiled in the root workspace directory:
+- **LMS ZIP Packet:** `W6_Submission_TBI-26100640.zip` (consolidating PDFs and collections).
+- **Postman API Suite:** [`W6_AuthAPICollection_TBI-26100640.json`](W6_AuthAPICollection_TBI-26100640.json).
+- **Flow Screenshots PDF:** [`W6_AuthFlowScreenshots_TBI-26100640.pdf`](W6_AuthFlowScreenshots_TBI-26100640.pdf).

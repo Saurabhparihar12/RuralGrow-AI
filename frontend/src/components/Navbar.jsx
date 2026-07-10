@@ -54,7 +54,13 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Dashboard', path: '/dashboard' },
+    ...(user ? [
+      { name: 'Dashboard', path: '/dashboard' },
+      { name: 'Profile', path: '/profile' }
+    ] : []),
+    ...(user && user.role === 'admin' ? [
+      { name: 'Admin', path: '/admin' }
+    ] : []),
     { name: 'Showcase', path: '/showcase' },
     { name: 'About Us', path: '/about' }
   ];

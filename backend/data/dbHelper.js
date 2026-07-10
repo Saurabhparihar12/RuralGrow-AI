@@ -215,6 +215,15 @@ export const userService = {
     }
   },
 
+  async findUserByGoogleId(googleId) {
+    if (isMongoConnected) {
+      return await UserModel.findOne({ googleId });
+    } else {
+      const db = await readJsonDb();
+      return db.users.find(u => u.googleId === googleId) || null;
+    }
+  },
+
   async createUser(data) {
     if (isMongoConnected) {
       const newUser = new UserModel(data);
@@ -223,8 +232,11 @@ export const userService = {
       const db = await readJsonDb();
       if (!db.users) db.users = [];
       
-      const salt = await bcryptjs.genSalt(10);
-      const hashedPassword = await bcryptjs.hash(data.password, salt);
+      let hashedPassword = null;
+      if (data.password) {
+        const salt = await bcryptjs.genSalt(10);
+        hashedPassword = await bcryptjs.hash(data.password, salt);
+      }
       
       const newId = `usr-${Date.now()}`;
       const newUser = {
@@ -233,8 +245,10 @@ export const userService = {
         name: data.name,
         email: data.email.toLowerCase(),
         password: hashedPassword,
-        role: data.role || 'merchant',
+        role: data.role || 'guest',
         shopName: data.shopName || 'Garhwal Organic Farms',
+        googleId: data.googleId || null,
+        avatar: data.avatar || null,
         createdAt: new Date().toISOString()
       };
       
@@ -245,6 +259,7 @@ export const userService = {
   },
 
   async comparePassword(enteredPassword, hashedPassword) {
+    if (!hashedPassword) return false; // Handle Google OAuth accounts with no passwords
     return await bcryptjs.compare(enteredPassword, hashedPassword);
   }
 };

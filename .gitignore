@@ -49,3 +49,6 @@ logs/
 # Archives
 *.zip
 screenshot_*.png
+
+# Local MongoDB Server Binaries & Data
+/backend/mongodb/

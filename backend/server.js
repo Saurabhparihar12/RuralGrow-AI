@@ -1,7 +1,9 @@
 import express from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import passport from 'passport';
+import { configurePassport } from './config/passport.js';
+import { helmetMiddleware, mongoSanitizeMiddleware, corsMiddleware } from './middleware/security.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import captionRoutes from './routes/captionRoutes.js';
 import authRoutes from './routes/authRoutes.js';
@@ -14,9 +16,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS and JSON body parser middleware
-app.use(cors());
+// Mount Security and CORS Middlewares
+app.use(helmetMiddleware);
+app.use(corsMiddleware);
+app.use(mongoSanitizeMiddleware);
 app.use(express.json());
+
+// Initialize Passport configurations
+configurePassport();
+app.use(passport.initialize());
 
 // Database setup: attempt MongoDB connection, fallback to local JSON file
 const mongoURI = process.env.MONGODB_URI;
@@ -41,7 +49,7 @@ if (mongoURI) {
   setMongoConnected(false);
 }
 
-// REST routes
+// REST API routes
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/captions', captionRoutes);
 app.use('/api/auth', authRoutes);
