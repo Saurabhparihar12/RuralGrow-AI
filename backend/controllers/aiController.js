@@ -1,8 +1,13 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Resolve static import bootstrap order by loading env values immediately
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Resolve static import bootstrap order by loading env values immediately using absolute path
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 // Initialize Gemini AI Client if API Key is set
 let genAI = null;
@@ -109,7 +114,7 @@ export const aiController = {
 
       // Live Gemini API Execution
       const model = genAI.getGenerativeModel({ 
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.0-flash',
         systemInstruction: `You are HimalayaGrow AI, a specialized business consultant, agricultural expert, and digital assistant designed for rural micro-entrepreneurs in the Himalayan/Uttarakhand region. You provide practical, highly helpful, step-by-step guidance on sustainable agriculture, local cottage industries (honey apiaries, handloom weavers, fruit cooperatives), and state/central government agricultural schemes (like PM-KISAN, PM-FME, organic certification). Keep your tone warm, encouraging, respectful, and plain. Format your output using clear markdown formatting. If appropriate, give localized examples from Dehradun, Mussoorie, Nainital, Almora, etc.`
       });
 
@@ -177,7 +182,7 @@ export const aiController = {
         });
       }
 
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
       const prompt = `Write a warm, polite, professional customer review reply for the local shop "${shopName}". The review was written by "${author}" with a rating of "${rating}" stars. The review text is: "${reviewText}". Tailor the tone of the response based on the rating and sentiment. If positive, express gratitude and invite them back. If negative, show deep empathy, apologize, and offer a way to make it right. Keep the response to 2-3 sentences max. Do not include placeholder brackets or sign-offs.`;
 
       const apiCall = model.generateContent(prompt);
@@ -226,7 +231,7 @@ export const aiController = {
         });
       }
 
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
       const prompt = `Act as an expert social media copywriter. Write a highly engaging marketing caption for a product named "${productName}" sold by a local rural store categorized as "${shopType}" in the hills of Uttarakhand. The additional product details are: "${details || 'Organic and locally grown'}". Emphasize the purity, mountain origin, traditional methods, and how buying this supports local farming communities. Include emojis, clear formatting, an active call to action, and 4-5 relevant local hashtags. Keep it concise yet premium.`;
 
       const apiCall = model.generateContent(prompt);

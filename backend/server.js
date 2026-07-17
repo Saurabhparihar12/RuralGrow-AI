@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import passport from 'passport';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { configurePassport } from './config/passport.js';
 import { helmetMiddleware, mongoSanitizeMiddleware, corsMiddleware } from './middleware/security.js';
 import reviewRoutes from './routes/reviewRoutes.js';
@@ -11,8 +13,11 @@ import aiRoutes from './routes/aiRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { setMongoConnected } from './data/dbHelper.js';
 
-// Load environment variables
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables dynamically using absolute path
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
