@@ -56,6 +56,7 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     ...(user ? [
       { name: 'Dashboard', path: '/dashboard' },
+      { name: 'AI Assistant', path: '/ai-assistant' },
       { name: 'Profile', path: '/profile' }
     ] : []),
     ...(user && user.role === 'admin' ? [

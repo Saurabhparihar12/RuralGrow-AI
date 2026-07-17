@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "c7f99bf1-e23a-4467-b847-e239e248b111",
+		"name": "RuralGrow AI - Week 7 AI API Collection",
+		"description": "Postman collection for validating Week 7 Google Gemini AI features and backend route integration.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AI Chat Assistant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"Suggest a crop rotation plan for my organic terrace farm in Nainital.\",\n    \"history\": []\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ai/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ai",
+						"chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AI Review Reply Generator",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"author\": \"Rohan Mehta\",\n    \"shopName\": \"Harsil Apples Co\",\n    \"reviewText\": \"The apples were delicious and fresh. Highly recommended!\",\n    \"rating\": 5\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ai/review-reply",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ai",
+						"review-reply"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AI Marketing Caption Writer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productName\": \"Himalayan Forest Honey\",\n    \"shopType\": \"Farm\",\n    \"details\": \"Raw, unfiltered pine forest honey harvested in Chamoli.\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/ai/marketing-caption",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"ai",
+						"marketing-caption"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -7,6 +7,7 @@ import { helmetMiddleware, mongoSanitizeMiddleware, corsMiddleware } from './mid
 import reviewRoutes from './routes/reviewRoutes.js';
 import captionRoutes from './routes/captionRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
 import errorHandler from './middleware/errorHandler.js';
 import { setMongoConnected } from './data/dbHelper.js';
 
@@ -53,6 +54,7 @@ if (mongoURI) {
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/captions', captionRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

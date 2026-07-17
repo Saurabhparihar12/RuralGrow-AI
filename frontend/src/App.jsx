@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
 import ComponentShowcase from './pages/ComponentShowcase';
+import AiAssistant from './pages/AiAssistant';
 import CustomCursor from './components/CustomCursor';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 
@@ -27,6 +28,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/ai-assistant" 
+          element={
+            <ProtectedRoute>
+              <AiAssistant />
             </ProtectedRoute>
           } 
         />
