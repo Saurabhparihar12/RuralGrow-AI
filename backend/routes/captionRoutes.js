@@ -9,6 +9,7 @@ router.route('/')
   .post(protect, captionController.createCaption);
 
 router.route('/:id')
+  .put(protect, captionController.updateCaption)
   .delete(protect, captionController.deleteCaption);
 
 export default router;

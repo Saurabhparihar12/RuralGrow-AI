@@ -192,6 +192,26 @@ export const reviewService = {
       await writeJsonDb(db);
       return removed;
     }
+  },
+
+  async updateCaption(id, data) {
+    if (isMongoConnected) {
+      return await CaptionModel.findByIdAndUpdate(id, data, { new: true });
+    } else {
+      const db = await readJsonDb();
+      const idx = db.captions.findIndex(c => c.id === id || c._id === id);
+      if (idx === -1) return null;
+
+      const updatedCaption = {
+        ...db.captions[idx],
+        ...data,
+        id,
+        _id: id
+      };
+      db.captions[idx] = updatedCaption;
+      await writeJsonDb(db);
+      return updatedCaption;
+    }
   }
 };
 
@@ -255,6 +275,26 @@ export const userService = {
       db.users.push(newUser);
       await writeJsonDb(db);
       return newUser;
+    }
+  },
+
+  async updateUser(id, data) {
+    if (isMongoConnected) {
+      return await UserModel.findByIdAndUpdate(id, data, { new: true });
+    } else {
+      const db = await readJsonDb();
+      const idx = db.users.findIndex(u => u.id === id || u._id === id);
+      if (idx === -1) return null;
+
+      const updatedUser = {
+        ...db.users[idx],
+        ...data,
+        id,
+        _id: id
+      };
+      db.users[idx] = updatedUser;
+      await writeJsonDb(db);
+      return updatedUser;
     }
   },
 

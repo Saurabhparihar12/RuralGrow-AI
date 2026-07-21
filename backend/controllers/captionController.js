@@ -60,5 +60,33 @@ export const captionController = {
     } catch (error) {
       next(error);
     }
+  },
+
+  // 4. PUT /api/captions/:id
+  async updateCaption(req, res, next) {
+    try {
+      const { captionText } = req.body;
+      if (!captionText) {
+        return res.status(400).json({
+          success: false,
+          message: 'Please provide captionText.'
+        });
+      }
+
+      const updated = await reviewService.updateCaption(req.params.id, { captionText });
+      if (!updated) {
+        return res.status(404).json({
+          success: false,
+          message: `Caption not found with id: ${req.params.id}`
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        data: updated
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 };
