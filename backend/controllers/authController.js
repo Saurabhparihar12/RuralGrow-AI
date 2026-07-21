@@ -219,5 +219,42 @@ export const authController = {
     } catch (error) {
       next(error);
     }
+  },
+
+  // 7. PUT /api/auth/profile - Update user profile details
+  async updateProfile(req, res, next) {
+    try {
+      const { name, shopName, avatar } = req.body;
+      const userId = req.user.id || req.user._id;
+
+      const updateData = {};
+      if (name !== undefined) updateData.name = name;
+      if (shopName !== undefined) updateData.shopName = shopName;
+      if (avatar !== undefined) updateData.avatar = avatar;
+
+      const updated = await userService.updateUser(userId, updateData);
+      if (!updated) {
+        return res.status(404).json({
+          success: false,
+          message: 'User profile not found.'
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Profile updated successfully.',
+        user: {
+          id: updated.id || updated._id,
+          name: updated.name,
+          email: updated.email,
+          role: updated.role,
+          shopName: updated.shopName,
+          googleId: updated.googleId,
+          avatar: updated.avatar
+        }
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 };

@@ -45,7 +45,9 @@ router.get('/google/callback',
 router.post('/google-simulated', authController.googleSimulated);
 
 // Private/Protected routes
-router.get('/profile', protect, authController.getProfile);
+router.route('/profile')
+  .get(protect, authController.getProfile)
+  .put(protect, authController.updateProfile);
 
 // Admin protected endpoint (accessible by admin/business_owner for testing)
 router.get('/admin/stats', protect, authorizeRoles('admin', 'business_owner'), authController.getAdminStats);

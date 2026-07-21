@@ -30,7 +30,7 @@ export default function Profile() {
     setToast({ message, type });
   };
 
-  const handleProfileUpdate = (e) => {
+  const handleProfileUpdate = async (e) => {
     e.preventDefault();
     if (!name.trim()) {
       showToast('Name field cannot be left blank.', 'warning');
@@ -38,21 +38,32 @@ export default function Profile() {
     }
 
     setIsUpdating(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name,
+          shopName,
+          avatar: selectedAvatar
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setUser(data.user);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        showToast('Profile details updated on server successfully!', 'success');
+      } else {
+        showToast(data.message || 'Failed to update profile.', 'error');
+      }
+    } catch (err) {
+      showToast('Network error: Could not contact auth server.', 'error');
+    } finally {
       setIsUpdating(false);
-      
-      // Update local storage and auth context user info
-      const updatedUser = {
-        ...user,
-        name,
-        shopName,
-        avatar: selectedAvatar
-      };
-      
-      setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      showToast('Profile information updated successfully!', 'success');
-    }, 800);
+    }
   };
 
   return (
