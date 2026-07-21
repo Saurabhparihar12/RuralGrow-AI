@@ -26,7 +26,10 @@ import {
   Plus,
   Compass,
   Settings,
-  Database
+  Database,
+  Edit2,
+  Check,
+  X
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -69,6 +72,10 @@ export default function Dashboard() {
   const [captionsLoading, setCaptionsLoading] = useState(false);
   const [isAILoading, setIsAILoading] = useState(false);
   const [isPromoLoading, setIsPromoLoading] = useState(false);
+
+  // Editing Saved Captions States
+  const [editingCaptionId, setEditingCaptionId] = useState(null);
+  const [editingCaptionText, setEditingCaptionText] = useState('');
 
   // Toast State
   const [toast, setToast] = useState(null);
@@ -280,6 +287,41 @@ export default function Dashboard() {
     }
   };
 
+  // Save/Update Review Reply Suggestion to database (PUT call)
+  const handleSaveReviewReply = async () => {
+    if (!selectedReviewId) return;
+
+    if (user && user.role === 'visitor') {
+      showToast('Action denied: Write permissions required.', 'warning');
+      return;
+    }
+
+    setIsAILoading(true);
+    try {
+      const res = await fetch(`http://localhost:5000/api/reviews/${selectedReviewId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          replySuggestion: generatedReply
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        showToast('Suggested reply draft saved successfully!', 'success');
+        fetchReviews();
+      } else {
+        showToast(data.message || 'Failed to save reply draft.', 'error');
+      }
+    } catch (err) {
+      showToast('Failed to connect to review server.', 'error');
+    } finally {
+      setIsAILoading(false);
+    }
+  };
+
   // Promo caption post call (JWT Protected & Gemini AI Powered)
   const handleGeneratePromo = async (e) => {
     e.preventDefault();
@@ -376,6 +418,42 @@ export default function Dashboard() {
       }
     } catch (err) {
       showToast('Failed to delete caption.', 'error');
+    }
+  };
+
+  // Update saved caption text (JWT Protected PUT call)
+  const handleUpdateCaption = async (id, newText) => {
+    if (user && user.role === 'visitor') {
+      showToast('Action denied: Write permissions required.', 'warning');
+      return;
+    }
+
+    if (!newText.trim()) {
+      showToast('Caption text cannot be empty.', 'warning');
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/captions/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          captionText: newText
+        })
+      });
+      const json = await res.json();
+      if (json.success) {
+        showToast('Instagram caption updated successfully!', 'success');
+        setEditingCaptionId(null);
+        fetchCaptions();
+      } else {
+        showToast(`Error: ${json.message}`, 'error');
+      }
+    } catch (err) {
+      showToast('Failed to update caption.', 'error');
     }
   };
 
@@ -835,6 +913,15 @@ export default function Dashboard() {
                               <Button 
                                 variant="outline" 
                                 size="sm"
+                                className="text-xs py-2 px-4 cursor-pointer border-sage-500 text-sage-650 dark:text-sage-400 hover:bg-sage-500/10"
+                                isLoading={isAILoading}
+                                onClick={handleSaveReviewReply}
+                              >
+                                Save Draft
+                              </Button>
+                              <Button 
+                                variant="outline" 
+                                size="sm"
                                 className="text-xs py-2 px-4 cursor-pointer"
                                 onClick={() => {
                                   navigator.clipboard.writeText(generatedReply);
@@ -1071,30 +1158,72 @@ export default function Dashboard() {
                                   <span className="text-purple-650 dark:text-purple-400">{cap.shopType}</span>
                                   <span className="text-slate-400 dark:text-slate-555">{cap.productName}</span>
                                 </div>
-                                <p className="text-[11px] sm:text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-wrap">
-                                  {cap.captionText}
-                                </p>
+                                {editingCaptionId === capId ? (
+                                  <textarea
+                                    className="w-full bg-white dark:bg-forest-900 border border-slate-205 dark:border-slate-800 rounded-xl p-2.5 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-purple-550 leading-relaxed font-medium"
+                                    rows={4}
+                                    value={editingCaptionText}
+                                    onChange={(e) => setEditingCaptionText(e.target.value)}
+                                  />
+                                ) : (
+                                  <p className="text-[11px] sm:text-xs text-slate-655 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-wrap">
+                                    {cap.captionText}
+                                  </p>
+                                )}
                               </div>
                               <div className="flex flex-col gap-1.5">
-                                <button
-                                  onClick={() => {
-                                    navigator.clipboard.writeText(cap.captionText);
-                                    showToast('Copied saved caption!', 'success');
-                                  }}
-                                  className="p-2 rounded-xl text-slate-400 hover:text-indigo-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
-                                  title="Copy Caption"
-                                >
-                                  <Clipboard className="w-4 h-4" />
-                                </button>
+                                {editingCaptionId === capId ? (
+                                  <>
+                                    <button
+                                      onClick={() => handleUpdateCaption(capId, editingCaptionText)}
+                                      className="p-2 rounded-xl text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/20 cursor-pointer transition-colors"
+                                      title="Save Changes"
+                                    >
+                                      <Check className="w-4 h-4" />
+                                    </button>
+                                    <button
+                                      onClick={() => setEditingCaptionId(null)}
+                                      className="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                                      title="Cancel"
+                                    >
+                                      <X className="w-4 h-4" />
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <button
+                                      onClick={() => {
+                                        navigator.clipboard.writeText(cap.captionText);
+                                        showToast('Copied saved caption!', 'success');
+                                      }}
+                                      className="p-2 rounded-xl text-slate-400 hover:text-indigo-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                                      title="Copy Caption"
+                                    >
+                                      <Clipboard className="w-4 h-4" />
+                                    </button>
 
-                                {user && user.role !== 'visitor' && (
-                                  <button
-                                    onClick={(e) => handleDeleteCaption(capId, e)}
-                                    className="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
-                                    title="Delete Caption"
-                                  >
-                                    <Trash2 className="w-4 h-4" />
-                                  </button>
+                                    {user && user.role !== 'visitor' && (
+                                      <>
+                                        <button
+                                          onClick={() => {
+                                            setEditingCaptionId(capId);
+                                            setEditingCaptionText(cap.captionText);
+                                          }}
+                                          className="p-2 rounded-xl text-slate-400 hover:text-sage-600 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                                          title="Edit Caption"
+                                        >
+                                          <Edit2 className="w-4 h-4" />
+                                        </button>
+                                        <button
+                                          onClick={(e) => handleDeleteCaption(capId, e)}
+                                          className="p-2 rounded-xl text-slate-400 hover:text-rose-500 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                                          title="Delete Caption"
+                                        >
+                                          <Trash2 className="w-4 h-4" />
+                                        </button>
+                                      </>
+                                    )}
+                                  </>
                                 )}
                               </div>
                             </motion.div>
