@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button, Input, Loader, Toast } from '../components/ui';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   AreaChart, 
@@ -96,7 +97,7 @@ export default function Dashboard() {
     if (!token) return;
     try {
       setLoading(true);
-      let url = 'http://localhost:5000/api/reviews';
+      let url = `${API_BASE_URL}/api/reviews`;
       const params = [];
       const activeSearch = overrideSearch !== null ? overrideSearch : searchTerm;
       
@@ -132,7 +133,7 @@ export default function Dashboard() {
     if (!token) return;
     try {
       setCaptionsLoading(true);
-      const res = await fetch('http://localhost:5000/api/captions', {
+      const res = await fetch(`${API_BASE_URL}/api/captions`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const json = await res.json();
@@ -183,7 +184,7 @@ export default function Dashboard() {
 
     try {
       setIsSubmitLoading(true);
-      const res = await fetch('http://localhost:5000/api/reviews', {
+      const res = await fetch(`${API_BASE_URL}/api/reviews`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -227,7 +228,7 @@ export default function Dashboard() {
     if (!window.confirm('Are you sure you want to delete this review?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/reviews/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/reviews/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -256,7 +257,7 @@ export default function Dashboard() {
 
     setIsAILoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/ai/review-reply', {
+      const res = await fetch(`${API_BASE_URL}/api/ai/review-reply`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -298,7 +299,7 @@ export default function Dashboard() {
 
     setIsAILoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/reviews/${selectedReviewId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/reviews/${selectedReviewId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -341,7 +342,7 @@ export default function Dashboard() {
     
     try {
       // 1. Fetch live Gemini AI caption
-      const aiRes = await fetch('http://localhost:5000/api/ai/marketing-caption', {
+      const aiRes = await fetch(`${API_BASE_URL}/api/ai/marketing-caption`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -369,7 +370,7 @@ export default function Dashboard() {
       setPromoOutput(finalCaptionText);
 
       // 2. Save generated caption draft to database
-      const saveRes = await fetch('http://localhost:5000/api/captions', {
+      const saveRes = await fetch(`${API_BASE_URL}/api/captions`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -405,7 +406,7 @@ export default function Dashboard() {
     if (!window.confirm('Are you sure you want to delete this caption?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/captions/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/captions/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -434,7 +435,7 @@ export default function Dashboard() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/api/captions/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/captions/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

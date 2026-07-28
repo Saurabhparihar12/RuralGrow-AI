@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config/api';
 
 const AuthContext = createContext(null);
 
@@ -38,7 +39,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -62,7 +63,7 @@ export function AuthProvider({ children }) {
   const signup = async (name, email, password, role, shopName) => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password, role, shopName })
@@ -86,7 +87,7 @@ export function AuthProvider({ children }) {
   const googleLoginSimulated = async (name, email, avatar) => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/google-simulated', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/google-simulated`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, avatar })
@@ -123,7 +124,7 @@ export function AuthProvider({ children }) {
   // Forgot password handler
   const forgotPassword = async (email) => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/forgot-password', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

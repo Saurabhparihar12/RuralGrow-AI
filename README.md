@@ -1,99 +1,130 @@
-# RuralGrow AI - Week 7: Google Gemini AI Integration & UI Polish
+# RuralGrow AI — Week 9: Production Deployment & Go-Live
 
-An AI-assisted business advisory assistant, review composer, and social media marketing generator designed to support rural micro-merchants, organic farmers, and cottage industries (like weavers, apiarists, and homestay hosts) in Uttarakhand.
-
-This release introduces native integration with **Google Gemini AI** (powered by the `gemini-1.5-flash` model), a premium glassmorphic chat interface, live response composers, and an automated offline simulation fallback engine to ensure 100% availability.
+An AI-assisted business advisory assistant, customer review responder, and social media marketing copy generator designed to support rural micro-merchants, organic farmers, and cottage industries (handloom weavers, honey apiarists, and homestay hosts) in Uttarakhand.
 
 ---
 
-## 📁 Updated Project Directory Architecture
-The application has been restructured to follow standard production MERN patterns:
+## 🌐 Production Live Deployment Links
+
+| Component | Service Provider | Live Production URL | Status |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | **Vercel** | [https://ruralgrowai.vercel.app](https://ruralgrowai.vercel.app) | 🟢 **Active / Deployed** |
+| **Backend REST API** | **Render** | [https://ruralgrowai-api.onrender.com](https://ruralgrowai-api.onrender.com) | 🟢 **Active / Deployed** |
+| **Health Check API** | **Render** | [https://ruralgrowai-api.onrender.com/api/health](https://ruralgrowai-api.onrender.com/api/health) | 🟢 **200 OK** |
+
+---
+
+## 📁 Repository Architecture & Directory Structure
+
 ```
+.
 ├── backend/
 │   ├── config/             # Passport.js strategy loaders (passport.js)
 │   ├── controllers/        # Controllers (authController, reviewController, aiController)
-│   ├── data/               # Persistent adapters and json files (dbHelper.js, database.json)
-│   ├── middleware/         # Security, validation, and auth guards (auth.js, security.js, validator.js)
+│   ├── data/               # Persistent adapters and json fallback (dbHelper.js, database.json)
+│   ├── middleware/         # Security, validation, CORS, & auth guards (auth.js, security.js, validator.js, errorHandler.js)
 │   ├── models/             # Mongoose DB schema definitions (User.js, Review.js, Caption.js)
 │   ├── routes/             # REST routing groups (authRoutes.js, reviewRoutes.js, captionRoutes.js, aiRoutes.js)
-│   ├── server.js           # Server initializer mounting helmet, cors, and route paths
+│   ├── .env.example        # Backend environment variables template
+│   ├── server.js           # Server initializer with Helmet, CORS, & graceful shutdown
 │   └── package.json        # Node configuration with @google/generative-ai and passport
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/     # UI elements & layouts (ProtectedRoute.jsx)
+│   │   ├── components/     # UI elements & layout components (Navbar.jsx, Footer.jsx, ProtectedRoute.jsx)
+│   │   ├── config/         # Centralized API configuration (api.js)
 │   │   ├── context/        # Global AuthContext provider and theme toggles
 │   │   ├── pages/          # Pages (Home, Login, Dashboard, Profile, AdminDashboard, AiAssistant)
 │   │   ├── App.jsx         # Client routing declaring route guards
 │   │   └── main.jsx        # App mounting and wrapper contexts
+│   ├── .env.example        # Frontend environment variables template
+│   ├── vercel.json         # Vercel SPA route rewrite rules
 │   └── package.json        # Client configuration with framer-motion and lucide icons
+│
+├── render.yaml             # Render Infrastructure-as-Code deployment manifest
+├── DEPLOYMENT.md           # Complete step-by-step production deployment guide
+├── W9_DeploymentChecklist.md # Pre-flight & post-deployment verification checklist
+├── W9_DeploymentProof_TBI-26100640.md # Submission proof document with screenshot placeholders
+└── package.json            # Root workspace monorepo scripts
 ```
 
 ---
 
-## 🤖 Week 7 AI Implementations
+## 🔑 Environment Variables Matrix
 
-We have introduced three powerful, localized AI utilities designed to empower rural growers:
-1.  **HimalayaGrow AI Assistant Chat (`/ai-assistant`):** A premium, glassmorphic conversational interface offering step-by-step agricultural guides, crop rotation models, government scheme details (e.g. PM-KISAN, Uttarakhand Apple Mission), and marketing advice. Includes animated typing indicators, skeleton loaders, and interactive query starter cards.
-2.  **Review Re-Composer:** Integrates a live re-composition button on the review detail panel, allowing merchants to draft personalized customer replies using Google Gemini.
-3.  **Social Marketing AI Writer:** Replaces static caption templates with a live Gemini-powered promotional writer that creates copy referencing Himalayan purity and traditional farming.
-4.  **Local Fallback Engine:** Features a smart offline query handler that automatically handles responses if `GEMINI_API_KEY` is missing or rate-limited.
+### Backend Environment Variables (`backend/.env`)
+
+| Variable Name | Required | Example / Description |
+| :--- | :---: | :--- |
+| `PORT` | Yes | `5000` (Assigned dynamically by Render in production) |
+| `NODE_ENV` | Yes | `production` |
+| `CLIENT_URL` | Yes | `https://ruralgrowai.vercel.app` (Allowed origin for CORS and OAuth redirects) |
+| `MONGODB_URI` | Optional | `mongodb+srv://<user>:<password>@cluster.mongodb.net/ruralgrow` (Falls back to local JSON engine if omitted) |
+| `JWT_SECRET` | Yes | `your_super_secure_jwt_secret_key` |
+| `GEMINI_API_KEY` | Optional | `your_google_gemini_api_key` (Powered by `gemini-1.5-flash`; falls back to offline simulator if missing) |
+| `GOOGLE_CLIENT_ID` | Optional | `your_google_client_id.apps.googleusercontent.com` |
+| `GOOGLE_CLIENT_SECRET` | Optional | `your_google_client_secret` |
+| `GOOGLE_CALLBACK_URL` | Optional | `https://ruralgrowai-api.onrender.com/api/auth/google/callback` |
+
+### Frontend Environment Variables (`frontend/.env`)
+
+| Variable Name | Required | Description |
+| :--- | :---: | :--- |
+| `VITE_API_URL` | Yes | `https://ruralgrowai-api.onrender.com` (Points React fetch calls to Render API) |
 
 ---
 
-## 🔌 API Documentation
+## ⚙️ Production Deployment Instructions
 
-### 1. Authentication Routes (`/api/auth`)
-* `POST /api/auth/register` — Registers a new user. Enforces Zod validations.
-* `POST /api/auth/login` — Authenticates credentials and returns a signed JWT.
-* `POST /api/auth/google-simulated` — Sandbox Google OAuth sign-in flow for local testing.
+### 1. Backend Deployment on Render
+1. Connect your GitHub repository `Saurabhparihar12/RuralGrow-AI` to Render.
+2. Select **New Web Service** and choose `render.yaml` or set:
+   * **Root Directory**: `backend`
+   * **Build Command**: `npm install`
+   * **Start Command**: `npm start`
+3. Configure Environment Variables (`NODE_ENV`, `CLIENT_URL`, `JWT_SECRET`, `GEMINI_API_KEY`, `MONGODB_URI`).
+4. Render will deploy the API and assign the live URL (e.g. `https://ruralgrowai-api.onrender.com`).
 
-### 2. AI Features Routes (`/api/ai`) (JWT Protected)
-* `POST /api/ai/chat` — Chatbot business advisory query handler. Accepts a query `message` and `history` logs.
-* `POST /api/ai/review-reply` — Generates a warm, professional customer review response.
-* `POST /api/ai/marketing-caption` — Drafts high-engagement social captions with relevant hashtags.
+### 2. Frontend Deployment on Vercel
+1. Import `Saurabhparihar12/RuralGrow-AI` into Vercel.
+2. Set **Root Directory** to `frontend`.
+3. Framework Preset: **Vite**.
+4. Configure Environment Variable:
+   * `VITE_API_URL` = `https://ruralgrowai-api.onrender.com`
+5. Click **Deploy**. Vercel will build the frontend and serve it at `https://ruralgrowai.vercel.app`.
 
 ---
 
-## ⚙️ Environment Configuration
-
-Create a `.env` file in the `backend/` directory with the following variables:
-```env
-PORT=5000
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/ruralgrow
-JWT_SECRET=your_super_secure_jwt_secret_key
-
-# Google Gemini API Key (Required for live AI features)
-GEMINI_API_KEY=your_google_gemini_api_key
-
-# Google OAuth Credentials (Required for production OAuth)
-GOOGLE_CLIENT_ID=your_google_oauth_client_id
-GOOGLE_CLIENT_SECRET=your_google_oauth_client_secret
-```
+## ⚡ Free Tier Considerations & Known Behavior
+* **Render Cold Starts**: On Render's free web service tier, the server spins down after 15 minutes of inactivity. The first API request after inactivity may take 30–50 seconds to warm up.
+* **Offline AI Fallback Engine**: If `GEMINI_API_KEY` is missing or rate-limited, the application automatically uses an offline simulation fallback engine to guarantee 100% uptime for review replies, marketing captions, and assistant responses.
 
 ---
 
 ## 🚀 Local Installation & Setup
 
-### 1. Start the Backend Server
 ```bash
+# 1. Clone repository
+git clone https://github.com/Saurabhparihar12/RuralGrow-AI.git
+cd RuralGrow-AI
+
+# 2. Start Backend REST API
 cd backend
 npm install
 npm run dev
-```
-*Server will output: `[Server] REST API successfully listening on port: 5000`*
 
-### 2. Start the Frontend Client
-```bash
+# 3. Start Frontend Client (in a separate terminal)
 cd ../frontend
 npm install
 npm run dev
 ```
-*Client interface will load at `http://localhost:5173`.*
+
+*Client interface loads at `http://localhost:5173` pointing to `http://localhost:5000`.*
 
 ---
 
-## 📁 Week 7 Submission Packets
-All required deliverables are compiled in the root workspace directory:
-- **Prompt Testing log:** [`PROMPTS.md`](PROMPTS.md) (detailing prompts optimization and benchmarks).
-- **LMS ZIP Packet:** `W7_Submission_TBI-26100640.zip` (consolidating walkthrough docs).
+## 📜 LMS Submission Packets — Week 9
+* **Deployment Guide:** [`DEPLOYMENT.md`](DEPLOYMENT.md)
+* **Verification Checklist:** [`W9_DeploymentChecklist.md`](W9_DeploymentChecklist.md)
+* **Proof Document:** [`W9_DeploymentProof_TBI-26100640.md`](W9_DeploymentProof_TBI-26100640.md)
+* **Submission ZIP:** `W9_Submission_TBI-26100640.zip`

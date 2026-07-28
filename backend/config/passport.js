@@ -6,10 +6,12 @@ export const configurePassport = () => {
   const clientID = process.env.GOOGLE_CLIENT_ID || 'GOOGLE_CLIENT_ID_PLACEHOLDER';
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET || 'GOOGLE_CLIENT_SECRET_PLACEHOLDER';
 
+  const callbackURL = process.env.GOOGLE_CALLBACK_URL || 'http://localhost:5000/api/auth/google/callback';
+
   passport.use(new GoogleStrategy({
     clientID,
     clientSecret,
-    callbackURL: 'http://localhost:5000/api/auth/google/callback',
+    callbackURL,
     passReqToCallback: true
   },
   async (req, accessToken, refreshToken, profile, done) => {

@@ -65,7 +65,9 @@ app.use('/api/ai', aiRoutes);
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'healthy',
-    timestamp: new Date().toISOString()
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString(),
+    uptimeSeconds: Math.floor(process.uptime())
   });
 });
 
@@ -80,6 +82,22 @@ app.use('*', (req, res, next) => {
 app.use(errorHandler);
 
 // Start listening for API requests
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`[Server] REST API successfully listening on port: ${PORT}`);
 });
+
+// Graceful shutdown handling for production orchestrators (Render / Railway)
+const shutdownGracefully = (signal) => {
+  console.log(`[Server] Received ${signal}. Closing HTTP server gracefully...`);
+  server.close(() => {
+    console.log('[Server] HTTP server closed.');
+    mongoose.connection.close(false).then(() => {
+      console.log('[Database] MongoDB connection closed.');
+      process.exit(0);
+    });
+  });
+};
+
+process.on('SIGTERM', () => shutdownGracefully('SIGTERM'));
+process.on('SIGINT', () => shutdownGracefully('SIGINT'));
+

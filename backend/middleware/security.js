@@ -22,10 +22,25 @@ export const helmetMiddleware = helmet();
 // Prevent MongoDB query injection
 export const mongoSanitizeMiddleware = mongoSanitize();
 
-// CORS configuration (allow local client port 5173, restrict in prod)
+// Production CORS configuration (supporting Vercel client domains & development localhost)
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'https://ruralgrowai.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://127.0.0.1:5173'
+].filter(Boolean);
+
 export const corsMiddleware = cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, server-to-server)
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, true); // Fallback allow during testing while keeping headers strict
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 });
+

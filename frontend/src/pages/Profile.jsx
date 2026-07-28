@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 import { Button, Input, Toast } from '../components/ui';
 import { User, Mail, Shield, Store, Camera, Settings, Eye, LogOut, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -39,7 +40,7 @@ export default function Profile() {
 
     setIsUpdating(true);
     try {
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

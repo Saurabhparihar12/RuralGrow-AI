@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 import { Toast, Loader, Button, Input, Modal } from '../components/ui';
 import Card from '../components/Card';
 import { 
@@ -66,7 +67,7 @@ export default function AdminDashboard() {
 
   const fetchTelemetryStats = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/admin/stats', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/admin/stats`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`

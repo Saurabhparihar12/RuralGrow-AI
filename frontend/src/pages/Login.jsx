@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import { Button, Input, Toast } from '../components/ui';
 import { Mail, Lock, Store, User, ArrowRight, CornerDownLeft, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Login() {
@@ -124,7 +125,7 @@ export default function Login() {
 
   const handleRealGoogleOAuth = () => {
     // Redirect browser directly to passport-google-oauth20 route on backend
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    window.location.href = `${API_BASE_URL}/api/auth/google`;
   };
 
   const handleSimulatedGoogleSubmit = async (e) => {
