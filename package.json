@@ -19,5 +19,8 @@
     "express"
   ],
   "author": "Saurabh Parihar",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "pdfkit": "^0.19.1"
+  }
 }
