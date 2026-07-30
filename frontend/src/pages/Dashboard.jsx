@@ -489,7 +489,7 @@ export default function Dashboard() {
         { date: 'No Data', Positive: 0, Neutral: 0, Negative: 0 }
       ];
     }
-    return data.slice(-7); // Last 7 active review days
+    return data; // Display complete sentiment trend across all reviews
   };
 
   // Dynamic statistics calculations
