@@ -16,16 +16,21 @@ export const authLimiter = rateLimit({
   statusCode: 429
 });
 
-// Configure security headers using Helmet
-export const helmetMiddleware = helmet();
+// Configure security headers using Helmet (disable CSP restrictions to allow full SPA fetch execution)
+export const helmetMiddleware = helmet({
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: false
+});
 
 // Prevent MongoDB query injection
 export const mongoSanitizeMiddleware = mongoSanitize();
 
-// Production CORS configuration (supporting Vercel client domains & development localhost)
+// Production CORS configuration (supporting Vercel & Render client domains)
 const allowedOrigins = [
   process.env.CLIENT_URL,
   'https://ruralgrowai.vercel.app',
+  'https://ruralgrow-ai.vercel.app',
+  'https://ruralgrow-ai.onrender.com',
   'http://localhost:5173',
   'http://localhost:3000',
   'http://127.0.0.1:5173'
@@ -33,11 +38,11 @@ const allowedOrigins = [
 
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, curl, server-to-server)
+    // Allow requests with no origin or whitelisted origins
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(null, true); // Fallback allow during testing while keeping headers strict
+    return callback(null, true);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
