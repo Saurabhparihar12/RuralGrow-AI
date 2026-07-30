@@ -8,9 +8,9 @@ An AI-assisted business advisory assistant, customer review responder, and socia
 
 | Component | Service Provider | Live Production URL | Status |
 | :--- | :--- | :--- | :--- |
-| **Frontend Web App** | **Public Cloud / Vercel** | [https://ruralgrow-ai.loca.lt](https://ruralgrow-ai.loca.lt) | 🟢 **Active / Deployed** |
-| **Backend REST API** | **Public Cloud / Render** | [https://ruralgrow-api.loca.lt](https://ruralgrow-api.loca.lt) | 🟢 **Active / Deployed** |
-| **Health Check API** | **Public Cloud / Render** | [https://ruralgrow-api.loca.lt/api/health](https://ruralgrow-api.loca.lt/api/health) | 🟢 **200 OK** |
+| **Frontend Web App** | **Vercel** | [https://ruralgrow-ai.vercel.app](https://ruralgrow-ai.vercel.app) | 🟢 **Active / Deployed** |
+| **Backend REST API** | **Render** | [https://ruralgrow-ai.onrender.com](https://ruralgrow-ai.onrender.com) | 🟢 **Active / Live** |
+| **Health Check API** | **Render** | [https://ruralgrow-ai.onrender.com/api/health](https://ruralgrow-ai.onrender.com/api/health) | 🟢 **200 OK** |
 
 ---
 

@@ -14,9 +14,9 @@ RuralGrow AI has been successfully refactored, hardened, and deployed to product
 
 ## 🔗 Live Application URLs
 
-* **Live Frontend Web App**: [https://ruralgrow-ai.loca.lt](https://ruralgrow-ai.loca.lt)
-* **Live Backend REST API**: [https://ruralgrow-api.loca.lt](https://ruralgrow-api.loca.lt)
-* **Backend Health Check**: [https://ruralgrow-api.loca.lt/api/health](https://ruralgrow-api.loca.lt/api/health)
+* **Live Frontend Web App**: [https://ruralgrow-ai.vercel.app](https://ruralgrow-ai.vercel.app)
+* **Live Backend REST API**: [https://ruralgrow-ai.onrender.com](https://ruralgrow-ai.onrender.com)
+* **Backend Health Check**: [https://ruralgrow-ai.onrender.com/api/health](https://ruralgrow-ai.onrender.com/api/health)
 
 ---
 

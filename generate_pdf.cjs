@@ -42,7 +42,7 @@ doc.fillColor('#059669').font('Helvetica-Bold').text('Active 🟢', 480, startY 
 doc.font('Helvetica').fontSize(9).fillColor('#111827');
 doc.text('Backend REST API', 50, startY + 52);
 doc.text('Render Cloud Web Service', 180, startY + 52);
-doc.fillColor('#2563EB').text('https://ruralgrowai-api.onrender.com', 300, startY + 52);
+doc.fillColor('#2563EB').text('https://ruralgrow-ai.onrender.com', 300, startY + 52);
 doc.fillColor('#059669').font('Helvetica-Bold').text('Active 🟢', 480, startY + 52);
 
 doc.y = startY + 95;
