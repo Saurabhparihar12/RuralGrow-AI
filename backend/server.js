@@ -62,7 +62,21 @@ app.use('/api/captions', captionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 
-// Serve static frontend React SPA build if available
+// Root API welcome endpoint (guarantees GET / never 404s)
+app.get('/', (req, res) => {
+  const frontendIndex = path.join(__dirname, '../frontend/dist/index.html');
+  if (fs.existsSync(frontendIndex)) {
+    return res.sendFile(frontendIndex);
+  }
+  res.status(200).json({
+    success: true,
+    message: 'RuralGrow AI Backend is Running 🚀',
+    healthCheck: '/api/health',
+    documentation: 'https://github.com/Saurabhparihar12/RuralGrow-AI'
+  });
+});
+
+// Serve static frontend React SPA build assets if available
 const frontendDistPath = path.join(__dirname, '../frontend/dist');
 if (fs.existsSync(frontendDistPath)) {
   console.log('[Server] Mounting frontend static production build from:', frontendDistPath);
@@ -72,17 +86,6 @@ if (fs.existsSync(frontendDistPath)) {
       return next();
     }
     res.sendFile(path.join(frontendDistPath, 'index.html'));
-  });
-} else {
-  // Root API welcome endpoint
-  app.get('/', (req, res) => {
-    res.status(200).json({
-      name: 'RuralGrow AI REST API',
-      status: 'online',
-      version: '1.0.0',
-      healthCheck: '/api/health',
-      documentation: 'https://github.com/Saurabhparihar12/RuralGrow-AI'
-    });
   });
 }
 
