@@ -61,6 +61,17 @@ app.use('/api/captions', captionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 
+// Root API welcome endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    name: 'RuralGrow AI REST API',
+    status: 'online',
+    version: '1.0.0',
+    healthCheck: '/api/health',
+    documentation: 'https://github.com/Saurabhparihar12/RuralGrow-AI'
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({
