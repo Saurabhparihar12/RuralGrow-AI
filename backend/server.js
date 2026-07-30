@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { configurePassport } from './config/passport.js';
 import { helmetMiddleware, mongoSanitizeMiddleware, corsMiddleware } from './middleware/security.js';
@@ -61,16 +62,29 @@ app.use('/api/captions', captionRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 
-// Root API welcome endpoint
-app.get('/', (req, res) => {
-  res.status(200).json({
-    name: 'RuralGrow AI REST API',
-    status: 'online',
-    version: '1.0.0',
-    healthCheck: '/api/health',
-    documentation: 'https://github.com/Saurabhparihar12/RuralGrow-AI'
+// Serve static frontend React SPA build if available
+const frontendDistPath = path.join(__dirname, '../frontend/dist');
+if (fs.existsSync(frontendDistPath)) {
+  console.log('[Server] Mounting frontend static production build from:', frontendDistPath);
+  app.use(express.static(frontendDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.originalUrl.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendDistPath, 'index.html'));
   });
-});
+} else {
+  // Root API welcome endpoint
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      name: 'RuralGrow AI REST API',
+      status: 'online',
+      version: '1.0.0',
+      healthCheck: '/api/health',
+      documentation: 'https://github.com/Saurabhparihar12/RuralGrow-AI'
+    });
+  });
+}
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
