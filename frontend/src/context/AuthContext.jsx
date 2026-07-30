@@ -4,10 +4,13 @@ import { API_BASE_URL } from '../config/api';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || null);
+  const [token, setToken] = useState(() => {
+    const saved = localStorage.getItem('token');
+    return (saved && saved !== 'null' && saved !== 'undefined') ? saved : null;
+  });
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('user');
-    if (saved) {
+    if (saved && saved !== 'null' && saved !== 'undefined') {
       try {
         return JSON.parse(saved);
       } catch (e) {
@@ -18,9 +21,9 @@ export function AuthProvider({ children }) {
   });
   const [loading, setLoading] = useState(false);
 
-  // Sync token and user in localStorage
+  // Sync token and user in localStorage safely
   useEffect(() => {
-    if (token) {
+    if (token && token !== 'null' && token !== 'undefined') {
       localStorage.setItem('token', token);
     } else {
       localStorage.removeItem('token');

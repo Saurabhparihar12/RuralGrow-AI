@@ -11,6 +11,13 @@ export const protect = async (req, res, next) => {
       // Extract token
       token = req.headers.authorization.split(' ')[1];
 
+      if (!token || token === 'null' || token === 'undefined') {
+        return res.status(401).json({
+          success: false,
+          message: 'Not authorized: Token missing or invalid.'
+        });
+      }
+
       // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'ruralgrow_secret_key');
 
