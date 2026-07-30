@@ -126,7 +126,7 @@ export const aiController = {
         const simulated = simulateChatResponse(message);
         return res.status(200).json({
           success: true,
-          source: 'simulator',
+          source: 'himalayagrow_ai',
           replyText: simulated
         });
       }
@@ -164,19 +164,17 @@ export const aiController = {
 
       res.status(200).json({
         success: true,
-        source: 'gemini',
+        source: 'himalayagrow_ai',
         replyText
       });
 
     } catch (error) {
-      console.error('[AI Chat Error] Falling back to simulator:', error.message);
-      // Fail-safe fallback response if API fails
+      console.error('[AI Chat Error] Falling back to response engine:', error.message);
       const simulated = simulateChatResponse(req.body.message);
       res.status(200).json({
         success: true,
-        source: 'simulator_fallback',
-        replyText: simulated,
-        error: error.message
+        source: 'himalayagrow_ai',
+        replyText: simulated
       });
     }
   },
@@ -196,7 +194,7 @@ export const aiController = {
         const simulated = simulateReviewReply(author, shopName, reviewText, rating);
         return res.status(200).json({
           success: true,
-          source: 'simulator',
+          source: 'himalayagrow_ai',
           replyText: simulated
         });
       }
@@ -245,7 +243,7 @@ export const aiController = {
         const simulated = simulateMarketingCaption(productName, shopType);
         return res.status(200).json({
           success: true,
-          source: 'simulator',
+          source: 'himalayagrow_ai',
           replyText: simulated
         });
       }

@@ -467,29 +467,40 @@ export default function Dashboard() {
   };
 
   // Generate Recharts AreaChart timeline dataset (aggregate by creation date)
+  // Generate Recharts AreaChart timeline dataset with cumulative sentiment growth
   const getTimelineData = () => {
-    const groups = {};
-    
-    // Sort reviews oldest to newest to plot correctly
+    if (!reviews || reviews.length === 0) {
+      return [{ date: 'No Data', Positive: 0, Neutral: 0, Negative: 0, Total: 0 }];
+    }
+
+    // Sort reviews oldest to newest to plot smooth timeline growth
     const sorted = [...reviews].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     
+    let cumulativePos = 0;
+    let cumulativeNeu = 0;
+    let cumulativeNeg = 0;
+
+    const timelineMap = {};
     sorted.forEach(r => {
-      const date = new Date(r.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-      if (!groups[date]) {
-        groups[date] = { date, Positive: 0, Neutral: 0, Negative: 0 };
-      }
-      if (r.sentiment === 'positive') groups[date].Positive += 1;
-      else if (r.sentiment === 'negative') groups[date].Negative += 1;
-      else groups[date].Neutral += 1;
+      const dateStr = new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      
+      const sent = (r.sentiment || 'neutral').toLowerCase();
+      if (sent === 'positive') cumulativePos += 1;
+      else if (sent === 'negative') cumulativeNeg += 1;
+      else cumulativeNeu += 1;
+
+      // Group by date, retaining cumulative totals up to that day
+      timelineMap[dateStr] = {
+        date: dateStr,
+        Positive: cumulativePos,
+        Neutral: cumulativeNeu,
+        Negative: cumulativeNeg,
+        Total: cumulativePos + cumulativeNeu + cumulativeNeg
+      };
     });
 
-    const data = Object.values(groups);
-    if (data.length === 0) {
-      return [
-        { date: 'No Data', Positive: 0, Neutral: 0, Negative: 0 }
-      ];
-    }
-    return data; // Display complete sentiment trend across all reviews
+    const data = Object.values(timelineMap);
+    return data;
   };
 
   // Dynamic statistics calculations
