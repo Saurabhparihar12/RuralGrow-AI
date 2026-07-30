@@ -6,8 +6,8 @@
       "author": "Vikram Mehta (Chandigarh)",
       "shopName": "Shyam's Organic Honey",
       "rating": 5,
-      "reviewText": "The wild forest honey is pure and tastes natural. Will order again next season.",
-      "replySuggestion": "Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! 🙏",
+      "reviewText": "The wild forest honey is pure, thick, and tastes completely natural. You can smell the wildflower blossoms. Will order again next season!",
+      "replySuggestion": "Dear Vikram, thank you for your 5-star review! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! 🙏",
       "sentiment": "positive",
       "createdAt": "2026-06-20T10:00:00.000Z"
     },
@@ -16,10 +16,10 @@
       "_id": "rev-2",
       "author": "Priya Sharma (Delhi)",
       "shopName": "Garhwal Handlooms",
-      "rating": 3,
-      "reviewText": "The woollen shawl is warm and colors are bright. But the courier delivery to Delhi took almost 9 days.",
-      "replySuggestion": "Hello Priya, thank you for ordering our hand-woven shawl. We are sorry for the delay in shipping. Since our weaving center is in a remote village, transport takes a bit extra time. We are working on a faster courier service for next orders! 🙏",
-      "sentiment": "neutral",
+      "rating": 4,
+      "reviewText": "The woollen pashmina shawl is soft, warm, and colors are bright. Took 6 days to deliver to Delhi, but quality is outstanding.",
+      "replySuggestion": "Hello Priya, thank you for ordering our hand-woven shawl. We are happy you love the quality! Since our center is in a remote village, transport takes a bit extra time. Thank you for supporting mountain weavers! 🙏",
+      "sentiment": "positive",
       "createdAt": "2026-06-21T11:30:00.000Z"
     },
     {
@@ -28,75 +28,172 @@
       "author": "Karan Johar (Mumbai)",
       "shopName": "Raj Mountain Homestay",
       "rating": 5,
-      "reviewText": "Amazing views of the Himalayas and homely food cooked by Raj's family. Very clean room.",
+      "reviewText": "Amazing views of the Himalayas from Mussoorie hills! Homely food cooked with fresh farm vegetables by Raj's family. Very clean rooms.",
       "replySuggestion": "Hi Karan, thank you for staying with us at Raj Homestay! It was our pleasure hosting you in Mussoorie. Hope to see you and your friends again in the winters! 🙏",
       "sentiment": "positive",
       "createdAt": "2026-06-22T08:15:00.000Z"
     },
     {
-      "id": "rev-1782842635635",
-      "_id": "rev-1782842635635",
-      "author": "saurabh",
-      "shopName": "Sawai pent house",
-      "rating": 4,
-      "reviewText": "nice experience\n",
-      "replySuggestion": "Hi saurabh! Thank you so much for the 5-star review. We are so happy you liked your experience at Sawai pent house. Do let us know when you need your next order. Have a wonderful day! 🙏",
-      "sentiment": "positive",
-      "createdAt": "2026-06-30T18:03:55.635Z"
-    },
-    {
-      "id": "rev-1783188712609",
-      "_id": "rev-1783188712609",
-      "author": "saurabh",
-      "shopName": "garwhal shop",
-      "rating": 2,
-      "reviewText": "nice\n",
-      "replySuggestion": "Hi saurabh! Thank you so much for the 5-star review. We are so happy you liked your experience at garwhal shop. Do let us know when you need your next order. Have a wonderful day! 🙏",
-      "sentiment": "positive",
-      "createdAt": "2026-07-04T18:11:52.609Z"
-    },
-    {
-      "id": "rev-1783191506523",
-      "_id": "rev-1783191506523",
-      "author": "muskan ",
-      "shopName": "muskan berries",
+      "id": "rev-4",
+      "_id": "rev-4",
+      "author": "Ananya Roy (Kolkata)",
+      "shopName": "Harsil Valley Orchards",
       "rating": 5,
-      "reviewText": "tasty berries",
-      "replySuggestion": "Hi muskan! Thank you for the review. We are glad you checked out muskan berries and appreciate your honest feedback. We will keep working to make our products better. Hope to serve you again! 🙏",
-      "sentiment": "neutral",
-      "createdAt": "2026-07-04T18:58:26.523Z"
+      "reviewText": "Ordered 10kg box of fresh Royal Delicious apples directly from Harsil valley. Crispy, sweet, and zero wax coating!",
+      "replySuggestion": "Namaste Ananya! Thank you for buying directly from our Uttarkashi orchard. Harsil apples are naturally sweet due to mountain snowmelt. We appreciate your support! 🍎🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-25T14:20:00.000Z"
+    },
+    {
+      "id": "rev-5",
+      "_id": "rev-5",
+      "author": "Rajesh Gupta (Noida)",
+      "shopName": "Dehradun Basmati Rice Co-op",
+      "rating": 5,
+      "reviewText": "Authentic long-grain aromatic Dehradun Basmati rice. The aroma while cooking fills the entire house. Superior to supermarket brands.",
+      "replySuggestion": "Dear Rajesh ji, thank you so much! Our farmer cooperative takes pride in preserving traditional Dehradun Basmati seed strains. Enjoy your meals! 🌾🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-28T09:45:00.000Z"
+    },
+    {
+      "id": "rev-6",
+      "_id": "rev-6",
+      "author": "Meenakshi Sundaram (Bengaluru)",
+      "shopName": "Almora Brassware & Crafts",
+      "rating": 5,
+      "reviewText": "Handcrafted copper water vessel from Almora market. Authentic traditional copper work with beautiful hammer engraving. Very sturdy.",
+      "replySuggestion": "Vanakkam Meenakshi! Thank you for supporting Almora traditional coppersmiths. Our artisans have been practicing this craft for generations! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-01T16:10:00.000Z"
+    },
+    {
+      "id": "rev-7",
+      "_id": "rev-7",
+      "author": "Sanjay Verma (Gurugram)",
+      "shopName": "Tehri Terrace Organic Rajma",
+      "rating": 4,
+      "reviewText": "Munsiyari red rajma cooks very fast and has a rich, buttery texture. Excellent taste when served with rice.",
+      "replySuggestion": "Hi Sanjay, thank you! High-altitude Tehri and Munsiyari kidney beans cook soft and absorb spices naturally. Happy cooking! 🍲🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-03T12:00:00.000Z"
+    },
+    {
+      "id": "rev-8",
+      "_id": "rev-8",
+      "author": "Neha Kapoor (Jaipur)",
+      "shopName": "Uttarkashi Sea Buckthorn Jams",
+      "rating": 5,
+      "reviewText": "Sea buckthorn (Himalayan wonder berry) jam has a wonderful tangy citrus flavor loaded with Vitamin C. Kids loved it!",
+      "replySuggestion": "Hello Neha, thank you! Sea buckthorn grows wild in high Himalayas and is known as the holy berry. Glad your family loved the jam! 🍊🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-05T15:30:00.000Z"
+    },
+    {
+      "id": "rev-9",
+      "_id": "rev-9",
+      "author": "Rohan Deshmukh (Pune)",
+      "shopName": "Rishikesh Ayurvedic Tea Hub",
+      "rating": 5,
+      "reviewText": "Himalayan Tulsi and Chamomile herbal infusion tea bags. Relaxing aroma and perfect for evening calm after work.",
+      "replySuggestion": "Namaste Rohan, thank you for your kind words! We blend handpicked Tulsi and wild herbs from the foothills of Rishikesh. Stay healthy! 🌿🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-08T18:25:00.000Z"
+    },
+    {
+      "id": "rev-10",
+      "_id": "rev-10",
+      "author": "Sunita Bisht (Dehradun)",
+      "shopName": "Garhwal Millet Bakery",
+      "rating": 5,
+      "reviewText": "Mandua (Finger millet) cookies and Jhangora kheer mix. Gluten-free, delicious, and healthy snack for elders.",
+      "replySuggestion": "Dear Sunita ji, thank you! Promoting Himalayan millets (Shree Anna) is our passion. We appreciate your support for local nutrition! 🌾🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-11T10:50:00.000Z"
+    },
+    {
+      "id": "rev-11",
+      "_id": "rev-11",
+      "author": "Amitabh Sen (Kolkata)",
+      "shopName": "Ranikhet Pine Crafts & Oils",
+      "rating": 4,
+      "reviewText": "Pure Himalayan Pine Needle essential oil. Smells like a fresh forest walk in Kumaon. Packaging was secure.",
+      "replySuggestion": "Hello Amitabh, thank you! We distill pine needle oil sustainably from fallen needles to prevent forest fires in Kumaon hills. Enjoy the aroma! 🌲🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-14T11:15:00.000Z"
+    },
+    {
+      "id": "rev-12",
+      "_id": "rev-12",
+      "author": "Harpreet Singh (Ludhiana)",
+      "shopName": "Chamoli Organic Garlic & Spices",
+      "rating": 5,
+      "reviewText": "High-altitude single-clove Himalayan garlic (Ek Pothi Lahsun). Very potent medicinal qualities and strong flavor.",
+      "replySuggestion": "Sat Sri Akal Harpreet ji! Single-clove Chamoli garlic is cultivated in snow-clad valleys and prized for health benefits. Thank you for buying! 🧄🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-16T17:00:00.000Z"
+    },
+    {
+      "id": "rev-13",
+      "_id": "rev-13",
+      "author": "Deepak Bhatt (Nainital)",
+      "shopName": "Kumaoni Bal Mithai Sweets",
+      "rating": 5,
+      "reviewText": "Authentic Almora Bal Mithai with roasted khoya and sugar balls. Brought back childhood memories of Kumaon trip!",
+      "replySuggestion": "Namaste Deepak ji! Bal Mithai is the sweet pride of Almora and Kumaon. We prepare it using slow-cooked pure milk khoya daily. 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-18T13:40:00.000Z"
+    },
+    {
+      "id": "rev-14",
+      "_id": "rev-14",
+      "author": "Shalini Nair (Thiruvananthapuram)",
+      "shopName": "Badrinath Organic Herbs",
+      "rating": 5,
+      "reviewText": "Purchased wild Jambu and Gandharayani spices for curry seasoning. Gives a unique mountain flavor to dal.",
+      "replySuggestion": "Dear Shalini, thank you! Jambu and Faran are wild aromatic herbs collected responsibly by Himalayan villagers. Glad you enjoyed the flavor! 🌿🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-20T09:10:00.000Z"
+    },
+    {
+      "id": "rev-15",
+      "_id": "rev-15",
+      "author": "Aakash Tripathi (Lucknow)",
+      "shopName": "Mussoorie Weaver's Collective",
+      "rating": 4,
+      "reviewText": "Handwoven tweed jacket fabric. Durable texture and authentic woollen warmth. Great craftsmanship.",
+      "replySuggestion": "Namaste Aakash, thank you for supporting Mussoorie handloom weavers! Our handspun wool tweed is made for lifetime durability. 🧥🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-22T14:05:00.000Z"
     }
   ],
   "shops": [],
   "captions": [
     {
-      "id": "cap-1782838420650",
-      "_id": "cap-1782838420650",
-      "productName": "Pashmina Shawl",
-      "shopType": "Handloom",
-      "captionText": "🧣 Handcrafted with love by our local weavers! Presenting the all-new [Pashmina Shawl]. Every thread is woven by hand using traditional designs passed down through generations. \n\n📦 Shipments across India. Help keep our craft heritage alive! \n\n#VocalForLocal #MakeInIndia #HandloomWeavers #TraditionalCrafts #PashminaShawl",
-      "createdAt": "2026-06-30T16:53:40.650Z"
+      "id": "cap-1",
+      "_id": "cap-1",
+      "productName": "Royal Delicious Apples",
+      "shopType": "Fruit Orchard",
+      "captionText": "🍎 Freshly harvested from the snow-fed heights of Harsil Valley, Uttarkashi! Experience 100% natural, crisp, zero-wax Royal Delicious apples directly from Himalayan terrace orchards. \n\n📦 Pan-India delivery available! Order your fresh orchard box today. \n\n#HarsilApples #UttarakhandOrganic #HimalayanProduce #VocalForLocal #DirectFromFarmers",
+      "createdAt": "2026-07-10T10:00:00.000Z"
     },
     {
-      "id": "cap-1782839854835",
-      "_id": "cap-1782839854835",
-      "productName": "Pashmina Shawl",
-      "shopType": "Handloom",
-      "captionText": "🧣 Handcrafted with love by our local weavers! Presenting the all-new [Pashmina Shawl]. Every thread is woven by hand using traditional designs passed down through generations. \n\n📦 Shipments across India. Help keep our craft heritage alive! \n\n#VocalForLocal #MakeInIndia #HandloomWeavers #TraditionalCrafts #PashminaShawl",
-      "createdAt": "2026-06-30T17:17:34.835Z"
+      "id": "cap-2",
+      "_id": "cap-2",
+      "productName": "Handspun Pashmina Shawl",
+      "shopType": "Handloom Weaving",
+      "captionText": "🧣 Wrap yourself in Himalayan warmth! Hand-spun and hand-woven by master weavers in Garhwal hills using age-old looms. Featherlight, cozy, and timeless. \n\n✨ Support mountain cottage industries! \n\n#GarhwalHandloom #PashminaShawl #MakeInIndia #HandwovenLuxury #UttarakhandCrafts",
+      "createdAt": "2026-07-15T12:30:00.000Z"
+    },
+    {
+      "id": "cap-3",
+      "_id": "cap-3",
+      "productName": "Wild Rajaji Forest Honey",
+      "shopType": "Apiary",
+      "captionText": "🍯 Raw, unheated, 100% pure wild honey harvested from the natural wildflower flora of Rajaji forests! Rich in natural enzymes, pollen, and immune-boosting goodness. \n\n📲 Order pure forest honey today! \n\n#WildHoney #RajajiForest #OrganicHoney #HimalayanPurity #RuralGrow",
+      "createdAt": "2026-07-20T08:15:00.000Z"
     }
   ],
   "users": [
-    {
-      "id": "usr-1782966498935",
-      "_id": "usr-1782966498935",
-      "name": "Saurabh parihar",
-      "email": "saurabh@gmail.com",
-      "password": "$2b$10$C6IJC7yH2eAVdV8rFX/kJeY6o7QQXfpJ3KFiRVWeioGSsEm.k5k92",
-      "role": "business_owner",
-      "shopName": "Garhwal Organic Farms",
-      "createdAt": "2026-07-02T04:28:18.935Z"
-    },
     {
       "id": "usr-admin",
       "_id": "usr-admin",
@@ -108,28 +205,14 @@
       "createdAt": "2026-07-10T09:00:00.000Z"
     },
     {
-      "id": "usr-1783675008677",
-      "_id": "usr-1783675008677",
-      "name": "sohamm",
-      "email": "sohamm@gmail.com",
-      "password": "$2b$10$Jrdl7NU0cYJq5Ox8sE.onOspGAJDCj6ByvO23Y6dlIqIrSvO9ySDC",
+      "id": "usr-owner",
+      "_id": "usr-owner",
+      "name": "Saurabh Parihar",
+      "email": "saurabh@gmail.com",
+      "password": "$2b$10$C6IJC7yH2eAVdV8rFX/kJeY6o7QQXfpJ3KFiRVWeioGSsEm.k5k92",
       "role": "business_owner",
       "shopName": "Garhwal Organic Farms",
-      "googleId": null,
-      "avatar": null,
-      "createdAt": "2026-07-10T09:16:48.677Z"
-    },
-    {
-      "id": "usr-1783675131543",
-      "_id": "usr-1783675131543",
-      "name": "Saurabh Parihar",
-      "email": "sparihar2005@gmail.com",
-      "password": null,
-      "role": "guest",
-      "shopName": "Garhwal Farms (Google)",
-      "googleId": "google-simulated-1783675131543",
-      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
-      "createdAt": "2026-07-10T09:18:51.543Z"
+      "createdAt": "2026-07-02T04:28:18.935Z"
     }
   ]
 }
