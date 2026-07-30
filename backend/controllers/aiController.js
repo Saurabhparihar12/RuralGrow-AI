@@ -28,12 +28,85 @@ if (apiKey && !apiKey.includes('your_') && !apiKey.includes('PLACEHOLDER') && ap
 // LOCAL FALLBACK SIMULATOR (If Gemini key is missing/fails)
 // ----------------------------------------------------
 const simulateChatResponse = (userMessage) => {
-  const query = (userMessage || '').toLowerCase();
-  
-  if (query.includes('crop') || query.includes('agriculture') || query.includes('rotation') || query.includes('soil') || query.includes('farm')) {
+  const query = (userMessage || '').trim();
+  const lower = query.toLowerCase();
+
+  // 1. Greetings & Intro
+  if (/^(hi|hello|hey|namaste|greetings|who are you|what can you do)/i.test(lower)) {
+    return `🏔️ **Namaste! I am HimalayaGrow AI, your Rural Business & Agriculture Assistant.**
+
+I am specially trained to assist micro-entrepreneurs, organic farmers, handloom weavers, and homestay owners across Uttarakhand and the Himalayan region. 
+
+Here are key areas I can guide you on:
+1. 🌾 **Crop Cultivation & Soil Care:** High-altitude apples, Red Rice (*Lal Chawal*), Millets (*Mandua/Jhangora*), organic pest management, terrace soil fertility.
+2. 🏛️ **Government Subsidies:** PM-KISAN, Uttarakhand Apple Mission, PM-FME food processing grants, SHG funding.
+3. 💳 **Loans & Finance:** Kisan Credit Card (KCC) eligibility, interest subventions, collateral-free credit.
+4. 📈 **E-Commerce & Marketing:** Branding Himalayan products, selling on ONDC/Amazon, Google Maps listings, WhatsApp promotions.
+
+Feel free to ask me any specific question about your farm or business!`;
+  }
+
+  // 2. Apples & Fruit Orchards
+  if (lower.includes('apple') || lower.includes('fruit') || lower.includes('orchard') || lower.includes('harsil') || lower.includes('plum')) {
+    return `🍎 **HimalayaGrow AI Advice for Mountain Fruit Orchards:**
+
+* **High-Density Planting:** Plant high-density dwarfing rootstocks (like M9/MM106) spaced 1m x 3m apart to yield up to 4x higher harvest per bigha.
+* **Frost & Hail Protection:** Install anti-hail nets before April blossoming. Uttarakhand Horticulture Dept offers an 80% subsidy on hail netting!
+* **Value Addition:** Convert grade-C fruit into organic Apple Cider Vinegar (ACV), sun-dried apple chips, or sugar-free preserves for 3x profit margins.
+
+💡 **Market Tip:** Label your boxes with your exact valley origin (e.g. *"Handpicked at 7,800ft in Harsil Valley"*) to command premium prices in Delhi/Mumbai markets!`;
+  }
+
+  // 3. Honey & Apiary
+  if (lower.includes('honey') || lower.includes('bee') || lower.includes('apiary') || lower.includes('rajaji')) {
+    return `🍯 **HimalayaGrow AI Advice for Wild & Organic Apiaries:**
+
+* **Flora Migration:** Move bee boxes seasonally to Rajaji forests during winter for wildflower nectar and higher mountain valleys in summer.
+* **Moisture Testing:** Ensure honey moisture content is under 18% before bottling to prevent fermentation without needing thermal pasteurization.
+* **Certification:** Apply for FSSAI organic packaging certification to sell raw unheated forest honey at ₹700-₹1,000 per kg online.`;
+  }
+
+  // 4. Handloom, Woolens & Crafts
+  if (lower.includes('shawl') || lower.includes('loom') || lower.includes('wool') || lower.includes('handloom') || lower.includes('weaver') || lower.includes('pashmina') || lower.includes('copper') || lower.includes('brass')) {
+    return `🧣 **HimalayaGrow AI Advice for Handloom & Artisanal Crafts:**
+
+* **Authenticity Tagging:** Attach a QR code label on every handmade shawl/jacket showing a 15-second video of the artisan weaving it on the traditional loom.
+* **Natural Dyes:** Utilize local walnut hulls (*Akhrot*), marigold flowers, and madder root (*Manjistha*) for eco-friendly herbal dyes that appeal to luxury buyers.
+* **Geographical Indication (GI):** Tap into Uttarakhand's registered GI tags (*Munsiyari Rajma, Almora Tamta copperware, Uttarakhand Ringal craft*) in your marketing headlines!`;
+  }
+
+  // 5. Pest Control, Organic Farming & Fertilizers
+  if (lower.includes('organic') || lower.includes('pest') || lower.includes('insect') || lower.includes('fertilizer') || lower.includes('compost') || lower.includes('vermicompost') || lower.includes('neem') || lower.includes('disease')) {
+    return `🌿 **HimalayaGrow AI Guide to Organic Pest Control & Soil Fertility:**
+
+* **Natural Bio-Pesticide (Jeevamrut):** Mix 10kg cow dung, 10L cow urine, 2kg jaggery, 2kg chickpea flour, and a handful of forest soil in 200L water. Ferment for 48 hours and spray.
+* **Neem Oil Spray:** Dilute 5ml cold-pressed Neem oil with 2ml natural soap liquid per liter of water to control aphids, mites, and caterpillars.
+* **Terrace Moisture Management:** Apply pine needle mulch (*Pirul*) around plant stems to reduce water evaporation by 40% on steep terrace slopes.`;
+  }
+
+  // 6. E-Commerce, ONDC, Amazon, Selling & Pricing
+  if (lower.includes('sell') || lower.includes('price') || lower.includes('ondc') || lower.includes('amazon') || lower.includes('flipkart') || lower.includes('online') || lower.includes('export') || lower.includes('market')) {
+    return `🛍️ **HimalayaGrow AI Digital Sales & E-Commerce Playbook:**
+
+1. **ONDC (Open Network for Digital Commerce):** Register your micro-store via Mystore or SellerApp to list your products across Paytm, Pincode, and Craftsvilla automatically.
+2. **Direct-to-Consumer (D2C):** Set up a simple WhatsApp Business catalog with direct UPI payment links for repeat buyers.
+3. **Eco-Friendly Packaging:** Use corrugated cardboard boxes with shredded paper cushioning. Include a hand-written thank-you note from your village to build strong customer loyalty!`;
+  }
+
+  // 7. Weather, Rain, Snow, Frost & Climate
+  if (lower.includes('weather') || lower.includes('rain') || lower.includes('snow') || lower.includes('frost') || lower.includes('climate') || lower.includes('winter') || lower.includes('temperature')) {
+    return `❄️ **HimalayaGrow AI Weather & Seasonal Crop Protection:**
+
+* **Frost Protection:** Provide light evening irrigation (*Micro-sprinklers*) before freezing nights; moist soil retains heat better than dry soil.
+* **Rainwater Harvesting:** Construct lined poly-tanks (*Jalkund*) on upper terrace levels to store monsoon runoff for dry summer months.
+* **Winter Shelter:** Cover young saplings and nursery beds with agri-mulch sheets or bamboo thatch structures during December-January snowfall.`;
+  }
+
+  // 8. Crop Rotation, Millets & Rice
+  if (lower.includes('crop') || lower.includes('rotation') || lower.includes('soil') || lower.includes('farm') || lower.includes('millet') || lower.includes('mandua') || lower.includes('rice') || lower.includes('basmati') || lower.includes('pulses')) {
     return `🌾 **HimalayaGrow AI Guidance on Crop Rotation & Soil Health:**
 
-For Himalayan mountain terrace farming in Uttarakhand, maintaining organic soil fertility is essential. Here is a recommended seasonal crop rotation plan:
+For Himalayan mountain terrace farming in Uttarakhand, maintaining organic soil fertility is essential. Recommended seasonal rotation:
 
 1. **Rabi Season (Winter):** High-altitude Wheat, Barley, or Mustard.
 2. **Kharif Season (Monsoon):** Finger Millet (*Mandua*), Barnyard Millet (*Jhangora*), or local Red Rice (*Lal Chawal*).
@@ -41,11 +114,12 @@ For Himalayan mountain terrace farming in Uttarakhand, maintaining organic soil 
 
 💡 **Soil Enhancement Tip:** Mix pine leaf mold with composted cow manure to improve moisture retention in rocky terrace slopes!`;
   }
-  
-  if (query.includes('scheme') || query.includes('pension') || query.includes('pm-kisan') || query.includes('government') || query.includes('subsidy') || query.includes('grant')) {
+
+  // 9. Government Schemes & Subsidies
+  if (lower.includes('scheme') || lower.includes('pension') || lower.includes('pm-kisan') || lower.includes('government') || lower.includes('subsidy') || lower.includes('grant')) {
     return `🏛️ **Key Government Schemes for Uttarakhand Rural Entrepreneurs:**
 
-Here are top financial and agricultural schemes available for micro-businesses in the region:
+Top financial and agricultural schemes available for micro-businesses:
 
 1. **PM-KISAN Samman Nidhi:** Direct income support of ₹6,000 annually in 3 equal installments to eligible farmer bank accounts.
 2. **Uttarakhand Apple & Fruit Mission:** Offers 50%–80% subsidies for high-density orchard cultivation, micro-irrigation, and hail nets.
@@ -54,19 +128,21 @@ Here are top financial and agricultural schemes available for micro-businesses i
 📍 **How to Apply:** Visit your nearest Common Service Centre (CSC) in Dehradun, Almora, or Mussoorie with your land record (*Khatauni*) and Aadhaar card!`;
   }
 
-  if (query.includes('loan') || query.includes('finance') || query.includes('eligibility') || query.includes('kcc') || query.includes('bank') || query.includes('money')) {
+  // 10. Loans, Finance & Kisan Credit Card
+  if (lower.includes('loan') || lower.includes('finance') || lower.includes('eligibility') || lower.includes('kcc') || lower.includes('bank') || lower.includes('money')) {
     return `💳 **Financial Assistance & Kisan Credit Card (KCC) Access:**
 
 For low-interest business & farm financing in Uttarakhand:
 
-* **Kisan Credit Card (KCC):** Provides flexible credit up to ₹3 Lakhs at an effective interest rate of ~4% per annum upon prompt repayment.
+* **Kisan Credit Card (KCC):** Flexible credit up to ₹3 Lakhs at an effective interest rate of ~4% per annum upon prompt repayment.
 * **Collateral-Free Limit:** No collateral security required for loans up to ₹1.60 Lakhs.
 * **Eligible Applicants:** Individual farmers, joint borrowers, tenant farmers, and self-help group (SHG) cooperatives.
 
 🏦 **Application Step:** Approach your local District Cooperative Bank or State Bank of India (SBI) branch with land records and ID proof.`;
   }
 
-  if (query.includes('marketing') || query.includes('business') || query.includes('growth') || query.includes('sell') || query.includes('brand') || query.includes('price')) {
+  // 11. Marketing & Branding
+  if (lower.includes('marketing') || lower.includes('business') || lower.includes('growth') || lower.includes('brand')) {
     return `📈 **Digital Marketing & Business Growth Strategy:**
 
 To scale your cottage industry products (organic honey, handloom woolens, herbal teas):
@@ -76,16 +152,17 @@ To scale your cottage industry products (organic honey, handloom woolens, herbal
 3. **WhatsApp Customer Retention:** Utilize the automated promotional templates in your RuralGrow AI dashboard to broadcast seasonal harvest updates to repeat customers.`;
   }
 
-  return `🏔️ **Namaste! I am HimalayaGrow AI, your Rural Business & Agriculture Assistant.**
+  // 12. DYNAMIC CONTEXTUAL GENERATOR FOR ANY OTHER CUSTOM QUESTION
+  const topicMatch = query.replace(/[^\w\s]/gi, '').trim();
+  return `🏔️ **HimalayaGrow AI Guidance regarding "${topicMatch}":**
 
-I am here to help mountain growers and micro-merchants succeed. You can ask me about:
+Thank you for your query about **${topicMatch}**. Here are 3 key recommendations tailored for your mountain enterprise:
 
-* 🌾 **Sustainable Terrace Farming:** Crop rotations, organic compost, millet cultivation.
-* 🏛️ **Govt Subsidies & Schemes:** PM-KISAN enrollment, Apple Mission grants, food processing subsidies.
-* 💳 **Kisan Credit Cards & Loans:** Eligibility rules, application steps, interest subventions.
-* 📈 **Branding & Marketing:** Packaging tips, Google Maps business listing, WhatsApp outreach.
+1. **Best Practice:** Ensure your production process preserves traditional Himalayan quality while meeting FSSAI and organic standards.
+2. **Resource Optimization:** Leverage local farmer cooperatives (*Self-Help Groups*) in Uttarakhand to pool transport costs and negotiate bulk supply deals.
+3. **Digital Growth:** Highlight the story behind your product—customers love knowing the village name, altitude, and traditional methods used!
 
-How can I assist your business growth today?`;
+*Need more specific guidance? Feel free to ask about crop rotation, government subsidies (PM-KISAN, PM-FME), loans (KCC), or packaging ideas!*`;
 };
 
 const simulateReviewReply = (author, shopName, reviewText, rating) => {
