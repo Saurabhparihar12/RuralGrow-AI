@@ -1,6 +1,18 @@
 // Centralized API Base URL configuration for RuralGrow AI
-// Supports VITE_API_URL environment variable for production deployments (e.g. Render)
-export const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+// Supports dynamic window.location origin fallback for unified monorepo hosting (Render/Vercel)
+
+const getBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  // If running in browser on production domain (e.g. *.onrender.com or *.vercel.app), use current origin!
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return window.location.origin;
+  }
+  return 'http://localhost:5000';
+};
+
+export const API_BASE_URL = getBaseUrl().replace(/\/$/, '');
 
 /**
  * Utility helper to construct absolute API endpoints.
