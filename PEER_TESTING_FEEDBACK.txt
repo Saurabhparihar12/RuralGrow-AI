@@ -24,18 +24,20 @@ CLASSMATE 1 REVIEW: SENTINAUT (Live App: https://sentinaut.vercel.app)
 
 
 --------------------------------------------------------------------------------
-CLASSMATE 2 REVIEW: AGRIGROW AI (Live App: https://agri-grow.vercel.app)
+CLASSMATE 2 REVIEW: SEJOURA (Live App: https://sejoura-frontend.vercel.app)
 --------------------------------------------------------------------------------
 
 1. WHAT WORKS WELL:
-   - The agricultural scheme recommendation wizard is very intuitive. Selecting a specific crop (e.g. Apples or Millets) immediately filters relevant state subsidies and Kisan Credit Card information with clear eligibility guidelines.
+   - The property discovery cards and hero section visuals render with high quality. The filter bar for searching regional stays, homestays, and mountain retreats operates smoothly with responsive layout transitions.
 
 2. BUG / ISSUE FOUND:
-   - Issue: Mobile Navigation Drawer Overflow on Small Viewports.
+   - Issue: Form Validation & Input Sanitization Error on Booking Inquiry Form.
    - Steps to Reproduce:
-     a. Open https://agri-grow.vercel.app on a mobile device or resize the desktop browser window below 400px width.
-     b. Click the hamburger navigation menu icon.
-     c. Observe that the navigation drawer menu items overlap with the background header action buttons, causing menu items to become unclickable on smaller screens.
-   - Constructive Suggestion: Add `z-50` and `overflow-y-auto` CSS utility classes to the mobile drawer container to ensure it renders above all page elements.
+     a. Open https://sejoura-frontend.vercel.app in your browser.
+     b. Click on any listed homestay card to view property details.
+     c. Scroll down to the booking inquiry form.
+     d. Enter special characters or unformatted text in the Full Name input field and click Submit.
+     e. Observe that the form submits without client-side input pattern validation, causing raw unformatted text strings to render in the confirmation modal.
+   - Constructive Suggestion: Add input sanitization and HTML pattern validation (e.g. pattern="[A-Za-z ]+") to the booking input fields before triggering API submission.
 
 ================================================================================

@@ -33,23 +33,25 @@ Add an API response interceptor to the frontend fetch/axios client that catches 
 
 ---
 
-## 👥 Peer Review 2: AgriGrow AI
+## 👥 Peer Review 2: Sejoura
 
-* **Application Name:** AgriGrow Rural Marketplace
-* **Live App URL:** [https://agri-grow.vercel.app](https://agri-grow.vercel.app)
-* **Testing Date:** July 30, 2026
+* **Application Name:** Sejoura Homestay & Travel Booking
+* **Live App URL:** [https://sejoura-frontend.vercel.app](https://sejoura-frontend.vercel.app)
+* **Testing Date:** August 2, 2026
 
 ### 🟢 1. What Works Well
-> The agricultural scheme recommendation wizard is very intuitive. Selecting a specific crop (e.g. Apples or Millets) immediately filters relevant state subsidies and Kisan Credit Card information with clear eligibility guidelines.
+> The property discovery cards and hero section visuals render with high quality. The filter bar for searching regional stays, homestays, and mountain retreats operates smoothly with responsive layout transitions.
 
 ### 🔴 2. Bug / Issue Found
-> **Issue:** Mobile Navigation Drawer Overflow on Small Viewports.  
-> **Severity:** Low (UI Alignment)  
+> **Issue:** Form Validation & Input Sanitization Error on Booking Inquiry Form.  
+> **Severity:** Low (Input Sanitization)  
 
 #### Steps to Reproduce:
-1. Open [https://agri-grow.vercel.app](https://agri-grow.vercel.app) on a mobile device or shrink the browser viewport width below `400px`.
-2. Click the top hamburger menu icon (`☰`) to open the mobile drawer.
-3. **Observed Behavior:** The navigation drawer items overlap with the fixed background header buttons, making lower menu links unclickable on mobile screens.
+1. Open [https://sejoura-frontend.vercel.app](https://sejoura-frontend.vercel.app) in your browser.
+2. Click on any listed homestay card to view property details.
+3. Scroll down to the booking inquiry form.
+4. Enter special characters or unformatted text in the Full Name input field and click Submit.
+5. **Observed Behavior:** The form submits without client-side input pattern validation, causing raw unformatted text strings to render in the confirmation modal.
 
 #### 💡 Constructive Suggestion:
-Add `z-50` and `overflow-y-auto` CSS utility classes to the mobile navigation drawer container to ensure it renders on top of all header elements across mobile resolutions.
+Add input sanitization and HTML pattern validation (e.g. `pattern="[A-Za-z ]+"`) to the booking input fields before triggering API submission.
