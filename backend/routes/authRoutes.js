@@ -15,14 +15,44 @@ router.post('/login', authLimiter, validateRequest(loginSchema), authController.
 router.post('/forgot-password', authController.forgotPassword);
 
 // Google OAuth endpoints (triggers passport redirection)
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', (req, res, next) => {
+  const origin = req.headers.referer || req.headers.origin || process.env.CLIENT_URL || 'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app';
+  const state = Buffer.from(JSON.stringify({ returnTo: origin })).toString('base64');
+  passport.authenticate('google', { scope: ['profile', 'email'], state })(req, res, next);
+});
 
 router.get('/google/callback', (req, res, next) => {
-  const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5173').replace(/\/$/, '');
-  passport.authenticate('google', { session: false, failureRedirect: `${clientUrl}/login?error=oauth_failed` })(req, res, next);
+  let clientUrl = (process.env.CLIENT_URL || 'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app').replace(/\/$/, '');
+  try {
+    if (req.query.state) {
+      const parsed = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));
+      if (parsed.returnTo && parsed.returnTo.startsWith('http')) {
+        clientUrl = parsed.returnTo.replace(/\/$/, '').replace(/\/login.*$/, '');
+      }
+    }
+  } catch (e) {
+    console.error('[OAuth Callback] State parse notice:', e.message);
+  }
+  
+  passport.authenticate('google', { session: false, failureRedirect: `${clientUrl}/login?error=oauth_failed` })(req, res, (err) => {
+    if (err || !req.user) {
+      console.error('[OAuth Callback] Passport authentication failed:', err ? err.message : 'No user');
+      return res.redirect(`${clientUrl}/login?error=oauth_failed`);
+    }
+    next();
+  });
 }, (req, res) => {
-  const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5173').replace(/\/$/, '');
-  // Generate token
+  let clientUrl = (process.env.CLIENT_URL || 'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app').replace(/\/$/, '');
+  try {
+    if (req.query.state) {
+      const parsed = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));
+      if (parsed.returnTo && parsed.returnTo.startsWith('http')) {
+        clientUrl = parsed.returnTo.replace(/\/$/, '').replace(/\/login.*$/, '');
+      }
+    }
+  } catch (e) {}
+
+  // Generate JWT token
   const token = jwt.sign({ id: req.user.id || req.user._id }, process.env.JWT_SECRET || 'ruralgrow_secret_key', {
     expiresIn: '7d'
   });
@@ -38,7 +68,7 @@ router.get('/google/callback', (req, res, next) => {
     avatar: req.user.avatar
   });
   
-  // Redirect to frontend callback handler
+  // Redirect back to frontend login callback handler
   res.redirect(`${clientUrl}/login?token=${token}&user=${encodeURIComponent(userStr)}`);
 });
 
