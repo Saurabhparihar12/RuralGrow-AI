@@ -7,6 +7,8 @@ import { authLimiter } from '../middleware/security.js';
 import { validateRequest, registerSchema, loginSchema } from '../middleware/validator.js';
 
 const router = express.Router();
+const defaultClientUrl = 'https://rural-grow-ai-eta.vercel.app';
+const getClientUrl = () => (process.env.CLIENT_URL || defaultClientUrl).trim().replace(/\/$/, '');
 
 // Public native authentication routes (rate-limited and validated via Zod)
 router.post('/signup', authLimiter, validateRequest(registerSchema), authController.register);
@@ -16,13 +18,13 @@ router.post('/forgot-password', authController.forgotPassword);
 
 // Google OAuth endpoints (triggers passport redirection)
 router.get('/google', (req, res, next) => {
-  const origin = req.headers.referer || req.headers.origin || process.env.CLIENT_URL || 'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app';
+  const origin = req.headers.referer || req.headers.origin || getClientUrl();
   const state = Buffer.from(JSON.stringify({ returnTo: origin })).toString('base64');
   passport.authenticate('google', { scope: ['profile', 'email'], state })(req, res, next);
 });
 
 router.get('/google/callback', (req, res, next) => {
-  let clientUrl = (process.env.CLIENT_URL || 'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app').replace(/\/$/, '');
+  let clientUrl = getClientUrl();
   try {
     if (req.query.state) {
       const parsed = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));
@@ -42,7 +44,7 @@ router.get('/google/callback', (req, res, next) => {
     next();
   });
 }, (req, res) => {
-  let clientUrl = (process.env.CLIENT_URL || 'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app').replace(/\/$/, '');
+  let clientUrl = getClientUrl();
   try {
     if (req.query.state) {
       const parsed = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));

@@ -28,6 +28,7 @@ export const mongoSanitizeMiddleware = mongoSanitize();
 // Production CORS configuration (supporting Vercel & Render client domains)
 const allowedOrigins = [
   process.env.CLIENT_URL,
+  'https://rural-grow-ai-eta.vercel.app',
   'https://ruralgrowai.vercel.app',
   'https://ruralgrow-ai.vercel.app',
   'https://ruralgrow-ai.onrender.com',
@@ -42,10 +43,9 @@ export const corsMiddleware = cors({
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(null, true);
+    return callback(new Error(`CORS origin not allowed: ${origin}`));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 });
-

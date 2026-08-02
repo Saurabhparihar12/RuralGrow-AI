@@ -3,10 +3,12 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { userService } from '../data/dbHelper.js';
 
 export const configurePassport = () => {
-  const clientID = process.env.GOOGLE_CLIENT_ID || 'GOOGLE_CLIENT_ID_PLACEHOLDER';
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || 'GOOGLE_CLIENT_SECRET_PLACEHOLDER';
+  // Deployment dashboards can accidentally preserve trailing whitespace when
+  // environment variables are pasted. OAuth redirect URIs must be exact.
+  const clientID = (process.env.GOOGLE_CLIENT_ID || 'GOOGLE_CLIENT_ID_PLACEHOLDER').trim();
+  const clientSecret = (process.env.GOOGLE_CLIENT_SECRET || 'GOOGLE_CLIENT_SECRET_PLACEHOLDER').trim();
 
-  const callbackURL = process.env.GOOGLE_CALLBACK_URL || 'http://localhost:5000/api/auth/google/callback';
+  const callbackURL = (process.env.GOOGLE_CALLBACK_URL || 'http://localhost:5000/api/auth/google/callback').trim();
 
   passport.use(new GoogleStrategy({
     clientID,
