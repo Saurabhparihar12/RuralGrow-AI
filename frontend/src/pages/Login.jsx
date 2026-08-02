@@ -46,8 +46,11 @@ export default function Login() {
     } else if (token && userStr) {
       try {
         const decodedUser = JSON.parse(decodeURIComponent(userStr));
-        loginWithParams(token, decodedUser);
-        showToast(`Google Login Successful! Welcome ${decodedUser.name}`, 'success');
+        if (!loginWithParams(token, decodedUser)) {
+          showToast('Google returned an incomplete account profile. Please try again.', 'error');
+          return;
+        }
+        showToast(`Google Login Successful! Signed in as ${decodedUser.email}`, 'success');
         setTimeout(() => {
           if (decodedUser.role === 'admin' || decodedUser.role === 'business_owner') {
             navigate('/admin');
@@ -162,7 +165,7 @@ export default function Login() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-55 max-w-sm w-full pointer-events-auto"
+            className="fixed bottom-4 left-4 right-4 z-55 max-w-sm w-auto sm:bottom-6 sm:left-auto sm:right-6 sm:w-full pointer-events-auto"
           >
             <Toast 
               message={toast.message} 
@@ -175,12 +178,12 @@ export default function Login() {
 
       <Navbar />
 
-      <main className="flex-1 flex items-center justify-center py-16 px-6 relative z-10">
+      <main className="flex-1 flex items-center justify-center py-8 sm:py-16 px-4 sm:px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-md w-full bg-white/80 dark:bg-[#19221F]/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 md:p-10 shadow-xl dark:shadow-none relative overflow-hidden transition-all duration-500"
+          className="max-w-md w-full bg-white/80 dark:bg-[#19221F]/80 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/40 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-xl dark:shadow-none relative overflow-hidden transition-all duration-500"
         >
           
           <AnimatePresence mode="wait">

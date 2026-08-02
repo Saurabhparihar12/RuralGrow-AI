@@ -110,13 +110,18 @@ export default function Navbar() {
             
             {/* Show Login or Sign Out in navigation based on active state */}
             {user ? (
-              <button
-                onClick={handleLogout}
-                className="relative px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-rose-500 transition-all duration-305 cursor-pointer flex items-center space-x-1.5"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                <span>Sign Out</span>
-              </button>
+              <>
+                <Link to="/profile" className="max-w-40 truncate px-3 py-2 text-xs font-semibold text-sage-700 dark:text-sage-400" title={user.email}>
+                  {user.email}
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="relative px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-rose-500 transition-all duration-305 cursor-pointer flex items-center space-x-1.5"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Sign Out</span>
+                </button>
+              </>
             ) : (
               <Link
                 to="/login"
@@ -175,7 +180,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-        isOpen ? 'max-h-80 border-t border-slate-200/50 dark:border-slate-800/30' : 'max-h-0'
+        isOpen ? 'max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-slate-200/50 dark:border-slate-800/30' : 'max-h-0'
       }`}>
         <div className="px-6 py-4 space-y-2 bg-white/95 dark:bg-forest-950/95 backdrop-blur-xl">
           {navLinks.map((link) => (
@@ -194,12 +199,17 @@ export default function Navbar() {
           ))}
           
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="w-full text-left block px-4 py-2.5 rounded-xl text-sm font-semibold uppercase tracking-wider text-rose-500 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors"
-            >
-              Sign Out
-            </button>
+            <>
+              <Link to="/profile" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-xs font-semibold text-sage-700 dark:text-sage-400 truncate" title={user.email}>
+                Signed in as {user.email}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="w-full text-left block px-4 py-2.5 rounded-xl text-sm font-semibold uppercase tracking-wider text-rose-500 hover:bg-slate-50 dark:hover:bg-slate-900/60 transition-colors"
+              >
+                Sign Out
+              </button>
+            </>
           ) : (
             <Link
               to="/login"

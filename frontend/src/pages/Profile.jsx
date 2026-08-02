@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useAuth } from '../context/AuthContext';
@@ -9,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Profile() {
   const { user, token, logout, setUser } = useAuth();
+  const navigate = useNavigate();
   
   const [name, setName] = useState(user?.name || '');
   const [shopName, setShopName] = useState(user?.shopName || '');
@@ -29,6 +31,11 @@ export default function Profile() {
 
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/', { replace: true });
   };
 
   const handleProfileUpdate = async (e) => {
@@ -77,7 +84,7 @@ export default function Profile() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-55 max-w-sm w-full pointer-events-auto"
+            className="fixed bottom-4 left-4 right-4 z-55 max-w-sm w-auto sm:bottom-6 sm:left-auto sm:right-6 sm:w-full pointer-events-auto"
           >
             <Toast 
               message={toast.message} 
@@ -90,7 +97,7 @@ export default function Profile() {
 
       <Navbar />
 
-      <main className="flex-1 max-w-5xl w-full mx-auto px-6 py-12">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -130,7 +137,7 @@ export default function Profile() {
               </div>
 
               <button
-                onClick={logout}
+                onClick={handleLogout}
                 className="w-full mt-8 flex items-center justify-center space-x-2 py-2.5 border border-red-500/20 hover:bg-red-500/5 text-red-500 rounded-xl transition-all duration-300 font-bold text-[10px] uppercase tracking-wider cursor-pointer bg-transparent"
               >
                 <LogOut className="w-3.5 h-3.5" />
@@ -165,7 +172,7 @@ export default function Profile() {
 
           {/* Column 2 & 3: Profile Settings Form */}
           <div className="md:col-span-2 space-y-6">
-            <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 shadow-sm transition-all duration-300">
+            <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-5 sm:p-8 shadow-sm transition-all duration-300">
               <h2 className="text-xl font-bold font-display text-forest-900 dark:text-clay-50 mb-6 flex items-center space-x-2">
                 <Settings className="w-5 h-5 text-sage-600" />
                 <span>Edit Profile Details</span>

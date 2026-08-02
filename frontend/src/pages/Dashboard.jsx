@@ -537,7 +537,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-55 max-w-sm w-full pointer-events-auto"
+            className="fixed bottom-4 left-4 right-4 z-55 max-w-sm w-auto sm:bottom-6 sm:left-auto sm:right-6 sm:w-full pointer-events-auto"
           >
             <Toast 
               message={toast.message} 
@@ -550,7 +550,7 @@ export default function Dashboard() {
 
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-6 sm:px-8 py-10 relative z-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-6 sm:py-10 relative z-10">
         
         {/* Main grid layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -704,13 +704,13 @@ export default function Dashboard() {
                 >
                   
                   {/* Recharts Analytics Panel */}
-                  <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6 shadow-xs">
+                  <div className="bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-4 sm:p-6 shadow-xs">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
                       <div>
                         <h4 className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Inference Trend Analytics</h4>
                         <h3 className="text-base font-display font-bold mt-1 text-forest-900 dark:text-clay-50">Sentiment Ingestion Volume</h3>
                       </div>
-                      <div className="flex items-center space-x-3.5 text-[9px] font-bold uppercase tracking-wider">
+                      <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1 text-[9px] font-bold uppercase tracking-wider">
                         <span className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500"></span><span className="text-slate-500">Positive</span></span>
                         <span className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-sage-500"></span><span className="text-slate-500">Neutral</span></span>
                         <span className="flex items-center space-x-1.5"><span className="w-2 h-2 rounded-full bg-rose-500"></span><span className="text-slate-500">Negative</span></span>
@@ -764,7 +764,7 @@ export default function Dashboard() {
                     <div className="lg:col-span-7 bg-white dark:bg-[#19221F] border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-6 shadow-xs space-y-6">
                       
                       {/* Filter and Search Panel */}
-                      <form onSubmit={handleSearchSubmit} className="flex gap-2.5 relative">
+                      <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-2.5 relative">
                         <div className="flex-1 relative">
                           <Input
                             placeholder="Search reviews..."
@@ -809,14 +809,14 @@ export default function Dashboard() {
                         </div>
                         <button 
                           type="submit"
-                          className="px-4.5 bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950 rounded-xl text-[10px] font-bold uppercase tracking-widest cursor-pointer shadow-xs hover:bg-sage-600 dark:hover:bg-clay-200 transition-colors"
+                          className="w-full sm:w-auto px-4.5 bg-forest-900 dark:bg-clay-50 text-clay-50 dark:text-forest-950 rounded-xl text-[10px] font-bold uppercase tracking-widest cursor-pointer shadow-xs hover:bg-sage-600 dark:hover:bg-clay-200 transition-colors"
                         >
                           Search
                         </button>
                         <select
                           value={sentimentFilter}
                           onChange={(e) => setSentimentFilter(e.target.value)}
-                          className="bg-white dark:bg-forest-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-350 outline-none cursor-pointer"
+                          className="w-full sm:w-auto bg-white dark:bg-forest-900 border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-350 outline-none cursor-pointer"
                         >
                           <option value="all">All Sentiment</option>
                           <option value="positive">Positive</option>
@@ -912,7 +912,7 @@ export default function Dashboard() {
                               value={generatedReply}
                               onChange={(e) => setGeneratedReply(e.target.value)}
                             />
-                            <div className="flex justify-end space-x-2">
+                            <div className="flex flex-col sm:flex-row sm:justify-end gap-2">
                               <Button 
                                 variant="primary" 
                                 size="sm"

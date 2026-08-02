@@ -5,7 +5,7 @@ import { ArrowRight, Globe } from 'lucide-react';
 export default function Hero() {
   return (
     <div 
-      className="relative h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-forest-950 text-clay-50 select-none"
+      className="relative h-[78svh] sm:h-[85vh] min-h-[520px] sm:min-h-[600px] flex items-center justify-center overflow-hidden bg-forest-950 text-clay-50 select-none"
       style={{ 
         backgroundImage: "url('https://images.unsplash.com/photo-1626697591416-56ceb5ecca61?auto=format&fit=crop&q=80&w=1920')", 
         backgroundSize: 'cover', 
@@ -32,16 +32,16 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/70 to-forest-950/40 pointer-events-none" />
 
       {/* Content Sandbox */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center space-y-8 flex flex-col items-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 text-center space-y-6 sm:space-y-8 flex flex-col items-center">
         
         {/* Accent Tag */}
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-clay-50/10 border border-clay-50/15 text-[10px] uppercase font-bold tracking-widest text-clay-100 animate-fade-in-blur">
+        <div className="inline-flex max-w-full items-center space-x-2 px-3 sm:px-4 py-1.5 rounded-full bg-clay-50/10 border border-clay-50/15 text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-clay-100 animate-fade-in-blur">
           <Globe className="w-3.5 h-3.5 text-sage-500" />
           <span>Community Outreach Initiative // Rural Growth</span>
         </div>
 
         {/* Storytelling Heading */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-black leading-[1.05] tracking-tight max-w-4xl animate-fade-in-blur" style={{ animationDelay: '150ms' }}>
+        <h1 className="text-3xl sm:text-6xl md:text-7xl font-display font-black leading-[1.05] tracking-tight max-w-4xl animate-fade-in-blur" style={{ animationDelay: '150ms' }}>
           Empelling local growers to stand out <br />
           <span className="text-sage-500 font-light italic">in the digital market.</span>
         </h1>

@@ -233,7 +233,7 @@ How can I assist your business today?`
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-55 max-w-sm w-full pointer-events-auto"
+            className="fixed bottom-4 left-4 right-4 z-55 max-w-sm w-auto sm:bottom-6 sm:left-auto sm:right-6 sm:w-full pointer-events-auto"
           >
             <Toast 
               message={toast.message} 
@@ -254,8 +254,8 @@ How can I assist your business today?`
             <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-sage-500/10 text-sage-600 dark:text-sage-400 text-[9px] uppercase font-black tracking-widest">
               <span>Himalayan AI Helper</span>
             </span>
-            <h1 className="text-2xl sm:text-3xl font-bold font-display tracking-tight mt-2 flex items-center space-x-2">
-              <Bot className="w-7 h-7 text-sage-500" />
+            <h1 className="text-xl sm:text-3xl font-bold font-display tracking-tight mt-2 flex items-center space-x-2">
+              <Bot className="w-6 h-6 sm:w-7 sm:h-7 text-sage-500 shrink-0" />
               <span>HimalayaGrow AI Assistant</span>
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium">
@@ -381,7 +381,7 @@ How can I assist your business today?`
           {/* Form Input panel */}
           <form 
             onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }}
-            className="border-t border-slate-100 dark:border-slate-800/60 pt-4 mt-2 flex items-center space-x-3"
+            className="border-t border-slate-100 dark:border-slate-800/60 pt-4 mt-2 flex items-center gap-2 sm:gap-3"
           >
             <input
               type="text"

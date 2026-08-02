@@ -20,7 +20,7 @@ router.post('/forgot-password', authController.forgotPassword);
 router.get('/google', (req, res, next) => {
   const origin = req.headers.referer || req.headers.origin || getClientUrl();
   const state = Buffer.from(JSON.stringify({ returnTo: origin })).toString('base64');
-  passport.authenticate('google', { scope: ['profile', 'email'], state })(req, res, next);
+  passport.authenticate('google', { scope: ['profile', 'email'], prompt: 'select_account', state })(req, res, next);
 });
 
 router.get('/google/callback', (req, res, next) => {

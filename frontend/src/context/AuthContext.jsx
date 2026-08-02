@@ -21,6 +21,22 @@ export function AuthProvider({ children }) {
   });
   const [loading, setLoading] = useState(false);
 
+  // Keep sessions synchronized when a user signs in or out in another tab.
+  useEffect(() => {
+    const syncSession = (event) => {
+      if (event.key === 'token') setToken(event.newValue || null);
+      if (event.key === 'user') {
+        try {
+          setUser(event.newValue ? JSON.parse(event.newValue) : null);
+        } catch {
+          setUser(null);
+        }
+      }
+    };
+    window.addEventListener('storage', syncSession);
+    return () => window.removeEventListener('storage', syncSession);
+  }, []);
+
   // Sync token and user in localStorage safely
   useEffect(() => {
     if (token && token !== 'null' && token !== 'undefined') {
@@ -51,7 +67,7 @@ export function AuthProvider({ children }) {
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
-        return { success: true, message: data.message };
+        return { success: true, message: data.message, user: data.user };
       } else {
         return { success: false, message: data.message || 'Login failed.' };
       }
@@ -75,7 +91,7 @@ export function AuthProvider({ children }) {
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
-        return { success: true, message: data.message };
+        return { success: true, message: data.message, user: data.user };
       } else {
         return { success: false, message: data.message || 'Registration failed.' };
       }
@@ -99,7 +115,7 @@ export function AuthProvider({ children }) {
       if (data.success) {
         setToken(data.token);
         setUser(data.user);
-        return { success: true, message: data.message };
+        return { success: true, message: data.message, user: data.user };
       } else {
         return { success: false, message: data.message || 'Google Login failed.' };
       }
@@ -112,8 +128,10 @@ export function AuthProvider({ children }) {
 
   // Direct login using parameters (for Google OAuth callback redirects)
   const loginWithParams = (authToken, userMetadata) => {
+    if (!authToken || !userMetadata?.email) return false;
     setToken(authToken);
     setUser(userMetadata);
+    return true;
   };
 
   // Logout handler
@@ -122,6 +140,8 @@ export function AuthProvider({ children }) {
     setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
   };
 
   // Forgot password handler

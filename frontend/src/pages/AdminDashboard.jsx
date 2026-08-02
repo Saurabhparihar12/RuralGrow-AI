@@ -164,7 +164,7 @@ export default function AdminDashboard() {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-55 max-w-sm w-full pointer-events-auto"
+            className="fixed bottom-4 left-4 right-4 z-55 max-w-sm w-auto sm:bottom-6 sm:left-auto sm:right-6 sm:w-full pointer-events-auto"
           >
             <Toast 
               message={toast.message} 

@@ -66,6 +66,7 @@
 html {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -78,6 +79,20 @@ body {
 body.dark {
   background-color: var(--color-forest-950);
   color: var(--color-clay-50);
+}
+
+#root {
+  min-width: 0;
+}
+
+img, video, svg {
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
 }
 
 
