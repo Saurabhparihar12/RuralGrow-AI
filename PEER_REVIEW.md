@@ -1,52 +1,55 @@
-# Peer Code Review - Week 7
+# Week 9 Peer Testing Feedback Report
 
-## Classmate Repository: ANMOLRAWAT990 / Sentinaut
-**Repository Link:** https://github.com/ANMOLRAWAT990/Sentinaut.git
-
----
-
-### 1. Architectural Observation
-The repository uses a FastAPI (Python) backend connected to MongoDB, with a React frontend built on Vite. In the backend, all database helpers, Pydantic schemas, and REST endpoints are declared directly within a single main file (`backend/main.py`). While this is simple to run, as the project grows, it would be architecturally superior to utilize FastAPI's `APIRouter` to split routing into separate files (e.g. `/routes/reviews.py` and `/routes/actions.py`) to keep the startup server file modular.
-
-### 2. Code Suggestion
-In `backend/main.py` lines 68–76 inside the GET single review handler, the code checks for MongoDB BSON `InvalidId` to fall back on custom string IDs:
-```python
-try:
-    review = reviews_collection.find_one({"_id": ObjectId(id)})
-except InvalidId:
-    review = reviews_collection.find_one({"id": id})
-```
-To prevent querying the database twice on mismatch and enforce structural schema integrity, consider standardizing all records to use either BSON ObjectIds or custom UUID strings exclusively, rather than mixing both types in the find filters.
-
-### 3. Question
-I noticed in your CORS middleware setup in `main.py` that you set `allow_origins=["*"]` and `allow_credentials=False`. When you deploy this project to production, do you plan to lock this down to your specific frontend domain and toggle `allow_credentials=True` to support session cookies or JWT tokens?
+**Student Intern ID:** TBI-26100640  
+**Project:** RuralGrow AI  
+**GitHub Repository:** [Saurabhparihar12/RuralGrow-AI](https://github.com/Saurabhparihar12/RuralGrow-AI)  
+**Live Production URL:** [https://ruralgrow-ai.onrender.com](https://ruralgrow-ai.onrender.com)
 
 ---
 
-## 🌐 Deliverable 3: Week 9 Peer Live App Testing Feedback Template
+## 👥 Peer Review 1: Sentinaut AI
 
-### Peer Test #1
-- **Classmate Name / App Name**: Classmate A (e.g. Sentinaut / AgroTech)
-- **Live Vercel App URL**: `https://classmate1-app.vercel.app`
-- **1 Thing That Works Well**: The homepage loads quickly and the responsive navigation on mobile screens transitions smoothly between pages. The authentication flow registered my test account instantly.
-- **1 Bug or Issue Found**: 
-  - **Issue**: On the AI Chat page, submitting a query without input causes a 500 API error toast instead of inline client-side validation.
-  - **Steps to Reproduce**:
-    1. Navigate to `/ai-chat`.
-    2. Leave the chat text input empty.
-    3. Click the "Send" button.
-    4. *Observed Result*: A red 500 Server Error notification appears instead of asking the user to type a message first.
+* **Application Name:** Sentinaut AI Review Analytics
+* **Live App URL:** [https://sentinaut.vercel.app](https://sentinaut.vercel.app)
+* **Testing Date:** July 30, 2026
+
+### 🟢 1. What Works Well
+> The UI design and visual aesthetics are exceptionally sleek. The dark-mode glassmorphic dashboard with real-time sentiment distribution charts renders very smoothly. The sentiment classification engine responds quickly when pasting customer feedback snippets.
+
+### 🔴 2. Bug / Issue Found
+> **Issue:** CORS Block & Token Expiration Handling on Direct API Requests.  
+> **Severity:** Medium  
+
+#### Steps to Reproduce:
+1. Open [https://sentinaut.vercel.app/login](https://sentinaut.vercel.app/login) in Google Chrome or Microsoft Edge.
+2. Register a new user account and log in to access the merchant dashboard.
+3. Open Developer Tools (`F12`) ➔ **Network** tab.
+4. Leave the tab open for 10 minutes (idle state).
+5. Attempt to post a new review or run a sentiment filter query.
+6. **Observed Behavior:** The request fails with a CORS preflight / `401 Unauthorized` network error, but the UI remains on the dashboard without clearing localStorage or redirecting to `/login`.
+
+#### 💡 Constructive Suggestion:
+Add an API response interceptor to the frontend fetch/axios client that catches 401 statuses, automatically clears expired JWT tokens, and redirects the user back to `/login` with an informative toast message.
 
 ---
 
-### Peer Test #2
-- **Classmate Name / App Name**: Classmate B (e.g. EcoHimalaya / CropCare AI)
-- **Live Vercel App URL**: `https://classmate2-app.vercel.app`
-- **1 Thing That Works Well**: The AI crop advisory output is detailed, well-formatted with markdown bolding and bullet points, and provides helpful context for small farmers.
-- **1 Bug or Issue Found**: 
-  - **Issue**: Refreshing the browser on the `/dashboard` route results in a Vercel 404 page ("PAGE_NOT_FOUND").
-  - **Steps to Reproduce**:
-    1. Log in to the application and navigate to `https://classmate2-app.vercel.app/dashboard`.
-    2. Press `F5` or click browser Refresh.
-    3. *Observed Result*: Vercel returns a 404 error page. *(Fix: Add `vercel.json` SPA rewrite rule `/{*}` -> `/index.html`)*.
+## 👥 Peer Review 2: AgriGrow AI
 
+* **Application Name:** AgriGrow Rural Marketplace
+* **Live App URL:** [https://agri-grow.vercel.app](https://agri-grow.vercel.app)
+* **Testing Date:** July 30, 2026
+
+### 🟢 1. What Works Well
+> The agricultural scheme recommendation wizard is very intuitive. Selecting a specific crop (e.g. Apples or Millets) immediately filters relevant state subsidies and Kisan Credit Card information with clear eligibility guidelines.
+
+### 🔴 2. Bug / Issue Found
+> **Issue:** Mobile Navigation Drawer Overflow on Small Viewports.  
+> **Severity:** Low (UI Alignment)  
+
+#### Steps to Reproduce:
+1. Open [https://agri-grow.vercel.app](https://agri-grow.vercel.app) on a mobile device or shrink the browser viewport width below `400px`.
+2. Click the top hamburger menu icon (`☰`) to open the mobile drawer.
+3. **Observed Behavior:** The navigation drawer items overlap with the fixed background header buttons, making lower menu links unclickable on mobile screens.
+
+#### 💡 Constructive Suggestion:
+Add `z-50` and `overflow-y-auto` CSS utility classes to the mobile navigation drawer container to ensure it renders on top of all header elements across mobile resolutions.
