@@ -1,130 +1,128 @@
-# RuralGrow AI — Week 9: Production Deployment & Go-Live
+# RuralGrow AI - Week 9 Production Deployment
 
-An AI-assisted business advisory assistant, customer review responder, and social media marketing copy generator designed to support rural micro-merchants, organic farmers, and cottage industries (handloom weavers, honey apiarists, and homestay hosts) in Uttarakhand.
+RuralGrow AI is an AI-assisted business advisory assistant, customer-review responder, and social-media copy generator for rural micro-merchants, organic farmers, handloom weavers, honey apiarists, and homestay hosts in Uttarakhand.
 
----
+## Live deployment
 
-## 🌐 Production Live Deployment Links
+| Component | Provider | URL | Status |
+| --- | --- | --- | --- |
+| Frontend web app | Vercel | https://rural-grow-ai-eta.vercel.app | Live |
+| Backend REST API | Render | https://ruralgrow-ai.onrender.com | Live |
+| Backend health check | Render | https://ruralgrow-ai.onrender.com/api/health | 200 OK |
 
-| Component | Service Provider | Live Production URL | Status |
-| :--- | :--- | :--- | :--- |
-| **Live Frontend Web App** | **Vercel** | [https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app](https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app) | 🟢 **100% LIVE** |
-| **Backend REST API** | **Render** | [https://ruralgrow-ai.onrender.com](https://ruralgrow-ai.onrender.com) | 🟢 **Active / Live** |
-| **Health Check API** | **Render** | [https://ruralgrow-ai.onrender.com/api/health](https://ruralgrow-ai.onrender.com/api/health) | 🟢 **200 OK** |
+The live application URL for the Week 9 submission is https://rural-grow-ai-eta.vercel.app.
 
----
+## Technology stack summary
 
-## 📁 Repository Architecture & Directory Structure
+| Layer | Technology | Production role |
+| --- | --- | --- |
+| Frontend | React 19, Vite, Tailwind CSS, Framer Motion, Recharts | Responsive Vercel SPA and merchant dashboard |
+| Backend | Node.js, Express, Passport Google OAuth, JWT | Render REST API, authentication, CRUD, and AI routes |
+| Database | MongoDB Atlas with Mongoose | Persistent users, reviews, captions, and shops |
+| AI | Google Gemini API with offline fallback | Agricultural assistant, review replies, and marketing captions |
+| Security | Helmet, CORS allow-list, rate limiting, Zod validation, Mongo sanitization | Production request and authentication protections |
 
-```
-.
-├── backend/
-│   ├── config/             # Passport.js strategy loaders (passport.js)
-│   ├── controllers/        # Controllers (authController, reviewController, aiController)
-│   ├── data/               # Persistent adapters and json fallback (dbHelper.js, database.json)
-│   ├── middleware/         # Security, validation, CORS, & auth guards (auth.js, security.js, validator.js, errorHandler.js)
-│   ├── models/             # Mongoose DB schema definitions (User.js, Review.js, Caption.js)
-│   ├── routes/             # REST routing groups (authRoutes.js, reviewRoutes.js, captionRoutes.js, aiRoutes.js)
-│   ├── .env.example        # Backend environment variables template
-│   ├── server.js           # Server initializer with Helmet, CORS, & graceful shutdown
-│   └── package.json        # Node configuration with @google/generative-ai and passport
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/     # UI elements & layout components (Navbar.jsx, Footer.jsx, ProtectedRoute.jsx)
-│   │   ├── config/         # Centralized API configuration (api.js)
-│   │   ├── context/        # Global AuthContext provider and theme toggles
-│   │   ├── pages/          # Pages (Home, Login, Dashboard, Profile, AdminDashboard, AiAssistant)
-│   │   ├── App.jsx         # Client routing declaring route guards
-│   │   └── main.jsx        # App mounting and wrapper contexts
-│   ├── .env.example        # Frontend environment variables template
-│   ├── vercel.json         # Vercel SPA route rewrite rules
-│   └── package.json        # Client configuration with framer-motion and lucide icons
-│
-├── render.yaml             # Render Infrastructure-as-Code deployment manifest
-├── DEPLOYMENT.md           # Complete step-by-step production deployment guide
-├── W9_DeploymentChecklist.md # Pre-flight & post-deployment verification checklist
-├── W9_DeploymentProof_TBI-26100640.md # Submission proof document with screenshot placeholders
-└── package.json            # Root workspace monorepo scripts
+## Repository architecture
+
+```text
+backend/
+  config/             Passport and Google OAuth configuration
+  controllers/        Authentication, reviews, captions, and AI controllers
+  data/               MongoDB adapter and local JSON fallback
+  middleware/         Security, validation, CORS, auth, and error handling
+  models/             Mongoose User, Review, Caption, and Shop models
+  routes/             REST route groups
+  server.js           Express server and health endpoint
+frontend/
+  src/components/    Reusable UI and layout components
+  src/config/        Centralized API configuration
+  src/context/       Authentication and session state
+  src/pages/         Home, Login, Dashboard, Profile, Admin, and AI pages
+  index.html          Vite document shell
+render.yaml           Render deployment manifest
+vercel.json           SPA fallback routing configuration
+DEPLOYMENT.md         Deployment guide
+W9_DeploymentChecklist.md  Week 9 verification checklist
 ```
 
----
+## Environment variables
 
-## 🔑 Environment Variables Matrix
+Configure secrets in the hosting dashboards. Do not commit `.env` files.
 
-### Backend Environment Variables (`backend/.env`)
+### Render backend
 
-| Variable Name | Required | Example / Description |
-| :--- | :---: | :--- |
-| `PORT` | Yes | `5000` (Assigned dynamically by Render in production) |
+| Variable | Required | Production value or description |
+| --- | --- | --- |
 | `NODE_ENV` | Yes | `production` |
-| `CLIENT_URL` | Yes | `https://ruralgrowai.vercel.app` (Allowed origin for CORS and OAuth redirects) |
-| `MONGODB_URI` | Optional | `mongodb+srv://<user>:<password>@cluster.mongodb.net/ruralgrow` (Falls back to local JSON engine if omitted) |
-| `JWT_SECRET` | Yes | `your_super_secure_jwt_secret_key` |
-| `GEMINI_API_KEY` | Optional | `your_google_gemini_api_key` (Powered by `gemini-1.5-flash`; falls back to offline simulator if missing) |
-| `GOOGLE_CLIENT_ID` | Optional | `your_google_client_id.apps.googleusercontent.com` |
-| `GOOGLE_CLIENT_SECRET` | Optional | `your_google_client_secret` |
-| `GOOGLE_CALLBACK_URL` | Optional | `https://ruralgrowai-api.onrender.com/api/auth/google/callback` |
+| `PORT` | Yes | `5000` (Render can assign the service port) |
+| `CLIENT_URL` | Yes | `https://rural-grow-ai-eta.vercel.app` |
+| `MONGODB_URI` | Yes for durable storage | MongoDB Atlas connection string |
+| `JWT_SECRET` | Yes | Long, random secret generated in Render |
+| `GEMINI_API_KEY` | Optional | Google Gemini API key; offline fallback is used if absent |
+| `GOOGLE_CLIENT_ID` | Required for real OAuth | Google OAuth client ID |
+| `GOOGLE_CLIENT_SECRET` | Required for real OAuth | Google OAuth client secret |
+| `GOOGLE_CALLBACK_URL` | Required for real OAuth | `https://ruralgrow-ai.onrender.com/api/auth/google/callback` |
 
-### Frontend Environment Variables (`frontend/.env`)
+### Vercel frontend
 
-| Variable Name | Required | Description |
-| :--- | :---: | :--- |
-| `VITE_API_URL` | Yes | `https://ruralgrowai-api.onrender.com` (Points React fetch calls to Render API) |
+| Variable | Required | Production value or description |
+| --- | --- | --- |
+| `VITE_API_URL` | Recommended | `https://ruralgrow-ai.onrender.com` |
 
----
+The frontend also has this production API fallback in source code so Vercel preview deployments continue to reach Render when the variable is missing.
 
-## ⚙️ Production Deployment Instructions
+For Google OAuth, add this exact Authorized redirect URI in Google Cloud:
 
-### 1. Backend Deployment on Render
-1. Connect your GitHub repository `Saurabhparihar12/RuralGrow-AI` to Render.
-2. Select **New Web Service** and choose `render.yaml` or set:
-   * **Root Directory**: `backend`
-   * **Build Command**: `npm install`
-   * **Start Command**: `npm start`
-3. Configure Environment Variables (`NODE_ENV`, `CLIENT_URL`, `JWT_SECRET`, `GEMINI_API_KEY`, `MONGODB_URI`).
-4. Render will deploy the API and assign the live URL (e.g. `https://ruralgrowai-api.onrender.com`).
+```text
+https://ruralgrow-ai.onrender.com/api/auth/google/callback
+```
 
-### 2. Frontend Deployment on Vercel
+## Deployment instructions
+
+### Render backend
+
+1. Connect the GitHub repository `Saurabhparihar12/RuralGrow-AI` to Render.
+2. Select the `backend` root directory.
+3. Use `npm install` as the build command and `npm start` as the start command.
+4. Add the Render variables listed above.
+5. Verify `https://ruralgrow-ai.onrender.com/api/health` returns status `healthy`.
+
+### Vercel frontend
+
 1. Import `Saurabhparihar12/RuralGrow-AI` into Vercel.
-2. Set **Root Directory** to `frontend`.
-3. Framework Preset: **Vite**.
-4. Configure Environment Variable:
-   * `VITE_API_URL` = `https://ruralgrowai-api.onrender.com`
-5. Click **Deploy**. Vercel will build the frontend and serve it at `https://ruralgrowai.vercel.app`.
+2. Set the root directory to `frontend` and use the Vite framework preset.
+3. Set `VITE_API_URL` to `https://ruralgrow-ai.onrender.com`.
+4. Deploy and verify https://rural-grow-ai-eta.vercel.app.
 
----
+## Known free-tier limitations
 
-## ⚡ Free Tier Considerations & Known Behavior
-* **Render Cold Starts**: On Render's free web service tier, the server spins down after 15 minutes of inactivity. The first API request after inactivity may take 30–50 seconds to warm up.
-* **Offline AI Fallback Engine**: If `GEMINI_API_KEY` is missing or rate-limited, the application automatically uses an offline simulation fallback engine to guarantee 100% uptime for review replies, marketing captions, and assistant responses.
+- Render's free web service spins down after inactivity. The first request after idle time can take approximately 30-60 seconds while the service wakes up.
+- MongoDB Atlas must allow Render network access. Without a valid `MONGODB_URI`, the backend uses its local JSON fallback, which is not durable across an ephemeral service restart.
+- If `GEMINI_API_KEY` is unavailable or rate-limited, the offline AI simulator provides fallback responses.
+- Google OAuth works only when the Google Cloud redirect URI and Render OAuth variables exactly match the production callback URL.
 
----
-
-## 🚀 Local Installation & Setup
+## Local development
 
 ```bash
-# 1. Clone repository
 git clone https://github.com/Saurabhparihar12/RuralGrow-AI.git
 cd RuralGrow-AI
 
-# 2. Start Backend REST API
 cd backend
 npm install
 npm run dev
 
-# 3. Start Frontend Client (in a separate terminal)
-cd ../frontend
+# In a second terminal
+cd frontend
 npm install
 npm run dev
 ```
 
-*Client interface loads at `http://localhost:5173` pointing to `http://localhost:5000`.*
+The local frontend runs at `http://localhost:5173` and the backend at `http://localhost:5000`.
 
----
+## Week 9 submission files
 
-## 📜 LMS Submission Packets — Week 9
-* **Deployment Guide:** [`DEPLOYMENT.md`](DEPLOYMENT.md)
-* **Verification Checklist:** [`W9_DeploymentChecklist.md`](W9_DeploymentChecklist.md)
-* **Proof Document:** [`W9_DeploymentProof_TBI-26100640.md`](W9_DeploymentProof_TBI-26100640.md)
-* **Submission ZIP:** `W9_Submission_TBI-26100640.zip`
+- [Deployment guide](DEPLOYMENT.md)
+- [Deployment checklist](W9_DeploymentChecklist.md)
+- [Deployment proof PDF](W9_DeploymentProof_TBI-26100640.pdf)
+- [Peer testing feedback](PEER_REVIEW.md)
+- `W9_Submission_TBI-26100640.zip`
