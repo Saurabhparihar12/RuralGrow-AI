@@ -8,7 +8,31 @@ import { validateRequest, registerSchema, loginSchema } from '../middleware/vali
 
 const router = express.Router();
 const defaultClientUrl = 'https://rural-grow-ai-eta.vercel.app';
-const getClientUrl = () => (process.env.CLIENT_URL || defaultClientUrl).trim().replace(/\/$/, '');
+const vercelDeploymentUrl = /^https:\/\/rural-grow-[a-z0-9]+-rural-grow-ai\.vercel\.app$/;
+
+const isAllowedClientUrl = (value) => {
+  try {
+    const origin = new URL(value).origin;
+    return origin === defaultClientUrl || vercelDeploymentUrl.test(origin);
+  } catch {
+    return false;
+  }
+};
+
+const getClientUrl = () => defaultClientUrl;
+const getRequestClientUrl = (request) => {
+  const candidate = request.headers.referer || request.headers.origin;
+  return isAllowedClientUrl(candidate) ? new URL(candidate).origin : getClientUrl();
+};
+
+const getStateClientUrl = (state) => {
+  try {
+    const parsed = JSON.parse(Buffer.from(state, 'base64').toString('utf-8'));
+    return isAllowedClientUrl(parsed.returnTo) ? new URL(parsed.returnTo).origin : getClientUrl();
+  } catch {
+    return getClientUrl();
+  }
+};
 
 // Public native authentication routes (rate-limited and validated via Zod)
 router.post('/signup', authLimiter, validateRequest(registerSchema), authController.register);
@@ -18,23 +42,13 @@ router.post('/forgot-password', authController.forgotPassword);
 
 // Google OAuth endpoints (triggers passport redirection)
 router.get('/google', (req, res, next) => {
-  const origin = req.headers.referer || req.headers.origin || getClientUrl();
+  const origin = getRequestClientUrl(req);
   const state = Buffer.from(JSON.stringify({ returnTo: origin })).toString('base64');
   passport.authenticate('google', { scope: ['profile', 'email'], prompt: 'select_account', state })(req, res, next);
 });
 
 router.get('/google/callback', (req, res, next) => {
-  let clientUrl = getClientUrl();
-  try {
-    if (req.query.state) {
-      const parsed = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));
-      if (parsed.returnTo && parsed.returnTo.startsWith('http')) {
-        clientUrl = parsed.returnTo.replace(/\/$/, '').replace(/\/login.*$/, '');
-      }
-    }
-  } catch (e) {
-    console.error('[OAuth Callback] State parse notice:', e.message);
-  }
+  const clientUrl = getStateClientUrl(req.query.state);
   
   passport.authenticate('google', { session: false, failureRedirect: `${clientUrl}/login?error=oauth_failed` })(req, res, (err) => {
     if (err || !req.user) {
@@ -44,15 +58,7 @@ router.get('/google/callback', (req, res, next) => {
     next();
   });
 }, (req, res) => {
-  let clientUrl = getClientUrl();
-  try {
-    if (req.query.state) {
-      const parsed = JSON.parse(Buffer.from(req.query.state, 'base64').toString('utf-8'));
-      if (parsed.returnTo && parsed.returnTo.startsWith('http')) {
-        clientUrl = parsed.returnTo.replace(/\/$/, '').replace(/\/login.*$/, '');
-      }
-    }
-  } catch (e) {}
+  const clientUrl = getStateClientUrl(req.query.state);
 
   // Generate JWT token
   const token = jwt.sign({ id: req.user.id || req.user._id }, process.env.JWT_SECRET || 'ruralgrow_secret_key', {
@@ -70,8 +76,9 @@ router.get('/google/callback', (req, res, next) => {
     avatar: req.user.avatar
   });
   
-  // Redirect back to frontend login callback handler
-  res.redirect(`${clientUrl}/login?token=${token}&user=${encodeURIComponent(userStr)}`);
+  // The fragment is not included in HTTP requests, keeping the short-lived
+  // access token out of proxy/server access logs.
+  res.redirect(`${clientUrl}/login#token=${token}&user=${encodeURIComponent(userStr)}`);
 });
 
 // Simulated Google Authentication for sandbox testing without credentials

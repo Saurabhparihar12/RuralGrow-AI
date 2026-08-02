@@ -37,10 +37,16 @@ const allowedOrigins = [
   'http://127.0.0.1:5173'
 ].filter(Boolean);
 
+// Each Vercel deployment receives a unique URL. Restrict that allowance to
+// this project's generated deployment-name format instead of allowing any
+// arbitrary origin.
+const vercelDeploymentOrigin = /^https:\/\/rural-grow-[a-z0-9]+-rural-grow-ai\.vercel\.app$/;
+const isAllowedOrigin = (origin) => allowedOrigins.includes(origin) || vercelDeploymentOrigin.test(origin);
+
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
     // Allow requests with no origin or whitelisted origins
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || isAllowedOrigin(origin)) {
       return callback(null, true);
     }
     return callback(new Error(`CORS origin not allowed: ${origin}`));

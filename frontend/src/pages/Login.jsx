@@ -35,10 +35,12 @@ export default function Login() {
     setToast({ message, type });
   };
 
-  // Check for Google OAuth tokens returned in URL parameters
+  // Check for Google OAuth tokens returned in the URL fragment. Fragments are
+  // not sent to the server, unlike normal query-string parameters.
   useEffect(() => {
-    const token = searchParams.get('token');
-    const userStr = searchParams.get('user');
+    const hashParams = new URLSearchParams(window.location.hash.slice(1));
+    const token = hashParams.get('token') || searchParams.get('token');
+    const userStr = hashParams.get('user') || searchParams.get('user');
     const error = searchParams.get('error');
 
     if (error) {
@@ -52,11 +54,7 @@ export default function Login() {
         }
         showToast(`Google Login Successful! Signed in as ${decodedUser.email}`, 'success');
         setTimeout(() => {
-          if (decodedUser.role === 'admin' || decodedUser.role === 'business_owner') {
-            navigate('/admin');
-          } else {
-            navigate('/dashboard');
-          }
+          navigate(decodedUser.role === 'admin' || decodedUser.role === 'business_owner' ? '/admin' : '/dashboard', { replace: true });
         }, 1000);
       } catch (e) {
         showToast('Error parsing Google user metadata.', 'error');
