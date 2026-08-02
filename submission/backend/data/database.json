@@ -1,0 +1,496 @@
+{
+  "reviews": [
+    {
+      "id": "rev-100",
+      "_id": "rev-100",
+      "author": "Vikram Mehta (Chandigarh)",
+      "shopName": "Shyam's Organic Honey",
+      "rating": 5,
+      "reviewText": "The wild forest honey is pure, thick, and tastes completely natural. You can smell the wildflower blossoms!",
+      "replySuggestion": "Dear Vikram, thank you so much for the 5-star review! The team at Shyam's Organic Honey is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-30T15:11:14.374Z"
+    },
+    {
+      "id": "rev-101",
+      "_id": "rev-101",
+      "author": "Priya Sharma (Delhi)",
+      "shopName": "Garhwal Handlooms",
+      "rating": 4,
+      "reviewText": "The woollen pashmina shawl is soft, warm, and colors are bright. Delivery took 5 days, but quality is outstanding.",
+      "replySuggestion": "Dear Priya, thank you so much for the 5-star review! The team at Garhwal Handlooms is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-28T15:11:14.382Z"
+    },
+    {
+      "id": "rev-102",
+      "_id": "rev-102",
+      "author": "Karan Johar (Mumbai)",
+      "shopName": "Raj Mountain Homestay",
+      "rating": 5,
+      "reviewText": "Amazing views of the Himalayas from Mussoorie hills! Homely food cooked with fresh farm vegetables by Raj's family.",
+      "replySuggestion": "Dear Karan, thank you so much for the 5-star review! The team at Raj Mountain Homestay is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-26T15:11:14.382Z"
+    },
+    {
+      "id": "rev-103",
+      "_id": "rev-103",
+      "author": "Ananya Roy (Kolkata)",
+      "shopName": "Harsil Valley Orchards",
+      "rating": 5,
+      "reviewText": "Ordered 10kg box of fresh Royal Delicious apples directly from Harsil valley. Crispy, sweet, and zero wax coating!",
+      "replySuggestion": "Dear Ananya, thank you so much for the 5-star review! The team at Harsil Valley Orchards is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-24T15:11:14.382Z"
+    },
+    {
+      "id": "rev-104",
+      "_id": "rev-104",
+      "author": "Rajesh Gupta (Noida)",
+      "shopName": "Dehradun Basmati Rice Co-op",
+      "rating": 5,
+      "reviewText": "Authentic long-grain aromatic Dehradun Basmati rice. The aroma while cooking fills the entire house.",
+      "replySuggestion": "Dear Rajesh, thank you so much for the 5-star review! The team at Dehradun Basmati Rice Co-op is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-22T15:11:14.382Z"
+    },
+    {
+      "id": "rev-105",
+      "_id": "rev-105",
+      "author": "Meenakshi Sundaram (Bengaluru)",
+      "shopName": "Almora Brassware & Crafts",
+      "rating": 5,
+      "reviewText": "Handcrafted copper water vessel from Almora market. Authentic traditional copper work with beautiful hammer engraving.",
+      "replySuggestion": "Dear Meenakshi, thank you so much for the 5-star review! The team at Almora Brassware & Crafts is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-20T15:11:14.382Z"
+    },
+    {
+      "id": "rev-106",
+      "_id": "rev-106",
+      "author": "Sanjay Verma (Gurugram)",
+      "shopName": "Tehri Terrace Organic Rajma",
+      "rating": 4,
+      "reviewText": "Munsiyari red rajma cooks very fast and has a rich, buttery texture. Excellent taste when served with rice.",
+      "replySuggestion": "Dear Sanjay, thank you so much for the 5-star review! The team at Tehri Terrace Organic Rajma is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-18T15:11:14.382Z"
+    },
+    {
+      "id": "rev-107",
+      "_id": "rev-107",
+      "author": "Neha Kapoor (Jaipur)",
+      "shopName": "Uttarkashi Sea Buckthorn Jams",
+      "rating": 5,
+      "reviewText": "Sea buckthorn (Himalayan wonder berry) jam has a wonderful tangy citrus flavor loaded with Vitamin C. Kids loved it!",
+      "replySuggestion": "Dear Neha, thank you so much for the 5-star review! The team at Uttarkashi Sea Buckthorn Jams is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-16T15:11:14.382Z"
+    },
+    {
+      "id": "rev-108",
+      "_id": "rev-108",
+      "author": "Rohan Deshmukh (Pune)",
+      "shopName": "Rishikesh Ayurvedic Tea Hub",
+      "rating": 5,
+      "reviewText": "Himalayan Tulsi and Chamomile herbal infusion tea bags. Relaxing aroma and perfect for evening calm after work.",
+      "replySuggestion": "Dear Rohan, thank you so much for the 5-star review! The team at Rishikesh Ayurvedic Tea Hub is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-14T15:11:14.382Z"
+    },
+    {
+      "id": "rev-109",
+      "_id": "rev-109",
+      "author": "Sunita Bisht (Dehradun)",
+      "shopName": "Garhwal Millet Bakery",
+      "rating": 5,
+      "reviewText": "Mandua (Finger millet) cookies and Jhangora kheer mix. Gluten-free, delicious, and healthy snack for elders.",
+      "replySuggestion": "Dear Sunita, thank you so much for the 5-star review! The team at Garhwal Millet Bakery is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-12T15:11:14.382Z"
+    },
+    {
+      "id": "rev-110",
+      "_id": "rev-110",
+      "author": "Amitabh Sen (Kolkata)",
+      "shopName": "Ranikhet Pine Crafts & Oils",
+      "rating": 4,
+      "reviewText": "Pure Himalayan Pine Needle essential oil. Smells like a fresh forest walk in Kumaon. Packaging was secure.",
+      "replySuggestion": "Dear Amitabh, thank you so much for the 5-star review! The team at Ranikhet Pine Crafts & Oils is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-10T15:11:14.382Z"
+    },
+    {
+      "id": "rev-111",
+      "_id": "rev-111",
+      "author": "Harpreet Singh (Ludhiana)",
+      "shopName": "Chamoli Organic Garlic & Spices",
+      "rating": 5,
+      "reviewText": "High-altitude single-clove Himalayan garlic (Ek Pothi Lahsun). Very potent medicinal qualities and strong flavor.",
+      "replySuggestion": "Dear Harpreet, thank you so much for the 5-star review! The team at Chamoli Organic Garlic & Spices is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-08T15:11:14.382Z"
+    },
+    {
+      "id": "rev-112",
+      "_id": "rev-112",
+      "author": "Deepak Bhatt (Nainital)",
+      "shopName": "Kumaoni Bal Mithai Sweets",
+      "rating": 5,
+      "reviewText": "Authentic Almora Bal Mithai with roasted khoya and sugar balls. Brought back childhood memories of Kumaon trip!",
+      "replySuggestion": "Dear Deepak, thank you so much for the 5-star review! The team at Kumaoni Bal Mithai Sweets is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-06T15:11:14.382Z"
+    },
+    {
+      "id": "rev-113",
+      "_id": "rev-113",
+      "author": "Shalini Nair (Thiruvananthapuram)",
+      "shopName": "Badrinath Organic Herbs",
+      "rating": 5,
+      "reviewText": "Purchased wild Jambu and Gandharayani spices for curry seasoning. Gives a unique mountain flavor to dal.",
+      "replySuggestion": "Dear Shalini, thank you so much for the 5-star review! The team at Badrinath Organic Herbs is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-04T15:11:14.382Z"
+    },
+    {
+      "id": "rev-114",
+      "_id": "rev-114",
+      "author": "Aakash Tripathi (Lucknow)",
+      "shopName": "Mussoorie Weaver's Collective",
+      "rating": 4,
+      "reviewText": "Handwoven tweed jacket fabric. Durable texture and authentic woollen warmth. Great craftsmanship.",
+      "replySuggestion": "Dear Aakash, thank you so much for the 5-star review! The team at Mussoorie Weaver's Collective is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-07-02T15:11:14.382Z"
+    },
+    {
+      "id": "rev-115",
+      "_id": "rev-115",
+      "author": "Pooja Hegde (Hyderabad)",
+      "shopName": "Bhimtal Lake Wooden Handicrafts",
+      "rating": 5,
+      "reviewText": "Beautiful carved pine wood tea coasters and wall clocks. Smooth finish and eco-friendly mountain packaging.",
+      "replySuggestion": "Dear Pooja, thank you so much for the 5-star review! The team at Bhimtal Lake Wooden Handicrafts is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-30T15:11:14.382Z"
+    },
+    {
+      "id": "rev-116",
+      "_id": "rev-116",
+      "author": "Vivek Agarwal (Ahmedabad)",
+      "shopName": "Joshimath High-Altitude Pulses",
+      "rating": 5,
+      "reviewText": "Organic Gahat (Horsegram) dal from Joshimath valley. Extremely fresh and authentic taste.",
+      "replySuggestion": "Dear Vivek, thank you so much for the 5-star review! The team at Joshimath High-Altitude Pulses is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-28T15:11:14.382Z"
+    },
+    {
+      "id": "rev-117",
+      "_id": "rev-117",
+      "author": "Ritu Malhotra (Delhi)",
+      "shopName": "Pithoragarh Woollen Socks",
+      "rating": 4,
+      "reviewText": "Super warm hand-knitted sheep wool socks. Kept my feet cozy during our snowfall trek in Munsiari.",
+      "replySuggestion": "Dear Ritu, thank you so much for the 5-star review! The team at Pithoragarh Woollen Socks is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-26T15:11:14.382Z"
+    },
+    {
+      "id": "rev-118",
+      "_id": "rev-118",
+      "author": "Gautam Gambhir (Delhi)",
+      "shopName": "Kumaon Organic Apple Cider Vinegar",
+      "rating": 5,
+      "reviewText": "Raw unfiltered apple cider vinegar with mother. Genuine farm-pressed vinegar without added sugar.",
+      "replySuggestion": "Dear Gautam, thank you so much for the 5-star review! The team at Kumaon Organic Apple Cider Vinegar is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-24T15:11:14.382Z"
+    },
+    {
+      "id": "rev-119",
+      "_id": "rev-119",
+      "author": "Smriti Mandhana (Mumbai)",
+      "shopName": "Chamba Herbal Soaps",
+      "rating": 5,
+      "reviewText": "Handmade goat milk and apricot kernel scrub soap. Natural fragrance and leaves skin feeling moisturized.",
+      "replySuggestion": "Dear Smriti, thank you so much for the 5-star review! The team at Chamba Herbal Soaps is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-22T15:11:14.382Z"
+    },
+    {
+      "id": "rev-120",
+      "_id": "rev-120",
+      "author": "Abhinav Bindra (Dehradun)",
+      "shopName": "Dhanaulti Mountain Farmstay",
+      "rating": 5,
+      "reviewText": "Peaceful stay amidst apple trees. Fresh cow milk, organic breakfast, and breathtaking sunrise views.",
+      "replySuggestion": "Dear Abhinav, thank you so much for the 5-star review! The team at Dhanaulti Mountain Farmstay is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-20T15:11:14.382Z"
+    },
+    {
+      "id": "rev-121",
+      "_id": "rev-121",
+      "author": "Divya Agarwal (Indore)",
+      "shopName": "Pauri Garhwal Red Rice",
+      "rating": 4,
+      "reviewText": "Nutritious mountain red rice (Lal Chawal). Rich nutty flavor and great for healthy daily meals.",
+      "replySuggestion": "Dear Divya, thank you so much for the 5-star review! The team at Pauri Garhwal Red Rice is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-18T15:11:14.382Z"
+    },
+    {
+      "id": "rev-122",
+      "_id": "rev-122",
+      "author": "Manish Pandey (Nainital)",
+      "shopName": "Mukteshwar Plum Jam",
+      "rating": 5,
+      "reviewText": "Sweet and tangy plum preserves made from fresh orchard fruit. No artificial colors added.",
+      "replySuggestion": "Dear Manish, thank you so much for the 5-star review! The team at Mukteshwar Plum Jam is delighted you enjoyed our handcrafted Himalayan products. We hope to serve you again soon! 🙏",
+      "sentiment": "positive",
+      "createdAt": "2026-06-16T15:11:14.382Z"
+    },
+    {
+      "id": "rev-123",
+      "_id": "rev-123",
+      "author": "Rahul Bajaj (Surat)",
+      "shopName": "Shyam's Organic Honey",
+      "rating": 3,
+      "reviewText": "The honey taste is good, but the glass bottle seal leaked slightly inside the parcel during courier transit.",
+      "replySuggestion": "Hello Rahul, thank you for your honest feedback regarding Shyam's Organic Honey. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-14T15:11:14.382Z"
+    },
+    {
+      "id": "rev-124",
+      "_id": "rev-124",
+      "author": "Tarun Gill (Faridabad)",
+      "shopName": "Garhwal Handlooms",
+      "rating": 3,
+      "reviewText": "Shawl texture is warm, but the color shade was slightly darker than shown in the product catalog photo.",
+      "replySuggestion": "Hello Tarun, thank you for your honest feedback regarding Garhwal Handlooms. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-12T15:11:14.382Z"
+    },
+    {
+      "id": "rev-125",
+      "_id": "rev-125",
+      "author": "Kavita Rao (Chennai)",
+      "shopName": "Harsil Valley Orchards",
+      "rating": 3,
+      "reviewText": "Apples arrived fresh, but out of 20 apples, 2 had minor pressure bruises from transport handling.",
+      "replySuggestion": "Hello Kavita, thank you for your honest feedback regarding Harsil Valley Orchards. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-10T15:11:14.382Z"
+    },
+    {
+      "id": "rev-126",
+      "_id": "rev-126",
+      "author": "Alok Nanda (Kanpur)",
+      "shopName": "Dehradun Basmati Rice Co-op",
+      "rating": 3,
+      "reviewText": "Rice grain length is long and aroma is nice, but price per kg is higher compared to local market brands.",
+      "replySuggestion": "Hello Alok, thank you for your honest feedback regarding Dehradun Basmati Rice Co-op. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-08T15:11:14.382Z"
+    },
+    {
+      "id": "rev-127",
+      "_id": "rev-127",
+      "author": "Siddharth Joshi (Vadodara)",
+      "shopName": "Almora Brassware & Crafts",
+      "rating": 3,
+      "reviewText": "Copper pot is solid, but took over 8 days to reach Gujarat. Tracking details were updated late.",
+      "replySuggestion": "Hello Siddharth, thank you for your honest feedback regarding Almora Brassware & Crafts. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-06T15:11:14.382Z"
+    },
+    {
+      "id": "rev-128",
+      "_id": "rev-128",
+      "author": "Meera Nair (Kochi)",
+      "shopName": "Rishikesh Ayurvedic Tea Hub",
+      "rating": 3,
+      "reviewText": "Herbal tea tastes decent, but the paper box packaging got slightly crushed in courier shipping.",
+      "replySuggestion": "Hello Meera, thank you for your honest feedback regarding Rishikesh Ayurvedic Tea Hub. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-04T15:11:14.382Z"
+    },
+    {
+      "id": "rev-129",
+      "_id": "rev-129",
+      "author": "Anish Giri (Varanasi)",
+      "shopName": "Tehri Terrace Organic Rajma",
+      "rating": 3,
+      "reviewText": "Rajma quality is genuine, but cooking required 4 extra whistles in pressure cooker.",
+      "replySuggestion": "Hello Anish, thank you for your honest feedback regarding Tehri Terrace Organic Rajma. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-06-02T15:11:14.382Z"
+    },
+    {
+      "id": "rev-130",
+      "_id": "rev-130",
+      "author": "Bhaskar Sharma (Agra)",
+      "shopName": "Garhwal Millet Bakery",
+      "rating": 3,
+      "reviewText": "Cookies are healthy and crisp, but finger millet taste is an acquired preference for children.",
+      "replySuggestion": "Hello Bhaskar, thank you for your honest feedback regarding Garhwal Millet Bakery. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-05-31T15:11:14.382Z"
+    },
+    {
+      "id": "rev-131",
+      "_id": "rev-131",
+      "author": "Varun Dhawan (Mumbai)",
+      "shopName": "Ranikhet Pine Crafts & Oils",
+      "rating": 3,
+      "reviewText": "Pine oil bottle size is smaller than expected for the price, though scent is pleasant.",
+      "replySuggestion": "Hello Varun, thank you for your honest feedback regarding Ranikhet Pine Crafts & Oils. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-05-29T15:11:14.382Z"
+    },
+    {
+      "id": "rev-132",
+      "_id": "rev-132",
+      "author": "Preeti Patel (Surat)",
+      "shopName": "Uttarkashi Sea Buckthorn Jams",
+      "rating": 3,
+      "reviewText": "Jam is very sour in taste due to high Vitamin C. Needs extra sweetener if you prefer sweet jams.",
+      "replySuggestion": "Hello Preeti, thank you for your honest feedback regarding Uttarkashi Sea Buckthorn Jams. We appreciate your support and are taking steps to improve our packaging and delivery speed. 🙏",
+      "sentiment": "neutral",
+      "createdAt": "2026-05-27T15:11:14.382Z"
+    },
+    {
+      "id": "rev-133",
+      "_id": "rev-133",
+      "author": "Mohit Chauhan (Shimla)",
+      "shopName": "Raj Mountain Homestay",
+      "rating": 2,
+      "reviewText": "Room view was nice, but hot water geyser was not working properly during cold morning hours.",
+      "replySuggestion": "Dear Mohit, we sincerely apologize for the inconvenience with your Raj Mountain Homestay order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-25T15:11:14.382Z"
+    },
+    {
+      "id": "rev-134",
+      "_id": "rev-134",
+      "author": "Gaurav Taneja (Delhi)",
+      "shopName": "Shyam's Organic Honey",
+      "rating": 1,
+      "reviewText": "Courier took 10 days to deliver to Delhi! Honey bottle arrived with a cracked cap. Unhappy with shipping.",
+      "replySuggestion": "Dear Gaurav, we sincerely apologize for the inconvenience with your Shyam's Organic Honey order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-23T15:11:14.382Z"
+    },
+    {
+      "id": "rev-135",
+      "_id": "rev-135",
+      "author": "Kriti Sanon (Mumbai)",
+      "shopName": "Garhwal Handlooms",
+      "rating": 2,
+      "reviewText": "Thread border had a small pull defect near the tassel. Customer care took 2 days to respond to my email.",
+      "replySuggestion": "Dear Kriti, we sincerely apologize for the inconvenience with your Garhwal Handlooms order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-21T15:11:14.382Z"
+    },
+    {
+      "id": "rev-136",
+      "_id": "rev-136",
+      "author": "Nikhil Kamath (Bengaluru)",
+      "shopName": "Harsil Valley Orchards",
+      "rating": 1,
+      "reviewText": "Delay of over a week in dispatching apple box after placing order. Needs faster logistics.",
+      "replySuggestion": "Dear Nikhil, we sincerely apologize for the inconvenience with your Harsil Valley Orchards order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-19T15:11:14.382Z"
+    },
+    {
+      "id": "rev-137",
+      "_id": "rev-137",
+      "author": "Suraj Saxena (Bhopal)",
+      "shopName": "Almora Brassware & Crafts",
+      "rating": 2,
+      "reviewText": "Polishing on the bottom outer rim was uneven. Expected better quality control for handcrafted brass.",
+      "replySuggestion": "Dear Suraj, we sincerely apologize for the inconvenience with your Almora Brassware & Crafts order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-17T15:11:14.382Z"
+    },
+    {
+      "id": "rev-138",
+      "_id": "rev-138",
+      "author": "Isha Ambani (Mumbai)",
+      "shopName": "Mussoorie Weaver's Collective",
+      "rating": 1,
+      "reviewText": "Received wrong color pattern in fabric delivery. Had to request return exchange.",
+      "replySuggestion": "Dear Isha, we sincerely apologize for the inconvenience with your Mussoorie Weaver's Collective order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-15T15:11:14.382Z"
+    },
+    {
+      "id": "rev-139",
+      "_id": "rev-139",
+      "author": "Devendra Jhajharia (Jaipur)",
+      "shopName": "Chamoli Organic Garlic & Spices",
+      "rating": 2,
+      "reviewText": "Garlic pods were smaller in size than displayed in the advertisement photos.",
+      "replySuggestion": "Dear Devendra, we sincerely apologize for the inconvenience with your Chamoli Organic Garlic & Spices order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-13T15:11:14.382Z"
+    },
+    {
+      "id": "rev-140",
+      "_id": "rev-140",
+      "author": "Pallavi Joshi (Nagpur)",
+      "shopName": "Mukteshwar Plum Jam",
+      "rating": 1,
+      "reviewText": "Glass jar arrived shattered inside courier box due to insufficient bubble wrap packaging.",
+      "replySuggestion": "Dear Pallavi, we sincerely apologize for the inconvenience with your Mukteshwar Plum Jam order. Please contact our support team directly so we can send a replacement immediately. 🙏",
+      "sentiment": "negative",
+      "createdAt": "2026-05-11T15:11:14.382Z"
+    }
+  ],
+  "shops": [],
+  "captions": [
+    {
+      "id": "cap-1",
+      "_id": "cap-1",
+      "productName": "Royal Delicious Apples",
+      "shopType": "Fruit Orchard",
+      "captionText": "🍎 Freshly harvested from the snow-fed heights of Harsil Valley, Uttarkashi! Experience 100% natural, crisp, zero-wax Royal Delicious apples directly from Himalayan terrace orchards. \n\n📦 Pan-India delivery available! Order your fresh orchard box today. \n\n#HarsilApples #UttarakhandOrganic #HimalayanProduce #VocalForLocal #DirectFromFarmers",
+      "createdAt": "2026-07-30T15:11:14.382Z"
+    },
+    {
+      "id": "cap-2",
+      "_id": "cap-2",
+      "productName": "Handspun Pashmina Shawl",
+      "shopType": "Handloom Weaving",
+      "captionText": "🧣 Wrap yourself in Himalayan warmth! Hand-spun and hand-woven by master weavers in Garhwal hills using age-old looms. Featherlight, cozy, and timeless. \n\n✨ Support mountain cottage industries! \n\n#GarhwalHandloom #PashminaShawl #MakeInIndia #HandwovenLuxury #UttarakhandCrafts",
+      "createdAt": "2026-07-30T15:11:14.382Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-admin",
+      "_id": "usr-admin",
+      "name": "Saurabh Parihar (Admin)",
+      "email": "admin@ruralgrow.in",
+      "password": "$2b$10$C6IJC7yH2eAVdV8rFX/kJeY6o7QQXfpJ3KFiRVWeioGSsEm.k5k92",
+      "role": "admin",
+      "shopName": "Garhwal Farms (Admin)",
+      "createdAt": "2026-07-10T09:00:00.000Z"
+    },
+    {
+      "id": "usr-owner",
+      "_id": "usr-owner",
+      "name": "Saurabh Parihar",
+      "email": "saurabh@gmail.com",
+      "password": "$2b$10$C6IJC7yH2eAVdV8rFX/kJeY6o7QQXfpJ3KFiRVWeioGSsEm.k5k92",
+      "role": "business_owner",
+      "shopName": "Garhwal Organic Farms",
+      "createdAt": "2026-07-02T04:28:18.935Z"
+    }
+  ]
+}

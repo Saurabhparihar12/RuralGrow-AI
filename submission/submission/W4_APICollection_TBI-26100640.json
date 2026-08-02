@@ -1,0 +1,382 @@
+{
+  "info": {
+    "_postman_id": "8c04bb84-0a35-469b-8e2c-c8471e4d0eb0",
+    "name": "RuralGrow AI REST API - Week 4",
+    "description": "Postman test suite collection for TBI-GEU RuralGrow AI REST API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. GET List Reviews",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/reviews?sentiment=positive&search=honey",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "reviews"
+          ],
+          "query": [
+            {
+              "key": "sentiment",
+              "value": "positive"
+            },
+            {
+              "key": "search",
+              "value": "honey"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success response (Filtered)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/reviews?sentiment=positive&search=honey",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "reviews"
+              ],
+              "query": [
+                {
+                  "key": "sentiment",
+                  "value": "positive"
+                },
+                {
+                  "key": "search",
+                  "value": "honey"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"count\": 1,\n  \"data\": [\n    {\n      \"id\": \"rev-1\",\n      \"author\": \"Vikram Mehta (Chandigarh)\",\n      \"shopName\": \"Shyam's Organic Honey\",\n      \"rating\": 5,\n      \"reviewText\": \"The wild forest honey is pure and tastes natural. Will order again next season.\",\n      \"replySuggestion\": \"Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! \\ud83d\\ude4f\",\n      \"sentiment\": \"positive\",\n      \"createdAt\": \"2026-06-20T10:00:00.000Z\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "2. GET Single Review",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/reviews/rev-1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "reviews",
+            "rev-1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success response (Found)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/reviews/rev-1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "reviews",
+                "rev-1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"rev-1\",\n    \"author\": \"Vikram Mehta (Chandigarh)\",\n    \"shopName\": \"Shyam's Organic Honey\",\n    \"rating\": 5,\n    \"reviewText\": \"The wild forest honey is pure and tastes natural. Will order again next season.\",\n    \"replySuggestion\": \"Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! \\ud83d\\ude4f\",\n    \"sentiment\": \"positive\",\n    \"createdAt\": \"2026-06-20T10:00:00.000Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "3. POST Create Review",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"author\": \"Rajeev Negi (Dehradun)\",\n  \"shopName\": \"Raj Mountain Homestay\",\n  \"rating\": 5,\n  \"reviewText\": \"Amazing stay! The mountain view from balcony room is beautiful.\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/reviews",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "reviews"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success response (Created)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"author\": \"Rajeev Negi (Dehradun)\",\n  \"shopName\": \"Raj Mountain Homestay\",\n  \"rating\": 5,\n  \"reviewText\": \"Amazing stay! The mountain view from balcony room is beautiful.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/reviews",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"rev-1718952400000\",\n    \"author\": \"Rajeev Negi (Dehradun)\",\n    \"shopName\": \"Raj Mountain Homestay\",\n    \"rating\": 5,\n    \"reviewText\": \"Amazing stay! The mountain view from balcony room is beautiful.\",\n    \"sentiment\": \"positive\",\n    \"replySuggestion\": \"Hi Rajeev! Thank you so much for the 5-star review. We are so happy you liked your experience at Raj Mountain Homestay. Do let us know when you need your next order. Have a wonderful day! \\ud83d\\ude4f\",\n    \"createdAt\": \"2026-06-23T20:00:00.000Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "4. PUT Update Review",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 5,\n  \"reviewText\": \"The wild forest honey is extremely pure and tastes organic.\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/reviews/rev-1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "reviews",
+            "rev-1"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success response (Updated)",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rating\": 5,\n  \"reviewText\": \"The wild forest honey is extremely pure and tastes organic.\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/reviews/rev-1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "reviews",
+                "rev-1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"rev-1\",\n    \"author\": \"Vikram Mehta (Chandigarh)\",\n    \"shopName\": \"Shyam's Organic Honey\",\n    \"rating\": 5,\n    \"reviewText\": \"The wild forest honey is extremely pure and tastes organic.\",\n    \"sentiment\": \"positive\",\n    \"replySuggestion\": \"Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! \\ud83d\\ude4f\",\n    \"createdAt\": \"2026-06-20T10:00:00.000Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "5. DELETE Review",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/reviews/rev-2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "reviews",
+            "rev-2"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success response (Deleted)",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/reviews/rev-2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "reviews",
+                "rev-2"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Review successfully deleted\",\n  \"data\": {\n    \"id\": \"rev-2\",\n    \"author\": \"Priya Sharma (Delhi)\",\n    \"shopName\": \"Garhwal Handlooms\",\n    \"rating\": 3,\n    \"reviewText\": \"The woollen shawl is warm and colors are bright. But the courier delivery to Delhi took almost 9 days.\",\n    \"sentiment\": \"neutral\",\n    \"replySuggestion\": \"Hello Priya, thank you for ordering our hand-woven shawl. We are sorry for the delay in shipping. Since our weaving center is in a remote village, transport takes a bit extra time. We are working on a faster courier service for next orders! \\ud83d\\ude4f\",\n    \"createdAt\": \"2026-06-21T11:30:00.000Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "6. POST Generate Reply",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/reviews/rev-1/reply",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "reviews",
+            "rev-1",
+            "reply"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success response (Reply Staged)",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/reviews/rev-1/reply",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "reviews",
+                "rev-1",
+                "reply"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"rev-1\",\n    \"author\": \"Vikram Mehta (Chandigarh)\",\n    \"shopName\": \"Shyam's Organic Honey\",\n    \"rating\": 5,\n    \"reviewText\": \"The wild forest honey is pure and tastes natural. Will order again next season.\",\n    \"sentiment\": \"positive\",\n    \"replySuggestion\": \"Dear Vikram, thank you for the feedback! We harvest our honey directly from the Rajaji forest region. Happy that you liked it. Keep supporting our local apiary! \\ud83d\\ude4f\",\n    \"createdAt\": \"2026-06-20T10:00:00.000Z\"\n  }\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Peer Code Review - Week 7</title>
+<style>
+body {
+  font-family: "Calibri", "Arial", sans-serif;
+  color: #1a202c;
+  line-height: 1.6;
+  margin: 40px;
+}
+h1 {
+  font-size: 24px;
+  color: #19221f;
+  border-bottom: 2px solid #4a6353;
+  padding-bottom: 10px;
+}
+h2 {
+  font-size: 16px;
+  color: #4a6353;
+}
+h3 {
+  font-size: 14px;
+  color: #1a202c;
+  margin-top: 25px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+p, li {
+  font-size: 11pt;
+}
+pre {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  font-family: "Consolas", monospace;
+  font-size: 9.5pt;
+  border-radius: 5px;
+}
+a {
+  color: #4a6353;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<h1>Peer Code Review - Week 7</h1>
+<h2>Classmate Repository: <a href="https://github.com/ANMOLRAWAT990/Sentinaut.git">ANMOLRAWAT990 / Sentinaut</a></h2>
+
+<hr>
+
+<h3>1. Architectural Observation</h3>
+<p>The repository uses a FastAPI (Python) backend connected to MongoDB, with a React frontend built on Vite. In the backend, all database helpers, Pydantic schemas, and REST endpoints are declared directly within a single main file (<code>backend/main.py</code>). While this is simple to run, as the project grows, it would be architecturally superior to utilize FastAPI's <code>APIRouter</code> to split routing into separate files (e.g. <code>/routes/reviews.py</code> and <code>/routes/actions.py</code>) to keep the startup server file modular.</p>
+
+<h3>2. Code Suggestion</h3>
+<p>In <code>backend/main.py</code> lines 68–76 inside the GET single review handler, the code checks for MongoDB BSON <code>InvalidId</code> to fall back on custom string IDs:</p>
+<pre>
+try:
+    review = reviews_collection.find_one({"_id": ObjectId(id)})
+except InvalidId:
+    review = reviews_collection.find_one({"id": id})
+</pre>
+<p>To prevent querying the database twice on mismatch and enforce structural schema integrity, consider standardizing all records to use either BSON ObjectIds or custom UUID strings exclusively, rather than mixing both types in the find filters.</p>
+
+<h3>3. Question</h3>
+<p>I noticed in your CORS middleware setup in <code>main.py</code> that you set <code>allow_origins=["*"]</code> and <code>allow_credentials=False</code>. When you deploy this project to production, do you plan to lock this down to your specific frontend domain and toggle <code>allow_credentials=True</code> to support session cookies or JWT tokens?</p>
+
+</body>
+</html>

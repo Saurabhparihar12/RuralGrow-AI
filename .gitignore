@@ -45,6 +45,7 @@ logs/
 .turbo/
 .vercel/
 .next/
+scratch/w9_staging/
 
 # Archives
 *.zip

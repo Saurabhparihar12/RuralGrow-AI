@@ -1,0 +1,7 @@
+Hello everyone!
+
+My name is Saurabh Parihar. My project is RuralGrow AI. It is a web application designed to help small rural businesses, like farmers, local weavers, and homestay owners, manage their customer reviews and write promotional posts. 
+
+I am building it using React.js for the frontend, Vanilla CSS for custom styling, Node.js and Express for the backend, and MongoDB to save user data. For the AI part, I will integrate the Google Gemini 1.5 Flash API.
+
+One technical challenge I think I will face is writing good prompts for the Gemini API so it can accurately analyze reviews in different Indian languages and suggest good replies. I also need to make sure the API returns clean data that the React frontend can read without crashing.

@@ -1,0 +1,29 @@
+{
+  "name": "ruralgrow-ai",
+  "version": "1.0.0",
+  "description": "RuralGrow AI - Full-Stack Production Monorepo for Uttarakhand Micro-Merchants",
+  "private": true,
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm install && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "start:backend": "cd backend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "npm install --prefix backend && npm install --prefix frontend"
+  },
+  "keywords": [
+    "ruralgrow",
+    "gemini-ai",
+    "mern",
+    "uttarakhand",
+    "react",
+    "express"
+  ],
+  "author": "Saurabh Parihar",
+  "license": "MIT",
+  "dependencies": {
+    "pdfkit": "^0.19.1",
+    "puppeteer": "^24.43.1"
+  }
+}

@@ -1,0 +1,43 @@
+================================================================================
+WEEK 9 PEER TESTING FEEDBACK REPORT
+Student Intern ID: TBI-26100640
+Project Name: RuralGrow AI
+Repository: https://github.com/Saurabhparihar12/RuralGrow-AI
+================================================================================
+
+--------------------------------------------------------------------------------
+CLASSMATE 1 REVIEW: SENTINAUT (Live App: https://sentinaut.vercel.app)
+--------------------------------------------------------------------------------
+
+1. WHAT WORKS WELL:
+   - The UI design and visual aesthetics are exceptionally sleek. The dark-mode glassmorphic dashboard with real-time sentiment distribution charts renders very smoothly. The sentiment classification engine responds quickly when pasting customer feedback snippets.
+
+2. BUG / ISSUE FOUND:
+   - Issue: CORS Block & Token Expiration Handling on Direct API Requests.
+   - Steps to Reproduce:
+     a. Navigate to https://sentinaut.vercel.app/login
+     b. Register a new user account and log in.
+     c. Open the browser developer console (F12) -> Network tab.
+     d. Perform a search or post a new review.
+     e. Observe that if the session sits idle for 10 minutes, subsequent API fetch calls return a CORS preflight warning / 401 Unauthorized status without redirecting the user back to the login page or prompting for re-authentication.
+   - Constructive Suggestion: Add an interceptor to the frontend fetch/axios client that catches 401 response statuses and automatically clears expired localStorage tokens while redirecting to /login.
+
+
+--------------------------------------------------------------------------------
+CLASSMATE 2 REVIEW: SEJOURA (Live App: https://sejoura-frontend.vercel.app)
+--------------------------------------------------------------------------------
+
+1. WHAT WORKS WELL:
+   - The property discovery cards and hero section visuals render with high quality. The filter bar for searching regional stays, homestays, and mountain retreats operates smoothly with responsive layout transitions.
+
+2. BUG / ISSUE FOUND:
+   - Issue: Form Validation & Input Sanitization Error on Booking Inquiry Form.
+   - Steps to Reproduce:
+     a. Open https://sejoura-frontend.vercel.app in your browser.
+     b. Click on any listed homestay card to view property details.
+     c. Scroll down to the booking inquiry form.
+     d. Enter special characters or unformatted text in the Full Name input field and click Submit.
+     e. Observe that the form submits without client-side input pattern validation, causing raw unformatted text strings to render in the confirmation modal.
+   - Constructive Suggestion: Add input sanitization and HTML pattern validation (e.g. pattern="[A-Za-z ]+") to the booking input fields before triggering API submission.
+
+================================================================================

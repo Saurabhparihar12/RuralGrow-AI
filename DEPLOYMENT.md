@@ -9,7 +9,7 @@ This document details the complete production deployment setup for **RuralGrow A
 ```
  ┌─────────────────────────────────────────┐
  │             Client Browser              │
- │    https://ruralgrowai.vercel.app      │
+ │ https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app │
  └────────────────────┬────────────────────┘
                       │
             HTTPS REST API Calls
@@ -18,7 +18,7 @@ This document details the complete production deployment setup for **RuralGrow A
                       ▼
  ┌─────────────────────────────────────────┐
  │            Render Backend API           │
- │   https://ruralgrowai-api.onrender.com  │
+ │     https://ruralgrow-ai.onrender.com   │
  └─────────┬───────────────────┬───────────┘
            │                   │
            ▼                   ▼
@@ -37,7 +37,8 @@ In production, CORS is restricted to trusted origins:
 ```javascript
 const allowedOrigins = [
   process.env.CLIENT_URL,
-  'https://ruralgrowai.vercel.app',
+  'https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app',
+  'https://rural-grow-ai-eta.vercel.app',
   'http://localhost:5173'
 ].filter(Boolean);
 ```
@@ -46,7 +47,7 @@ const allowedOrigins = [
 Navigate to **Render Dashboard -> Environment**:
 * `NODE_ENV`: `production`
 * `PORT`: `5000`
-* `CLIENT_URL`: `https://ruralgrowai.vercel.app`
+* `CLIENT_URL`: `https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app`
 * `JWT_SECRET`: `[Secret Key]`
 * `GEMINI_API_KEY`: `[Gemini API Key]`
 * `MONGODB_URI`: `[MongoDB Atlas Connection String]`
@@ -77,7 +78,7 @@ To prevent 404 errors on direct navigation to sub-routes (`/dashboard`, `/ai-ass
 
 ### 2.3 Environment Variables in Vercel Dashboard
 Navigate to **Vercel Project Settings -> Environment Variables**:
-* `VITE_API_URL`: `https://ruralgrowai-api.onrender.com`
+* `VITE_API_URL`: `https://ruralgrow-ai.onrender.com`
 
 ---
 
@@ -85,15 +86,15 @@ Navigate to **Vercel Project Settings -> Environment Variables**:
 
 1. **Verify Health Endpoint**:
    ```bash
-   curl -i https://ruralgrowai-api.onrender.com/api/health
+   curl -i https://ruralgrow-ai.onrender.com/api/health
    ```
    *Expected Output*: `200 OK` JSON with `"status": "healthy"`.
 
 2. **Verify CORS Headers**:
    ```bash
-   curl -i -H "Origin: https://ruralgrowai.vercel.app" https://ruralgrowai-api.onrender.com/api/health
+   curl -i -H "Origin: https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app" https://ruralgrow-ai.onrender.com/api/health
    ```
-   *Expected Output*: `Access-Control-Allow-Origin: https://ruralgrowai.vercel.app`.
+   *Expected Output*: `Access-Control-Allow-Origin: https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app`.
 
 3. **Verify Auth Flow**:
    * Test registration at `/login`.
@@ -110,8 +111,9 @@ Navigate to **Vercel Project Settings -> Environment Variables**:
 
 | Issue | Root Cause | Solution |
 | :--- | :--- | :--- |
-| **CORS Blocked Error** | `CLIENT_URL` mismatch or missing origin header | Ensure `CLIENT_URL` in Render matches exact Vercel domain (`https://ruralgrowai.vercel.app`). |
+| **CORS Blocked Error** | `CLIENT_URL` mismatch or missing origin header | Ensure `CLIENT_URL` in Render matches exact Vercel domain (`https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app`). |
 | **Vercel 404 on Refresh** | Missing SPA rewrite rule | Verify `vercel.json` exists in `frontend/` directory with rewrite rules. |
 | **Render Build Failure** | Wrong Root Directory | Ensure **Root Directory** is set to `backend` in Render project settings. |
 | **First API Request Slow** | Render Free Tier Cold Start | Normal free-tier behavior (spins down after 15m idle). Retry after 30 seconds. |
 | **AI Feature Fails** | Missing `GEMINI_API_KEY` | Set `GEMINI_API_KEY` in Render environment variables or verify offline fallback handles gracefully. |
+

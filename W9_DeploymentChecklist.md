@@ -20,7 +20,7 @@
 ## 🔒 2. Backend Security & Server Readiness
 
 - [x] **Dynamic Port Binding**: `process.env.PORT || 5000` enforced in `backend/server.js`.
-- [x] **Production CORS Handling**: Configured allowed origins array matching `process.env.CLIENT_URL` and `https://ruralgrowai.vercel.app`.
+- [x] **Production CORS Handling**: Configured allowed origins array matching `process.env.CLIENT_URL` and `https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app`.
 - [x] **Security Middleware**: Helmet security headers, Mongo sanitize, rate limiting active.
 - [x] **Health Check Endpoint**: `/api/health` active returning status `200 OK` and system metadata.
 - [x] **Graceful Shutdown**: `SIGTERM` and `SIGINT` listeners attached for clean shutdown.

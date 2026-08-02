@@ -1,0 +1,15 @@
+App Name: RuralGrow AI
+
+One-Line Pitch: A web app that helps small rural businesses analyze customer reviews and easily generate promotional posts using AI.
+
+Target User: Rural small business owners like farmers, local weavers, or homestay hosts who want to grow online but struggle with writing marketing posts or replying to reviews due to language barriers or lack of tech skills. (38 words)
+
+Core Features (3–5):
+* Review Sentiment Checker: Scans customer reviews, detects if they are positive or negative, and suggests a polite reply template.
+* Social Media Post Creator: Generates simple marketing captions for Facebook or Instagram based on product details.
+* WhatsApp Promo Copywriter: Drafts promotional messages with custom discounts to send to customers on WhatsApp.
+* Sales & Review Dashboard: A simple dashboard showing graphs of review trends and marketing performance.
+
+AI Feature: I will use the Google Gemini 1.5 Flash API because it has a free tier for developers, supports multiple Indian languages, and generates replies and posts very quickly.
+
+Tech Stack: Frontend (React.js), Styling (Vanilla CSS), Backend (Node.js/Express), Database (MongoDB), Auth method (JWT), Deployment (Vercel + Render).

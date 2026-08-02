@@ -1,0 +1,184 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config/api';
+
+const AuthContext = createContext(null);
+
+export function AuthProvider({ children }) {
+  const [token, setToken] = useState(() => {
+    const saved = localStorage.getItem('token');
+    return (saved && saved !== 'null' && saved !== 'undefined') ? saved : null;
+  });
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem('user');
+    if (saved && saved !== 'null' && saved !== 'undefined') {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  });
+  const [loading, setLoading] = useState(false);
+
+  // Keep sessions synchronized when a user signs in or out in another tab.
+  useEffect(() => {
+    const syncSession = (event) => {
+      if (event.key === 'token') setToken(event.newValue || null);
+      if (event.key === 'user') {
+        try {
+          setUser(event.newValue ? JSON.parse(event.newValue) : null);
+        } catch {
+          setUser(null);
+        }
+      }
+    };
+    window.addEventListener('storage', syncSession);
+    return () => window.removeEventListener('storage', syncSession);
+  }, []);
+
+  // Sync token and user in localStorage safely
+  useEffect(() => {
+    if (token && token !== 'null' && token !== 'undefined') {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
+
+  // Login handler
+  const login = async (email, password) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setToken(data.token);
+        setUser(data.user);
+        return { success: true, message: data.message, user: data.user };
+      } else {
+        return { success: false, message: data.message || 'Login failed.' };
+      }
+    } catch (err) {
+      return { success: false, message: 'Could not connect to authentication server.' };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Signup/Register handler
+  const signup = async (name, email, password, role, shopName) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role, shopName })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setToken(data.token);
+        setUser(data.user);
+        return { success: true, message: data.message, user: data.user };
+      } else {
+        return { success: false, message: data.message || 'Registration failed.' };
+      }
+    } catch (err) {
+      return { success: false, message: 'Could not connect to registration server.' };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Simulated Google Sign-In handler (for development and test sandboxes)
+  const googleLoginSimulated = async (name, email, avatar) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/google-simulated`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, avatar })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setToken(data.token);
+        setUser(data.user);
+        return { success: true, message: data.message, user: data.user };
+      } else {
+        return { success: false, message: data.message || 'Google Login failed.' };
+      }
+    } catch (err) {
+      return { success: false, message: 'Could not connect to authentication server.' };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Direct login using parameters (for Google OAuth callback redirects)
+  const loginWithParams = (authToken, userMetadata) => {
+    if (!authToken || !userMetadata?.email) return false;
+    setToken(authToken);
+    setUser(userMetadata);
+    return true;
+  };
+
+  // Logout handler
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+  };
+
+  // Forgot password handler
+  const forgotPassword = async (email) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (data.success) {
+        return { success: true, message: data.message };
+      } else {
+        return { success: false, message: data.message || 'Failed to trigger recovery.' };
+      }
+    } catch (err) {
+      return { success: false, message: 'Could not connect to password recovery server.' };
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ 
+      token, 
+      user, 
+      setUser, 
+      login, 
+      signup, 
+      googleLoginSimulated,
+      loginWithParams,
+      logout, 
+      forgotPassword, 
+      loading 
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export const useAuth = () => useContext(AuthContext);
