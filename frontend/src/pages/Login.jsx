@@ -255,7 +255,7 @@ export default function Login() {
                   <button
                     onClick={() => { setIsLogin(true); setToast(null); }}
                     className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all duration-300 relative z-10 cursor-pointer ${
-                      isLogin ? 'text-forest-900 dark:text-clay-50 bg-white dark:bg-forest-800 shadow-xs' : 'text-slate-500 hover:text-slate-700'
+                      isLogin ? 'text-forest-900 dark:text-clay-50 bg-white dark:bg-[#25322E] shadow-xs' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-clay-50'
                     }`}
                   >
                     Login
@@ -263,7 +263,7 @@ export default function Login() {
                   <button
                     onClick={() => { setIsLogin(false); setToast(null); }}
                     className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-wider rounded-xl transition-all duration-300 relative z-10 cursor-pointer ${
-                      !isLogin ? 'text-forest-900 dark:text-clay-50 bg-white dark:bg-forest-800 shadow-xs' : 'text-slate-500 hover:text-slate-700'
+                      !isLogin ? 'text-forest-900 dark:text-clay-50 bg-white dark:bg-[#25322E] shadow-xs' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-clay-50'
                     }`}
                   >
                     Register
