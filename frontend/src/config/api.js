@@ -5,17 +5,9 @@ const getBaseUrl = () => {
   if (import.meta.env.VITE_API_URL) {
     return import.meta.env.VITE_API_URL;
   }
-  if (typeof window !== 'undefined') {
-    const host = window.location.hostname;
-    if (host.includes('vercel.app')) {
-      return 'https://ruralgrow-ai.onrender.com';
-    }
-    if (host.includes('onrender.com')) {
-      return window.location.origin;
-    }
-    if (host !== 'localhost' && host !== '127.0.0.1') {
-      return window.location.origin;
-    }
+  // If running in browser on production domain (e.g. *.onrender.com or *.vercel.app), use current origin!
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return window.location.origin;
   }
   return 'http://localhost:5000';
 };

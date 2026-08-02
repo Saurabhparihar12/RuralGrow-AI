@@ -8,13 +8,13 @@
 ---
 
 ## 🎯 Executive Summary
-RuralGrow AI has been successfully refactored, hardened, and deployed to production. The frontend is hosted on **Vercel** (`https://ruralgrowai.vercel.app`), and the Node.js Express REST API backend is hosted on **Render** (`https://ruralgrowai-api.onrender.com`).
+RuralGrow AI has been successfully refactored, hardened, and deployed to production. The frontend is hosted on **Vercel** (`https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app`), and the Node.js Express REST API backend is hosted on **Render** (`https://ruralgrowai-api.onrender.com`).
 
 ---
 
 ## 🔗 Live Application URLs
 
-* **Live Frontend Web App**: [https://ruralgrow-ai.vercel.app](https://ruralgrow-ai.vercel.app)
+* **Live Frontend Web App (Vercel)**: [https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app](https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app)
 * **Live Backend REST API**: [https://ruralgrow-ai.onrender.com](https://ruralgrow-ai.onrender.com)
 * **Backend Health Check**: [https://ruralgrow-ai.onrender.com/api/health](https://ruralgrow-ai.onrender.com/api/health)
 

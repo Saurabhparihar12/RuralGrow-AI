@@ -8,7 +8,7 @@ An AI-assisted business advisory assistant, customer review responder, and socia
 
 | Component | Service Provider | Live Production URL | Status |
 | :--- | :--- | :--- | :--- |
-| **Frontend Web App** | **Vercel** | [https://ruralgrow-ai.vercel.app](https://ruralgrow-ai.vercel.app) | 🟢 **Active / Deployed** |
+| **Live Frontend Web App** | **Vercel** | [https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app](https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app) | 🟢 **100% LIVE** |
 | **Backend REST API** | **Render** | [https://ruralgrow-ai.onrender.com](https://ruralgrow-ai.onrender.com) | 🟢 **Active / Live** |
 | **Health Check API** | **Render** | [https://ruralgrow-ai.onrender.com/api/health](https://ruralgrow-ai.onrender.com/api/health) | 🟢 **200 OK** |
 

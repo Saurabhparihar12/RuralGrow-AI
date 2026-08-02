@@ -36,7 +36,7 @@ doc.moveTo(40, startY + 25).lineTo(555, startY + 25).stroke('#D1D5DB');
 doc.font('Helvetica').fontSize(9).fillColor('#111827');
 doc.text('Frontend Web App', 50, startY + 32);
 doc.text('Vercel / Netlify Cloud', 180, startY + 32);
-doc.fillColor('#2563EB').text('https://ruralgrowai.vercel.app', 300, startY + 32);
+doc.fillColor('#2563EB').text('https://rural-grow-58fsd5yhj-rural-grow-ai.vercel.app', 300, startY + 32);
 doc.fillColor('#059669').font('Helvetica-Bold').text('Active 🟢', 480, startY + 32);
 
 doc.font('Helvetica').fontSize(9).fillColor('#111827');
