@@ -23,6 +23,7 @@
   "author": "Saurabh Parihar",
   "license": "MIT",
   "dependencies": {
-    "pdfkit": "^0.19.1"
+    "pdfkit": "^0.19.1",
+    "puppeteer": "^24.43.1"
   }
 }
