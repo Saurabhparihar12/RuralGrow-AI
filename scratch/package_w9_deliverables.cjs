@@ -46,7 +46,6 @@ const rootFiles = [
   'W9_DeploymentChecklist.md',
   'W9_DeploymentProof_TBI-26100640.md',
   'W9_DeploymentProof_TBI-26100640.pdf',
-  'W9_Final_Presentation_TBI-26100640.pdf',
   'PEER_REVIEW.md',
   'PEER_TESTING_FEEDBACK.txt',
   'PROMPTS.md',
